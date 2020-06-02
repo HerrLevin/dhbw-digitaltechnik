@@ -11,7 +11,12 @@
 \usepackage{MnSymbol,wasysym}
 \usepackage{tikz-timing}
 \usepackage{tikz, pgfplots}
+\usetikzlibrary{calc}
+
 	\usepgfplotslibrary{groupplots}
+
+\newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
+
 
 \tikzset{
 	timing/z/.style={color=blue},
@@ -36,6 +41,10 @@
 	} 
 }{thm}
 
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 
 \author{Levin Baumann}
 \title{Digitaltechnik}
@@ -399,7 +408,118 @@ $ TTL-Pegel
 \end{figure}
 
 \subsubsection*{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}
-	Nyquist-Theorem: Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.\\
-	BBB (Bandbreitenbedarf): notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einem 
+	\textbf{Nyquist-Theorem:} Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.\\
+	\textbf{BBB (Bandbreitenbedarf): }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
+	\textbf{BBB bei NRZ:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
+	\textbf{BBB bei RZ:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
+	\textbf{BBB bei AMI:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
+	\textbf{BBB bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq oder \glqq 111111 \grqq)\\
 
+\begin{tabularx}{\textwidth}{l|Y|Y|Y|Y}
+	 & TRG 
+	 & GSF \newline symm. Pegel als Grundvoraussetzung 
+	 & SSH \newline abhängig von Anzahl Pegel 
+	 & BBB \newline abhängig von Schrittrate \\ \hline \rule{0pt}{2em} 
+	 NRZ 
+	 & bei \glqq 01 \grqq und \glqq 10 \grqq \newline \circled{$=$} 
+	 & \#\glqq 1 \grqq = \# \glqq 0 \grqq \newline (1 und 0 gleichverteilt) \newline \circled{$-$}
+	 & 2 \newline \circled{$+$}
+	 & halbe \newline \circled{$+$}\\ \hline \rule{0pt}{2em}
+	 RZ
+	 & bei jeder \glqq 1 \grqq \newline \circled{$-$}
+	 & symm. Pegel \& nur \glqq 1 \grqq, single ended \& nur \glqq 0 \grqq, \#1 = \#0 und umgekehrt \newline \circled{$=$}
+	 & 2 \newline \circled{$+$}
+	 & ganze \newline \circled{$-$} \\ \hline \rule{0pt}{2em}
+	 AMI
+	 & bei jeder \glqq 1 \grqq \newline \circled{$-$}
+	 & nach jeder zweiten \glqq 1 \grqq, in der Praxis \glqq immer \grqq \newline \circled{$+$}
+	 & 3 \newline \circled{$-$}
+	 & halbe \newline \circled{$+$} \\ \hline \rule{0pt}{2em}
+	 Manch. 
+	 & immer \newline \circled{$+$}
+	 & immer \newline \circled{$++$}
+	 & 2 \newline \circled{$+$}
+	 & ganze \newline \circled{$-$} \\
+\end{tabularx}
+\\ \\
+\textbf{Einsatz:}\\
+\begin{itemize}
+	\item NRZ für interne Schnittstellen, bei denen der Verzicht auf Takt- oder Masseleitung nicht relevant ist
+	\item Manchester gerne für Netzwerkschnittstellen (z.B. Ethernet) um auf Takt- und Masseleitung verzichten zu können
+\end{itemize}
+
+\subsubsection*{3 Verfahren zur sicheren Taktrückgewinnung:}
+\begin{enumerate}
+	\item \textbf{Startbitsequenz} \\
+	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere TRG ermöglicht. z.B. bei NRZ: \glqq 01\grqq oder \glqq 10 \grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\
+	\textbf{Nachteil:} relativ großer Overhead, effektive Nutzdatenrate deutlich kleiner als die Schrittrate.\\
+	\noindent\hspace*{2em}% 
+	Im Beispiel: Nutzdatenrate = $\dfrac{n}{n+2}\cdot Schrittweite$\\
+	Bsp: bei RZ oder AMI reicht ein einfaches \glqq 1 \grqq-Startbit. (Keine \glqq Sequenz\grqq, weniger Overhead)\\
+	\textbf{Anwendung:} z.B.serielle Schnittstelle RS232
+	
+	\item \textbf{Bitstuffing (\glqq Bitstopfen\grqq)}\\
+	Nach jeweils $n$ gleichen direkt aufeinanderfolgenden Bitwerten wird ein Bit mit dem eingesetzten Bitwert eingefügt. \\
+	z.B. n=3:\\
+	\noindent\hspace*{3em}% 
+	\begin{tabularx}{10em}{ccccccccccccccc}
+		0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1\\
+		1 & 2 & 1 & 2 & \tikzmark{stuffing1}{3}& 1 & 2 & \tikzmark{stuffing2}{3} & 1 & 1 & 2 & \tikzmark{stuffing3}{3} & 1 & 2 & \tikzmark{stuffing4}{3}\\
+	\end{tabularx}
+\tikz[overlay,remember picture] {
+	\draw[<-,red] ($(stuffing1)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
+	\draw[<-,red] ($(stuffing2)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
+	\draw[<-,red] ($(stuffing3)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
+	\draw[<-,red] ($(stuffing4)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
+}
+\\ \\ \\
+	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.\\
+	\textbf{Vor-/Nachteile:} Overhead bei NRZ im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! \\
+	\textbf{bei RZ:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1 \grqq eingefügt, d.h. weniger Overhead als bei NRZ und Bitstuffing. Verfahren ist komplex und deshalb \grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)\\
+	\textbf{Anwendung:} Ethernet (um Bitmuster des Frame-Delimiters \glqq 01111110\grqq auszuschließen $\Rightarrow$ nach fünf \glqq 1\grqq wird eine Stopf-\glqq 0\grqq eingeschoben)
+	
+	\item \textbf{Blockcodierung}\\
+	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere TRG ermöglichen.\\
+	\textbf{Nachteil:} konstant großer Overhead\\
+	\textbf{Vorteil:} ggf. sind weitere positive Eigenschaften erzielbar durch geeignete Auswahl der zu verwendenden Datenblöcke bei der Übertragung (vgl. 8B10B-Codierung und GSF!)\\
+	\textbf{Anwendung:} z.B. ISDN und viele andere
+\end{enumerate}
+
+Ganggenauigkeit der Uhren und Anzahl der Schritte ohne Resynchronisierung:
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) -- (12,0);
+\draw (0,0) node[left=3pt] {S} node[left=3pt] {$ $};
+
+\foreach \x in {0,3,6,9,12}
+\draw (\x,0.25) -- (\x,-0.25);
+
+
+\draw (0,-1.5) -- (12,-1.5);
+\draw (0,-1.5) node[left=3pt] {E} node[left=3pt] {$ $};
+
+\foreach \x in {0,4,8,12}
+\draw (\x,-1.25) -- (\x,-1.75);
+
+\end{tikzpicture}
+\end{center}
+Der Pegel wird beim Empfang in der Mitte der angenommenen Schrittzeit abgetastet.\\
+$\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\
+Bsp: Bei 5\% spezifischer Ganggenauigkeit wären 5 Schirrte \glqq zu viel\grqq
+
+\section{Boolsche Algebra}
+\begin{center}
+	\textit{(angelehnt an das Skript von Burkhard Stiller an der Uni Zürich \glqq Info3 Modul Schaltnetze\grqq)
+}
+\end{center}
+Benannt nach irischem (?) Mathematiker George Boole (1815-1864)\\
+Rechensystem mit bestimmten Regeln:
+\begin{itemize}
+\item endliche Wertemenge $W$
+\item zwei zweistellige Operatoren $\bigotimes, \bigoplus$
+\item Abgeschlossenheit: $\forall a, b \in W\!: \; a \otimes  b \in W, \; a \oplus b \in W$
+\end{itemize}
+
+Es müssen die vier Huntingtonsche Axiome gelten: $\forall a,b,c \in W$
 \end{document}
