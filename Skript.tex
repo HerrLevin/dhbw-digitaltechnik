@@ -12,6 +12,7 @@
 \usepackage{MnSymbol,wasysym}
 \usepackage{tikz-timing}
 \usepackage{subcaption}
+\usepackage{acronym}
 \usepackage{tikz, pgfplots}
 \usetikzlibrary{calc}
 
@@ -347,50 +348,50 @@ $ TTL-Pegel
 \subsubsection*{4 Verfahren (1-4) und 4 Eigenschaften(a-d)}
 
 \begin{enumerate}
-	\item NRZ (Non-Return-to-zero)\\
-		Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
-	\item RZ (Return-to-Zero)
-		Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
-		\subitem TRG bei RZ: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
-	\item AMI (Alternate Mark Inversion)\\
-		Ähnlich NRZ mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
-		\subitem GFS bei AMI: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer GSF.
-		\subitem TRG bei AMI: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine TRG möglich
-	\item Manchester\\
-		Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq und fallende Flanke $\hat{=}$ \glqq 0 \grqq.\\
-		ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
-		\subitem TRG bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
-		\subitem GFS bei Manchester: immer, da sich die Pegel in erster und zweiter Schrittzeithälfte gegenseitig ausgleichen
-		\subitem SSH bei Manchester: optimal, da \glqq nur \grqq 2 Pegel
+	\item[a)] \ac{TRG}\\
+	Möglichkeit, nur aus dem übertragenen Datensignal eine Resynchronisierung biem Empfänger auf den Takt des Senders zu machen
+	
+	\item[b)] \ac{GSF} \\
+	Motivation: Einsparung der Masseleitung. Im zeitlichen Mittel liegen auf der Signalleitung 0V an.\\
+	Ziel: Anhand des mittleren Signalpegels soll der Massepegel \glqq errechnet\grqq\ werden.\\
+	\subitem -Vermeidung einer Potentialverschiebung beim E.
+	\subitem -Pseudoargument: keine Energieübertragung beim vom S zum E.\\
+	Grundvoraussetzung: symmetrische Pegel statt single-ended. \\
+	z.B. $1V \hat{=} +5v$ und $0 \hat{=} -5V$\\
+	dann: \ac{GSF} bei \ac{NRZ}: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleichverteilt)\\\\
+	Bei den meisten Anwendungs-, Zeichen- und Zahlencodierungen kann keine Gleichverteilung angenommen werden. Ausnahme: Verschlüsselung und Kompression.
+	\item[c)] \ac{SSH}\\
+	(Un-)Anfälligkeit eines Verfahrens ggü. Störungen, welche durch Spannungsschwankungen auf der Leitung verursacht werden.\\
+	$\Rightarrow$ direkt abhängig von der Anzahl der verwendeten Pegel, welche auf einen vorgegebenen Potentialbereich verteilt werden müssen (und so natürlich auch beim Empfänger voneinander unterschieden werden müssen)\\
+	\ac{SSH} bei \ac{AMI}: schlecht, da 3 Pegel\\
+	\ac{SSH} bei \ac{NRZ} und \ac{RZ}: gut, da \glqq nur\grqq\ 2 Pegel (und weniger Pegel geht nicht \smiley{})
 \end{enumerate}
 
 \begin{enumerate}
-	\item[a)] TRG (Taktrückgewinnung)\\
-		Möglichkeit, nur aus dem übertragenen Datensignal eine Resynchronisierung biem Empfänger auf den Takt des Senders zu machen
-	
-	\item[b)] GSF (Gleichspannungs-/stromfreiheit)\\
-		Motivation: Einsparung der Masseleitung. Im zeitlichen Mittel liegen auf der Signalleitung 0V an.\\
-		Ziel: Anhand des mittleren Signalpegels soll der Massepegel \glqq errechnet\grqq\ werden.\\
-		\subitem -Vermeidung einer Potentialverschiebung beim E.
-		\subitem -Pseudoargument: keine Energieübertragung beim vom S zum E.\\
-		Grundvoraussetzung: symmetrische Pegel statt single-ended. \\
-		z.B. $1V \hat{=} +5v$ und $0 \hat{=} -5V$\\
-		dann: GSF bei NRZ: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleichverteilt)\\\\
-		Bei den meisten Anwendungs-, Zeichen- und Zahlencodierungen kann keine Gleichverteilung angenommen werden. Ausnahme: Verschlüsselung und Kompression.
-	\item[c)] SSH (Störsicherheit)\\
-		(Un-)Anfälligkeit eines Verfahrens ggü. Störungen, welche durch Spannungsschwankungen auf der Leitung verursacht werden.\\
-		$\Rightarrow$ direkt abhängig von der Anzahl der verwendeten Pegel, welche auf einen vorgegebenen Potentialbereich verteilt werden müssen (und so natürlich auch beim Empfänger voneinander unterschieden werden müssen)\\
-		SSH bei AMI: schlecht, da 3 Pegel\\
-		SSH bei NRZ und RZ: gut, da \glqq nur\grqq\ 2 Pegel (und weniger Pegel geht nicht \smiley{})
+	\item \ac{NRZ}\\
+		Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
+	\item \ac{RZ}
+		Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
+		\subitem \ac{TRG} bei \ac{RZ}: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
+	\item \ac{AMI}\\
+		Ähnlich \ac{NRZ} mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
+		\subitem \ac{GSF} bei \ac{AMI}: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
+		\subitem \ac{TRG} bei \ac{AMI}: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine \ac{TRG} möglich
+	\item Manchester\\
+		Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq und fallende Flanke $\hat{=}$ \glqq 0 \grqq.\\
+		ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
+		\subitem \ac{TRG} bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
+		\subitem \ac{GSF} bei Manchester: immer, da sich die Pegel in erster und zweiter Schrittzeithälfte gegenseitig ausgleichen
+		\subitem \ac{SSH} bei Manchester: optimal, da \glqq nur \grqq 2 Pegel
 \end{enumerate}
 
 \begin{figure}[h]
 	\centering
 	\begin{tikztimingtable}[timing/slope=0, scale=4]
 		Data    	&  \\
-		NRZ     	& ZHZHZHZZZZHHHHH \\
-		RZ 		    & ZhzZhzZhzZZZZhzhzhzhzhz\\
-		AMI        	& ZHZLZHZZZZLHLHL \\
+		\ac{NRZ}     	& ZHZHZHZZZZHHHHH \\
+		\ac{RZ} 		    & ZhzZhzZhzZZZZhzhzhzhzhz\\
+		\ac{AMI}        	& ZHZLZHZZZZLHLHL \\
 		Manchester 	& hzzhhzzhhzzhhzhzhzhzzhzhzhzhzh\\
 		\extracode
 		\makeatletter
@@ -412,28 +413,28 @@ $ TTL-Pegel
 
 \subsubsection*{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}
 	\textbf{Nyquist-Theorem:} Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.\\
-	\textbf{BBB (Bandbreitenbedarf): }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
-	\textbf{BBB bei NRZ:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
-	\textbf{BBB bei RZ:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
-	\textbf{BBB bei AMI:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
-	\textbf{BBB bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq oder \glqq 111111 \grqq)\\
+	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
+	\textbf{\ac{BBB} bei \ac{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
+	\textbf{\ac{BBB} bei \ac{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
+	\textbf{\ac{BBB} bei \ac{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
+	\textbf{\ac{BBB} bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq oder \glqq 111111 \grqq)\\
 
 \begin{tabularx}{\textwidth}{l|Y|Y|Y|Y}
-	 & TRG 
-	 & GSF \newline symm. Pegel als Grundvoraussetzung 
-	 & SSH \newline abhängig von Anzahl Pegel 
-	 & BBB \newline abhängig von Schrittrate \\ \hline \rule{0pt}{2em} 
-	 NRZ 
+	 & \ac{TRG} 
+	 & \ac{GSF} \newline symm. Pegel als Grundvoraussetzung 
+	 & \ac{SSH} \newline abhängig von Anzahl Pegel 
+	 & \ac{BBB} \newline abhängig von Schrittrate \\ \hline \rule{0pt}{2em} 
+	 \ac{NRZ} 
 	 & bei \glqq 01 \grqq und \glqq 10 \grqq \newline \circled{$=$} 
 	 & \#\glqq 1 \grqq = \# \glqq 0 \grqq \newline (1 und 0 gleichverteilt) \newline \circled{$-$}
 	 & 2 \newline \circled{$+$}
 	 & halbe \newline \circled{$+$}\\ \hline \rule{0pt}{2em}
-	 RZ
+	 \ac{RZ}
 	 & bei jeder \glqq 1 \grqq \newline \circled{$-$}
 	 & symm. Pegel \& nur \glqq 1 \grqq, single ended \& nur \glqq 0 \grqq, \#1 = \#0 und umgekehrt \newline \circled{$=$}
 	 & 2 \newline \circled{$+$}
 	 & ganze \newline \circled{$-$} \\ \hline \rule{0pt}{2em}
-	 AMI
+	 \ac{AMI}
 	 & bei jeder \glqq 1 \grqq \newline \circled{$-$}
 	 & nach jeder zweiten \glqq 1 \grqq, in der Praxis \glqq immer \grqq \newline \circled{$+$}
 	 & 3 \newline \circled{$-$}
@@ -447,18 +448,18 @@ $ TTL-Pegel
 \\ \\
 \textbf{Einsatz:}\\
 \begin{itemize}
-	\item NRZ für interne Schnittstellen, bei denen der Verzicht auf Takt- oder Masseleitung nicht relevant ist
+	\item \ac{NRZ} für interne Schnittstellen, bei denen der Verzicht auf Takt- oder Masseleitung nicht relevant ist
 	\item Manchester gerne für Netzwerkschnittstellen (z.B. Ethernet) um auf Takt- und Masseleitung verzichten zu können
 \end{itemize}
 
 \subsubsection*{3 Verfahren zur sicheren Taktrückgewinnung:}
 \begin{enumerate}
 	\item \textbf{Startbitsequenz} \\
-	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere TRG ermöglicht. z.B. bei NRZ: \glqq 01\grqq oder \glqq 10 \grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\
+	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere \ac{TRG} ermöglicht. z.B. bei \ac{NRZ}: \glqq 01\grqq oder \glqq 10 \grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\
 	\textbf{Nachteil:} relativ großer Overhead, effektive Nutzdatenrate deutlich kleiner als die Schrittrate.\\
 	\noindent\hspace*{2em}% 
 	Im Beispiel: Nutzdatenrate = $\dfrac{n}{n+2}\cdot Schrittweite$\\
-	Bsp: bei RZ oder AMI reicht ein einfaches \glqq 1 \grqq-Startbit. (Keine \glqq Sequenz\grqq, weniger Overhead)\\
+	Bsp: bei \ac{RZ} oder \ac{AMI} reicht ein einfaches \glqq 1 \grqq-Startbit. (Keine \glqq Sequenz\grqq, weniger Overhead)\\
 	\textbf{Anwendung:} z.B.serielle Schnittstelle RS232
 	
 	\item \textbf{Bitstuffing (\glqq Bitstopfen\grqq)}\\
@@ -477,14 +478,14 @@ $ TTL-Pegel
 }
 \\ \\ \\
 	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.\\
-	\textbf{Vor-/Nachteile:} Overhead bei NRZ im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! \\
-	\textbf{bei RZ:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1 \grqq eingefügt, d.h. weniger Overhead als bei NRZ und Bitstuffing. Verfahren ist komplex und deshalb \grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)\\
+	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! \\
+	\textbf{bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1 \grqq eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb \grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)\\
 	\textbf{Anwendung:} Ethernet (um Bitmuster des Frame-Delimiters \glqq 01111110\grqq auszuschließen $\Rightarrow$ nach fünf \glqq 1\grqq wird eine Stopf-\glqq 0\grqq eingeschoben)
 	
 	\item \textbf{Blockcodierung}\\
-	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere TRG ermöglichen.\\
+	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere \ac{TRG} ermöglichen.\\
 	\textbf{Nachteil:} konstant großer Overhead\\
-	\textbf{Vorteil:} ggf. sind weitere positive Eigenschaften erzielbar durch geeignete Auswahl der zu verwendenden Datenblöcke bei der Übertragung (vgl. 8B10B-Codierung und GSF!)\\
+	\textbf{Vorteil:} ggf. sind weitere positive Eigenschaften erzielbar durch geeignete Auswahl der zu verwendenden Datenblöcke bei der Übertragung (vgl. 8B10B-Codierung und \ac{GSF}!)\\
 	\textbf{Anwendung:} z.B. ISDN und viele andere
 \end{enumerate}
 
@@ -665,4 +666,16 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
     DeMorgan-Gesetz  & $ \overline{(a \wedge b)} = \overline{a} \vee \overline{b} $\\
     				 & $ \overline{(a \vee b)} = \overline{a} \wedge \overline{b} $\\
 \end{tabular}
+
+\newpage
+\section*{Abkürzungsverzeichnis}
+\begin{acronym}[Bash]
+	\acro{BBB}{Bandbreitenbedarf}
+	\acro{NRZ}{Non-Return-to-zero}
+	\acro{RZ}{Return-to-Zero}
+	\acro{AMI}{Alternate Mark Inversion}
+	\acro{TRG}{Taktrückgewinnung}
+	\acro{GSF}{Gleichspannungs-/stromfreiheit}
+	\acro{SSH}{Störsicherheit}
+\end{acronym}
 \end{document}
