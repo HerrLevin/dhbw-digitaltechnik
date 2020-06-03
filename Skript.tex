@@ -7,9 +7,11 @@
 \usepackage{amsmath}
 \usepackage[bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
 \usepackage{cancel}
+\usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{MnSymbol,wasysym}
 \usepackage{tikz-timing}
+\usepackage{subcaption}
 \usepackage{tikz, pgfplots}
 \usetikzlibrary{calc}
 
@@ -17,6 +19,7 @@
 
 \newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
 
+\newcommand{\reftbl}[1]{Tabelle ~\ref{#1}}
 
 \tikzset{
 	timing/z/.style={color=blue},
@@ -521,5 +524,145 @@ Rechensystem mit bestimmten Regeln:
 \item Abgeschlossenheit: $\forall a, b \in W\!: \; a \otimes  b \in W, \; a \oplus b \in W$
 \end{itemize}
 
-Es müssen die vier Huntingtonsche Axiome gelten: $\forall a,b,c \in W$
+Es gelten die 4 huntington'schen Axiome: $\forall a,b,c \in W$
+\begin{itemize}
+	\item[\circled{H1}] \textbf{Kommutativgesetz}\\
+	$a \oplus b = b \oplus a, \; a \otimes b =  b \otimes a$
+	\item[\circled{H2}] \textbf{Distributivgesetz}\\
+	$a \oplus (b \otimes c) = (a \oplus b) \otimes (a \oplus c)$\\
+	$a \otimes (b \oplus c) = (a \otimes b) \oplus (a \otimes c)$
+	\item[\circled{H3}] \textbf{Neutrales Element:} $\exists n, e \in IV$\\
+	$a \oplus n = a \;,\; a \otimes e = a $
+	\item[\circled{H4}] \textbf{Inverses Element:} $\exists \overline{a} \exists IV$\\
+	$a \oplus \overline{a} = e \;, \; a \otimes \overline{a} = n$\\	
+\end{itemize}
+\noindent
+Spezialfall: Schaltalgebra\\
+Wertemenge besteht aus zwei Werten:
+$IV = \{0,1\} = \{false, true\} = \{falsch, wahr\} = \{off, on\} = \{aus, an\}$\\
+\begin{tabular}{rrl}
+	Operatoren: & statt $\bigoplus$: & $\vee, \; ODER, \; OR\; (,\;+)$\\
+	& statt $\bigotimes$:& $\wedge, \; UND, \; AND$\\
+	& & (statt $a \wedge b$ geht auch $ab$)\\
+	& & $\Rightarrow$ zweistellige Operatoren
+\end{tabular}
+\\
+Durch \circled{H4} wird ein einstelliger Operator definiert:\\
+\noindent\hspace*{2em}% 
+$\overline{a} = \neg a \; \; NICHT, NOT$
+\subsection{Schaltalgebra}
+\subsubsection{Huntingtonsche Axiome in der Schaltalgebra}
+\begin{itemize}
+	\item[\circled{H1}] $a \vee b = b \vee a, \; a \wedge b  = b \wedge a$
+	\item[\circled{H2}] $a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$\\
+	$a \wedge (b \vee c) = (a \wedge b) \vee (a \wedge c)$
+	\item[\circled{H3}] $a \vee 0 = a, \; a \wedge 1 = a$
+	\item[\circled{H4}] $a \vee \overline{a} = 1, \; a \wedge \overline{a} = 0$\\
+	(oder: $a \vee \neg a = 1, \; a \wedge \neg a = 0$)
+\end{itemize}
+
+\subsubsection{Warum Schaltalgebra?}
+$\Rightarrow$ Darstellung der zweistelligen Operatoren mit Schalttasten, wobei die Werte durch Schalter dargestellt wurden.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{img/schaltnetz_oder}
+		\caption{ODER: $a \vee b$}
+		\label{fig:sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{img/schaltnetz_und}
+		\caption{UND: $a \wedge b$}
+		\label{fig:sub2}
+	\end{subfigure}
+	\caption{Darstellung zweistelliger Operatoren mit Schaltnetzen}
+	\label{fig:test}
+\end{figure}
+
+Darstellung mit Wertetabellen:\\
+
+\begin{table}[h]
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\centering
+		\begin{tabular}{cc|c|c}
+			b & a & $a \vee b$ & $a \wedge b$\\ \hline
+			0 & 0 & 0 & 0\\
+			0 & 1 & 1 & 0\\
+			1 & 0 & 1 & 0\\
+			1 & 1 & 1 & 1\\
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}[b]{0.4\textwidth}
+		\centering
+		\begin{tabular}{c|c}
+			$a$ & $\overline{a}$\\ \hline
+			0 & 1\\
+			1 & 0\\
+		\end{tabular}
+	\end{minipage}	
+	\caption{Wahrheitstabellen für UND/ODER und Negierung}
+\end{table}
+
+Ausdrücke der Schaltalgebra (\glqq boolsche Ausdrücke\grqq) bestehen aus:
+\begin{itemize}
+	\item ein- und zweistelligen Operatoren
+	\item Variable (als Platzhalter für einen Wert)
+	\item Wert
+	\item Klammern
+\end{itemize}
+\begin{Theorem}{Eingangsbelegung}{fermat}
+	Jeder Variable wird ein konkreter Wert zugeordnet
+\end{Theorem}
+\begin{Theorem}{Ausgangsbelegung}{fermat}
+	Der Wert, welcher sich bei einem boolschen Ausdruck bei einer konkreten E-Belegung ergibt, wenn man den boolschen Ausdruck \glqq auswertet\grqq.
+\end{Theorem}
+
+Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge c) \vee (0 \wedge d)$ (Siehe \reftbl{tab:ausdruck})
+\begin{itemize}
+	\item Festlegung der E-Belegung
+	\item Ersetzen der Variablen durch die entsprechenden Werte
+	\item Auswerten \glqq von innen nach außen\grqq
+	\subitem Zunächst den Teilausdruck mit der stärksten Bindungskraft, zuletzt der Teilausdruck mit der schwächsten\\ Bindungskraft: am stärksten... $NOT$, Klammer, $AND$, $OR$ ...am schwächsten
+	\item bei gleicher Bindungskraft Auswertug von links nach rechts
+\end{itemize}
+
+\begin{table}[h!]
+\begin{tabularx}{\textwidth}{c|cccc|Y|Y|Y|Y|Y|Y}
+	\# & $ d $ & $ c $ & $ b $ & $ a $ & $ \neg c $ & $ a \wedge \neg c $ & $ 1 \wedge (b \wedge c) $ & $ 0 \wedge d $ & $ x \vee y $ & $ f $\\ \hline
+	0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+	1 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1\\
+	2 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+	3 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1\\ \hline
+	4 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+	5 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+	6 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1\\
+	7 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1\\ \hline
+	8 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+	9 & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1\\
+	10 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+	11 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1\\ \hline
+	12 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+	13 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+	14 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1\\
+	15 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1\\
+\end{tabularx}
+\caption{Wahrheitstabelle für $f = (a \wedge \neg c) \vee 1 \wedge (b \wedge c) \vee (0 \wedge d)$}
+\label{tab:ausdruck}
+\end{table}
+
+\subsubsection{Aus den Huntingtonschen axiomen abgeleitete (beweisbare Gesetze)}
+\begin{tabular}{ll}
+	Assoziativgesetz & $(a \wedge b) \wedge c = a \wedge (b\wedge c)$ \\
+	 & $ (a \vee b) \vee c = a \vee (b \vee c) $\\
+	Idempotenzgesetz & $ a \wedge a = a $\\
+	 & $ a \vee a = a $\\
+	Absorptionsgesetz& $ a \wedge (a \vee b) = a $\\
+    	& $ a \vee (a \wedge b) = a $\\
+    DeMorgan-Gesetz  & $ \overline{(a \wedge b)} = \overline{a} \vee \overline{b} $\\
+    				 & $ \overline{(a \vee b)} = \overline{a} \wedge \overline{b} $\\
+\end{tabular}
 \end{document}
