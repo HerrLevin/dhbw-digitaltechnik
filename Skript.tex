@@ -9,6 +9,7 @@
 \usepackage{cancel}
 \usepackage{enumitem}
 \usepackage{tabularx}
+\usepackage{xcolor}
 \usepackage{MnSymbol,wasysym}
 \usepackage{tikz-timing}
 \usepackage{subcaption}
@@ -19,6 +20,9 @@
 	\usepgfplotslibrary{groupplots}
 
 \newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
+
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+	\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
 
 \newcommand{\reftbl}[1]{Tabelle ~\ref{#1}}
 
@@ -143,7 +147,7 @@
 		\item[$ \ominus $] recht hohe Komplexität, relativ geringe Verständlichkeit
 		\item[$ \ominus $] extrem komplizierte Addition und Subtraktion
 	\end{itemize}
-	\paragraph{II. Stellenwertsysteme}
+	\paragraph{II. \acp{SWS}}
 	\subparagraph{Dezimalsystem}
 	\begin{itemize}
 		\item[] Alphabet = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}
@@ -158,7 +162,7 @@
 	$$
 	Wert(Z_{n-1} \dots Z_0) = \sum_{i=0}^{n-1}|Z_i|\cdot10^i
 	$$
-	\subparagraph{SWS zur Basis b}
+	\subparagraph{\ac{SWS} zur Basis b}
 	\begin{itemize}
 		\item[] Alphabet enthält b Ziffern
 		\item[] Alphabet beginnt bei Ziffer \glqq 0\grqq\ und endet bei Ziffer \glqq b-1\grqq\
@@ -167,7 +171,7 @@
 		Wert(Z_{n-1} \dots Z_0) = \sum_{i=0}^{n-1}|Z_i| \cdot b^i
 	$$
 	$b_{EIN}$ mit $b>1$\\
-	\textit{Anmerkung:} $b=1$ nicht sinnvoll, da im SWS zur Basis nur die 0 dargestelt werden könnte.
+	\textit{Anmerkung:} $b=1$ nicht sinnvoll, da im \ac{SWS} zur Basis nur die 0 dargestelt werden könnte.
 	\begin{itemize}
 		\item[$ \oplus/\ominus $] gewisses \glqq Erstverständnis \grqq\/Lernaufwand ist nötig
 		\item[$ \oplus/\ominus $] es gibt für jede Grundrechenart einVerfahren mit etwas erhöhter Komplexität, welches aber nach erstmaligem Lernaufwand doch relativ problemfrei realisierbar ist
@@ -193,11 +197,11 @@
 	1:2	&= 0R1 = Z_5
 	\end{split}
 	\end{equation}
-	Hinweis: Führende \glqq 0 \grqq\ können bei Zahlen im SWS beliebig hinzugefügt oder weggelassen werden. 
+	Hinweis: Führende \glqq 0 \grqq\ können bei Zahlen im \ac{SWS} beliebig hinzugefügt oder weggelassen werden. 
 	allg: Umrechnung von Basis $b_1$ nach Basis $b_2$
 	\begin{itemize}
 		\item meist: von Basis $b_1$ nach $b_Z=10$ dann von $b_Z$ nach $b_2$
-		\item theoretisch: Ganzzahldivision durch Zielbasis $b_2$, aber ausgeführt im SWS zur Ausgangsbasis $\Rightarrow$ Nicht praktikabel
+		\item theoretisch: Ganzzahldivision durch Zielbasis $b_2$, aber ausgeführt im \ac{SWS} zur Ausgangsbasis $\Rightarrow$ Nicht praktikabel
 	\end{itemize}
 	Direkte Umrechnung:\\
 	Falls $ b_1 = {b_2}^n $, dann entsprechen $n$ Ziffern zur Basis $ b_2 $ einer Ziffer zur Basis $ b_1 $ und es ist eine ziffern(block)weise Umrechnung.\\
@@ -205,7 +209,7 @@
 	\underline{Bsp.:} $ b_1=2 $ und $ b_2=16 $\\
 	$ \Rightarrow $ 4 Ziffern zur Basis $ 2 $ entsprechen einer Ziffer zur Basis $ 16 $.\\ \\
 	
-	\underline{Gängige Basen im SWS}\\
+	\underline{Gängige Basen im \ac{SWS}}\\
 	$ b=10 $ \glqq Dezimalsystem\grqq\ $ \Rightarrow $ Mensch\\
 	$ b=2 $ \glqq Binärsystem\grqq\/\glqq Dualsystem\grqq\ $ \Rightarrow $ Digitalrechner \\
 	$ b=16 $ \glqq Hexadezimalsystem \grqq\ $ \Rightarrow $ Computernahe Darstellung von Zahlen
@@ -268,8 +272,112 @@ $$
 \hspace*{2em}
 auch negative Zahlen!
 \\
-Darstellung negativer Zahlen
+\subsection{Darstellung negativer Zahlen}
+ Vorzeichen und Betrag
+\subsubsection{1er-Komplement}
+	\textit{(ab jetzt immer zur Basis 2)}\\
+	Alle Bits werden invertiert: $ 0 \rightarrow 1; \; 1\rightarrow 0 $\\
+	Aber vorher: bei positiven Zahlen mindestens eine führende Null.\\
+	Außerdem: alle Zahlen auf \underline{gleiche} Länge!
 
+$$
+\begin{array}{rc}
+	& 42 \\
+ -  & 37 \\
+    & \\
+    &
+\end{array}
+\begin{array}{cccccccccl}
+       & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 &\\
+       & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 0 &\\
+ _1 & _1 & _1 & _1 & _1 &     & _1 &    & &\\ \hline
+\hcancel[red]{1}  & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & \text{(9. Stelle wird ignoriert)}
+
+\end{array}
+$$
+
+\subsubsection*{Nachteile 1er-Komplement}
+\begin{itemize}
+	\item Manchmal (leicht) falsche ERgebnisse
+	\item Zwei verschiedene Darstellungen der \glqq 0\grqq \\
+	$  +0 \hat{=} 0000 \xrightarrow{e.K.} 1111 \hat{=} -0 $
+\end{itemize}
+\subsubsection*{Wertebereich 8bit-1-IC-Zahlen:}
+$$
+01111111 = 127 \\
+-127 = 10000000 \xrightarrow{eK} 01111111 = 127
+$$
+$\Rightarrow$ nur 255 (statt $ 256 = 2^8 $) verschiedene Zahlenwerte mit 8 Bit darstellbar
+
+\subsubsection{2er Komplement}
+Bildung: Wie 1er-Komplement, also Stellenzahl festlegen, Ziffern invertieren ($ 0 \rightarrow 1; \; 1\rightarrow 0 $)\\
+\textbf{Zusätzlich:} +1 addieren!\\
+\\
+$ \bigoplus $ Ergebnis immer korrekt!
+
+\subsection{Darstellung nicht-ganzer (aber vorläufig nicht-negativer) Zahlen}
+\subsubsection{Bruch: Darstellung mit Zähler \& Nenner}
+$$
+\dfrac{1}{2} = \dfrac{2}{4} \\
+\dfrac{1}{4}
+$$
+
+$ \bigominus $ Es gibt unendlich viele Darstellungen jeder Zahl als Bruch. Lösungsmöglichkeit: nur gekürzte Darstellung.\\
+$ \Rightarrow $ Normalerweise keine Darstellung von Zahlen als Bruch im PC (Ausnahme: algebraisches Lösen von Gleichungssystemen)
+
+\subsubsection{\acp{FKZ}}
+Alphabet mit Ziffern wird erweitert um \glqq Komma \grqq (\glqq , \grqq)\\
+$ \Rightarrow $ In der Symbolfolge ist maximal ein komma erlaubt. \\
+Bsp: Zahl mit $n$ Vor- und Nachkommastellen
+$$
+Z_{n-1} Z_{n-2}\ldots Z_2 Z_1 Z_0,Z_{-1} Z_{-2} \ldots Z_{-m+1} Z_{-m+2}
+$$
+$$
+\sum_{i=0}^{n-1} |z_i|\cdot b^i
+$$
+
+$$
+\begin{array}{rrcl}
+z.B. & 110,011_2 & = & 0 \cdot 2^0 + 1 \cdot 2^1 + 1 \cdot 2^2 \\
+        &                     & = & 0 \cdot 2^{-1} + 1 \cdot 2^{-2} + 1 \cdot 2^{-3} \\
+        &                     & = & 2 + 4 + \dfrac{1}{4} + \dfrac{1}{8} = 6 + 0,25 + 0,125 = 6,375 \\
+\end{array}
+$$
+\\
+Umrechnung von Basis 10 nach Basis b? \\
+$\rightarrow$ Werteformel\\
+$ z.B. 6,375_{10} = ?,?_2 $\\
+\noindent
+Aufteilung in Vor- und Nachkommateil: \\
+Vorkommateil über Ganzzahldivision\\
+$ 6_{10} = 110_{2} $\\
+Nachkommateil: Multiplikation mit Zielbasis und Aufteilen in Vor- und Nachkommateil \\
+Vorkommateil ist die erste bzw. nächste Nachkommastelle
+$$
+\begin{array}{rlcl}
+0,375 & \cdot 2 & = & 0,75\\
+0,75   & \cdot 2 & = & 1,5\\
+0,5     & \cdot 2 & = & 1,0\\
+0,0     & \cdot 2 & = & 0,0\\
+\end{array}
+$$
+$$
+0,375_{10} = 0,01100_{2}
+$$
+
+\subsubsection{\acp{GKZ}(auch Fließkommazahlen)}
+$$
+\text{Wert} = \text{Mantisse} \cdot \text{Basis}^{\text{Exponent}}
+$$
+\begin{tabular}{rl}
+	Mantisse  & Festkommazahl \\
+	Exponent & ganze Zahl, steht für die Verschiebung des Kommas bei der Mantisse\\
+	Basis b     & beliebig (wie bei anderen Zahlen im \ac{SWS}), aber $b$ muss der für die Mantisse verwendeten Basis entsprechen\\
+\end{tabular}
+
+$$
+1,0 \cdot 10^0 = 10,0 * 10^{-1} = 100,0 \cdot 10^{-2} = 0,1 \cdot 10^{1} \ldots
+$$
 
 %ToDo Rest aus Tablet übernehmen
 
@@ -670,6 +778,12 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 \newpage
 \section*{Abkürzungsverzeichnis}
 \begin{acronym}[Bash]
+	\acro{SWS}{Stellenwertsysteme}
+	\acroplural{SWS}[SWS]{Stellenwertsysteme}
+	\acro{FKZ}{Festkommazahl}
+	\acroplural{FKZ}[FKZ]{Festkommazahlen}
+	\acro{GKZ}{Gleitkommazahl}
+	\acroplural{GKZ}[GKZ]{Gleitkommazahlen}
 	\acro{BBB}{Bandbreitenbedarf}
 	\acro{NRZ}{Non-Return-to-zero}
 	\acro{RZ}{Return-to-Zero}
