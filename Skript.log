@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.18)  9 JUN 2020 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.18)  9 JUN 2020 13:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1419,6 +1419,12 @@ LaTeX Warning: Label `thm:fermat' multiply defined.
 
 LaTeX Warning: Label `thm:fermat' multiply defined.
 
+
+LaTeX Warning: Label `thm:fermat' multiply defined.
+
+
+LaTeX Warning: Label `thm:fermat' multiply defined.
+
 )
 \openout1 = `Skript.aux'.
 
@@ -1759,12 +1765,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 855--864
 
  []
 
-[12] [13] [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 955.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 955.
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 937--940
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 972--973
+
+ []
+
+[13] [14] [15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 998.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 998.
  (./Skript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 955.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 955.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 998.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 998.
 Package rerunfilecheck Info: File `Skript.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1776,10 +1792,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 53332 strings out of 492167
- 1181402 string characters out of 6131558
+ 53339 strings out of 492167
+ 1181508 string characters out of 6131558
  1579093 words of memory out of 5000000
- 56914 multiletter control sequences out of 15000+600000
+ 56919 multiletter control sequences out of 15000+600000
  549591 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,18n,116p,10125b,1301s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1805,10 +1821,10 @@ fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share
 /type1/public/amsfonts/latxfont/line10.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/wasy2-ps/
 wasy10.pfb>
-Output written on Skript.pdf (14 pages, 333038 bytes).
+Output written on Skript.pdf (15 pages, 337215 bytes).
 PDF statistics:
- 424 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
+ 429 PDF objects out of 1000 (max. 8388607)
+ 347 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
  260 words of extra memory for PDF output out of 10000 (max. 10000000)
 
