@@ -19,6 +19,8 @@
 
 	\usepgfplotslibrary{groupplots}
 
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
 \newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
 
 \newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
@@ -46,6 +48,22 @@
 		size=small,
 		colback=blue!75!black,
 		colframe=blue!75!black,
+	} 
+}{thm}
+\newtcbtheorem[no counter]{Hint}{Hinweis}{
+	enhanced,
+	sharp corners,
+	attach boxed title to top left={
+		yshifttext=-1mm
+	},
+	colback=white,
+	colframe=yellow!75,
+	fonttitle=\color{black}\bfseries,
+	boxed title style={
+		sharp corners,
+		size=small,
+		colback=yellow!75,
+		colframe=yellow!75,
 	} 
 }{thm}
 
@@ -773,6 +791,111 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
     	& $ a \vee (a \wedge b) = a $\\
     DeMorgan-Gesetz  & $ \overline{(a \wedge b)} = \overline{a} \vee \overline{b} $\\
     				 & $ \overline{(a \vee b)} = \overline{a} \wedge \overline{b} $\\
+\end{tabular}
+\subsubsection{Beweismethoden}
+\begin{itemize}
+	\item algebraische Umformungen mit Hilfe der Axiome und bereits bewiesener Gesetze: \\
+	$ a \overset{!}{=} a \wedge a $ (Idempotenzgesetz)\\
+	$ a \overset{H3}{=} a \wedge 1 \overset{H4}{=} a \wedge ( a \vee \overline{a} ) \overset{H2}{=} (a \wedge a) \vee (a \wedge \overline{a}) \overset{H4}{=} (a \wedge a) \vee 0 \overset{H3}{=} a \wedge a$
+	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle E-Belegugen dieselbe A-Belegung haben
+	\item spezielle Interpretation von $H4$:\\
+	falls $ a \vee \overline{b} = 1 $ und $ a \wedge \overline{b} = 0 $, dann $ a = b $\\
+	$ a \vee (b \vee c) \overset{!}{=} (a \vee b) \vee c $ (Assoziativgesetz)
+\end{itemize}
+
+\begin{tabular}{c|ccc|c|c|c|c}
+	\# & c & b & a & $ b \vee c $ & $ a \vee (b \vee c) $ & $ a \vee b $ & $ (a \vee b) \vee c$\\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+	1 & 0 & 0 & 1 & 0 & 1 & 1 & 1\\
+	2 & 0 & 1 & 0 & 1 & 1 & 1 & 1\\
+	3 & 0 & 1 & 1 & 1 & 1 & 1 & 1\\
+	4 & 1 & 0 & 0 & 1 & 1 & 0 & 1\\
+	5 & 1 & 0 & 1 & 1 & 1 & 1 & 1\\
+	6 & 1 & 1 & 0 & 1 & 1 & 1 & 1\\
+	7 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+	 \multicolumn{5}{c}{}& \multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}& $\uparrow$\\
+	 \multicolumn{5}{c}{}&\multicolumn{3}{c}{gleiche Ausgangsbelegungen}
+\end{tabular}
+\\
+$ \overline{a \wedge b} \overset{!}{=} \overline{a} \vee \overline{b}$\\
+Beweis: 
+\begin{align*}
+\overline{\overline{a \vee b}}  \wedge (\overline{a} \vee \overline{b}) \overset{!}{=} 0 \\
+\overline{\overline{a \wedge b}} \vee (\overline{a} \vee \overline{b}) \overset{!}{=} 1 \\
+\overline{\overline{a \wedge b}} \wedge ( \overline{a} \vee \overline{b}) \overset{\text{dopp. Neg.}}{=} (a \wedge b ) \wedge (\overline{a} \vee \overline{b}) \overset{H2}{=} (a \wedge b) \wedge \overline{a} \vee (a \wedge b) \wedge \overline{b} \\
+\overset{H1 \text{ \& AssG.}}{=} b \wedge (a \wedge \overline{a}) \vee a \wedge (b \wedge \overline{b}) \overset{H4}{=} (b \wedge 0) \vee (a \wedge 0) \overset{0-Abs.}{=} 0 \vee 0 \overset{H3 \text{ oder Id.pot.}}{=} 0 \\
+\overset{\text{1. Hälfte}}{\blacksquare}
+\end{align*}
+\begin{align*}
+\overline{\overline{a \wedge b}} \vee (\overline{a} \vee \overline{b}) \overset{\text{dopp. Neg.}}{=} (a \wedge b) \vee (\overline{a} \vee \overline{b}) \overset{H2}{=} (a \vee (\overline{a} \vee \overline{b})) \wedge (b \vee (\overline{a} \vee \overline{b})) \\
+\overset{H1 \text{ \& AssG.}}{=} ((a\vee \overline{a})\vee \overline{b}) \wedge ((b \vee \overline{b})\vee \overline{a})\\
+\overset{H4}{=} (1 \vee \overline{b}) \wedge (1 \vee \overline{a})\\
+\overset{\text{1-Absorp.}}{=} 1 \wedge 1 \\
+\overset{H3 \text{ oder Id.pot.}}{=} 1\\
+\overset{\text{2. Hälfte}}{\blacksquare}
+\end{align*}
+
+\noindent
+doppelte Negation: $ \overline{\overline{x}} \overset{!}{=} x $\\
+Beweis über: $ \overline{\overline{x}} \wedge \overline{x} \overset{!}{=} 0 \text{ und }  \overline{\overline{x}} \vee \overline{x} \overset{!}{=} 1 $\\
+\begin{align*}
+\begin{array}{cc}
+\overline{(\overline{x})} \wedge (\overline{x}) \overset{H4}{=} 0 & \overset{\text{1. Hälfte}}{\blacksquare}\\
+\overline{(\overline{x})} \vee (\overline{x}) \overset{H4}{=} 0 & \overset{\text{2. Hälfte}}{\blacksquare}\\
+\end{array}
+\Bigg\} \blacksquare
+\end{align*}
+0-Absorption: $ x \wedge 0 \overset{!}{=} 0$\\
+Beweis: $ x \wedge 0 \overset{H4}{=} x \wedge (x \wedge \overline{x})  \overset{\text{AssG.}}{=} (x \wedge x) \wedge \overline{x} \overset{\text{Id.pot.}}{=} x \wedge \overline{x} \overset{H4}{=} 0 \blacksquare$\\
+\\
+1-Absorption: $ x \vee 1 \overset{!}{=} $\\
+Beweis: \\
+%ToDo
+\begin{Theorem}{}{fermat}
+Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegung (der $ n $ Eingangsvariablen) wird genau eine Ausgangsbelegung zugeordnet.
+\end{Theorem}
+
+Darstellung von Funktionen:
+\begin{enumerate}
+	\item algebraischer Funktionsterm
+	\item Wahrheitstabelle
+\end{enumerate}
+
+\begin{Theorem}{}{fermat}
+	Zwei Funktionen sind äquivalent, wenn sie dieselbe Wahrheitstabelle aufweisen
+\end{Theorem}
+
+\begin{Hint}{}{hint}
+	Zwei äquivalente Funktionen können durch sehr unterschiedliche Funktionsterme dargestellt werden. (algebraische Umformungen mit Hilfe der Axiome und abgeleiteten Gesetze sind immer möglich)
+\end{Hint}
+
+\subsubsection{Funktionen abhängig von Ausgangsvariablen}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|r|l|l|}
+	\hline
+	$ n = 0 $ & $ f_0() = 0 $ & \glqq Nullfunktion\grqq \\
+					 & $ f_1() = 1 $ & \glqq Einsfunktion\grqq \\ \hline
+\multicolumn{3}{|l|}{$ \Rightarrow $ (nur) 2 verschiedene Funktionen abhängig von 0 Variablen!}\\ \hline
+	$ n = 1 $ & $ f_0(a) = 0 $ & \glqq Nullfunktion\grqq \\
+					 & $ f_1(a) = \overline{a} $ & \glqq Negation \grqq \\
+					 & $ f_2(a) = a $ & \glqq Identität \grqq \\
+					 & $ f_3(a) = 1 $ & \glqq Einsfunktion \grqq \\ \hline
+ \multicolumn{3}{|l|}{$ \Rightarrow $ genau 4 verschiedene Funktionen abhängig vn 1 Variablen!}\\ \hline
+\end{tabular}
+\label{tab:funktionen_ausgang}
+\caption{Funktionen abhängig von Ausgangsvariablen ($ n = 0 \ldots 1 $)}
+\end{table}
+
+\subsubsection*{Anzahl verschiedener Funktionen?}
+Anzahl Zeilen in der Wertetabelle: $ 2^n $\\
+Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktionen abhängig von Eingangsvariablen.
+\\
+\begin{tabular}{ccc}
+	n & $ 2^n $ & $ 2^{2^{n}} $ \\ \hline
+	0 & 1 & 2 \\
+	1 & 2 & 4 \\
+	2 & 4 & 16\\
 \end{tabular}
 
 \newpage
