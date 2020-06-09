@@ -21,6 +21,9 @@
 
 \def\doubleunderline#1{\underline{\underline{#1}}}
 
+\def\rot{\rotatebox}
+
+
 \newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
 
 \newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
@@ -797,13 +800,15 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 	\item algebraische Umformungen mit Hilfe der Axiome und bereits bewiesener Gesetze: \\
 	$ a \overset{!}{=} a \wedge a $ (Idempotenzgesetz)\\
 	$ a \overset{H3}{=} a \wedge 1 \overset{H4}{=} a \wedge ( a \vee \overline{a} ) \overset{H2}{=} (a \wedge a) \vee (a \wedge \overline{a}) \overset{H4}{=} (a \wedge a) \vee 0 \overset{H3}{=} a \wedge a$
-	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle E-Belegugen dieselbe A-Belegung haben
+	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle Eingangsbelegugen dieselbe Ausgagsbelegung haben (\reftbl{tab:beweiswahrheitstabelle})
 	\item spezielle Interpretation von $H4$:\\
 	falls $ a \vee \overline{b} = 1 $ und $ a \wedge \overline{b} = 0 $, dann $ a = b $\\
 	$ a \vee (b \vee c) \overset{!}{=} (a \vee b) \vee c $ (Assoziativgesetz)
 \end{itemize}
 
-\begin{tabular}{c|ccc|c|c|c|c}
+\begin{table}
+	\centering
+	\begin{tabular}{c|ccc|c|c|c|c}
 	\# & c & b & a & $ b \vee c $ & $ a \vee (b \vee c) $ & $ a \vee b $ & $ (a \vee b) \vee c$\\
 	0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 	1 & 0 & 0 & 1 & 0 & 1 & 1 & 1\\
@@ -816,7 +821,10 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 	 \multicolumn{5}{c}{}& \multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}& $\uparrow$\\
 	 \multicolumn{5}{c}{}&\multicolumn{3}{c}{gleiche Ausgangsbelegungen}
 \end{tabular}
-\\
+\label{tab:beweiswahrheitstabelle}
+\caption{Beweis anhand einer Wahrheitstabelle}
+\end{table}
+
 $ \overline{a \wedge b} \overset{!}{=} \overline{a} \vee \overline{b}$\\
 Beweis: 
 \begin{align*}
@@ -883,7 +891,7 @@ Darstellung von Funktionen:
 					 & $ f_3(a) = 1 $ & \glqq Einsfunktion \grqq \\ \hline
  \multicolumn{3}{|l|}{$ \Rightarrow $ genau 4 verschiedene Funktionen abhängig vn 1 Variablen!}\\ \hline
 \end{tabular}
-\label{tab:funktionen_ausgang}
+\label{tab:funktionenausgang}
 \caption{Funktionen abhängig von Ausgangsvariablen ($ n = 0 \ldots 1 $)}
 \end{table}
 
@@ -891,12 +899,41 @@ Darstellung von Funktionen:
 Anzahl Zeilen in der Wertetabelle: $ 2^n $\\
 Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktionen abhängig von Eingangsvariablen.
 \\
-\begin{tabular}{ccc}
-	n & $ 2^n $ & $ 2^{2^{n}} $ \\ \hline
-	0 & 1 & 2 \\
-	1 & 2 & 4 \\
-	2 & 4 & 16\\
-\end{tabular}
+\begin{minipage}{0.45\textwidth}
+	\begin{tabular}{cccl}
+		n & $ 2^n $ & $ 2^{2^{n}} $& \\ \cline{1-3}
+		0 & 1 & 2 &\\
+		1 & 2 & 4 &\\
+		2 & 4 & 16&\\
+		4 & 16 & 65536&\\
+		5 & 32 & $ \approx $ 4 Mrd&\\
+		6 & 64 & $ \approx $ 16 Trio & $ \approx $ 1.000.000.000.000.000.000
+	\end{tabular}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\fbox{$
+	\begin{array}{ccc}
+	2^{10} & = & 1024\\
+	             & \approx & 1000
+	\end{array}
+	$}
+\end{minipage}
+
+\begin{table}
+	\centering
+	\begin{tabular}{cc|cccccccccccccccc}
+		b & a & $ f_{0} $ & $ f_{1} $ & $ f_{2} $ & $ f_{3} $ & $ f_{4} $ & $ f_{5} $ & $ f_{6} $ & $ f_{7} $ & $ f_{8} $ & $ f_{9} $ & $ f_{10} $ & $ f_{11} $ & $ f_{12} $ & $ f_{13} $ & $ f_{14} $ & $ f_{15} $ \\
+		0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\
+		0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1\\
+		1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1\\
+		1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\ \hline
+		\multicolumn{2}{l|}{$ f(a,b)= $} & 0 & $ \overline{a \vee b} $ & $ \overline{a \Rightarrow b} $ & $ \overline{b} $ & $ \overline{b \Rightarrow a} $ & $ \overline{a} $ & $\overline{a \Leftrightarrow b}$ & $ \overline{a \wedge b} $ & $ a \wedge b $ & $ a \Leftrightarrow b $ & $ a $ & $ b \Rightarrow b $ & $ b $ & $ a \Rightarrow b $ & $ a \vee b $ & $ 1 $\\
+		& & \rotatebox{270}{Nullfunktion} & \rotatebox{270}{NOR}&\rotatebox{270}{Inhibition}&\rotatebox{270}{Negation von $ b $}&\rotatebox{270}{Inhibition}&\rotatebox{270}{Negation von $ a $}&\rotatebox{270}{XOR/Antivalenz}&\rotatebox{270}{NAND}&\rotatebox{270}{UND/AND}&\rotatebox{270}{Äquivalenz}&\rotatebox{270}{Identität von $ a $}&\rotatebox{270}{Implikation; aus $ b  $ folgt $ a $}&\rotatebox{270}{Identität von $ b $}&\rotatebox{270}{Implikation: aus $ a $ folgt $ b $}&\rotatebox{270}{ODER/OR}&\rotatebox{270}{Einsfunktion}\\
+	\end{tabular}
+\label{tab:bolscheoperationen}
+\caption{Wahrheitstabelle boolscher Operationen}
+\end{table}
+
 
 \newpage
 \section*{Abkürzungsverzeichnis}
