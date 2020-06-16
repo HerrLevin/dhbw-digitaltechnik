@@ -15,6 +15,7 @@
 \usepackage{subcaption}
 \usepackage{acronym}
 \usepackage{tikz, pgfplots}
+\usepackage{circuitikz}
 \usetikzlibrary{calc}
 
 	\usepgfplotslibrary{groupplots}
@@ -977,6 +978,139 @@ Bsp: Speicherbausteine in \glqq NAND \grqq-Technologie.\\
 	Wir suchen einen \glqq standardisierten\grqq Funktionsterm!
 \end{Hint}
 
+Wir suchen einen standardisierten Funktionsterm!\\
+Ausgangspunkt: Wertetabelle\\
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|ccc|c|c}
+	\# & c & b & a & $ f(a,b,c) $ & Minterm \\
+	0 & 0 & 0 & 0 & 1 & $ \overline{c} \overline{b} \overline{a} = (\overline{c} \wedge \overline{b}) \wedge \overline{a}$ \\
+	1 & 0 & 0 & 1 & 1 & $ \overline{c}\overline{b}a $\\
+	2 & 0 & 1 & 0 & 0 & \\
+	3 & 0 & 1 & 1 & 1 & $ \overline{c}ba $\\
+	4 & 1 & 0 & 0 & 0 & \\
+	5 & 1 & 0 & 1 & 0 & \\
+	6 & 1 & 1 & 0 & 0 & \\
+	7 & 1 & 1 & 1 & 1 & $ cba $
+\end{tabular}
+\end{table}
+
+\begin{equation*}
+f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\vee\overline{c}ba\vee cba
+\end{equation*}
+
+\begin{itemize}
+	\item Ein Literal ist eine Variable in negierter oder nicht-negierter Form
+	\item Ein Implikant ist eine Konkunktion von Literalen, für den gilt $ i \implies f $
+	\item Ein Minterm ist ein Implikant, bei dem es für jede E-Variable ein Literal gibt. (Auch Viollkonjunktion genannt)
+\end{itemize}
+
+\begin{tabular}{rp{10cm}}
+	Satz: & Ein Minterm hat nur bei einer einzigen E-Belegung \glqq 1 \grqq als A-Belegung, in allen anderen Fällen der E-Belegung ergibt sich \glqq 0\grqq als A-Belegung.\\
+	Bew.:& geschenkt (Verständnis)\\ \hline
+	Satz: & Die \ac{DNF} der Funktion $ f $ ist ein äquivalent zur Funktion $ f $.\\
+	Bew.:& Verständnis/Bildungsregel\\ \hline
+	Satz: & Die\ac{DNF} ist (ausgenommen die Reihenfolge der Minterme, sowie die Reihenfolge der Literale in den Mintermen) für eine gegebene Funktion eindeutig.\\
+	Bew.:& Bildungsregel \& Wertetabelle ist eindeutig.\\
+\end{tabular}
+
+\begin{Theorem}{}{fermat}
+	Die Disjunktion aller Minterme der Funktion $ f $ heißt \ac{DNF}.
+\end{Theorem}
+
+\subsection{Darstellung von Funktionen}
+\subsubsection{Schaltnetze}
+Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstellung von Funktionen als Graph, genauer als gerichteter Graph (\glqq Reihenfolge\grqq!)\\
+\begin{tabular}{ll}
+	Gatter: Knoten & $ \hat{=} $ Operatoren\\
+	Leitungsverbindungen: Kanten & $ \hat{=} $ Reihenfolge
+\end{tabular}
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz} 
+	\draw (0,0) node[european and port] (and) {}
+	(and.in 1) node[anchor=east] {a}
+	(and.in 2) node[anchor=east] {b}
+	(and.out) node[anchor=west]{$ a \wedge b $}
+	(and.south) node[below]{AND};
+	
+	\draw (4,0) node[european or port] (or) {}
+	(or.in 1) node[anchor=east] {a}
+	(or.in 2) node[anchor=east] {b}
+	(or.out) node[anchor=west]{$ a \vee  b $}
+	(or.south) node[below]{OR};
+	
+	\draw (0,-2) node[and port] (aand) {}
+	(aand.in 1) node[anchor=east] {a}
+	(aand.in 2) node[anchor=east] {b}
+	(aand.out) node[anchor=west]{$ a \wedge b $}
+	(aand.south) node[below]{Amerikanisches AND};
+	
+	\draw (4,-2) node[or port] (aor) {}
+	(aor.in 1) node[anchor=east] {a}
+	(aor.in 2) node[anchor=east] {b}
+	(aor.out) node[anchor=west]{$ a \vee b $}
+	(aor.south) node[below]{Amerikanisches OR};
+	
+	\draw (0,-4) node[european buffer port] (ident) {}
+	(ident.in 1) node[anchor=east] {a}
+	(ident.out) node[anchor=west]{a}
+	(ident.south) node[below]{Identer/Identität};
+	
+	\draw (4,-4) node[european buffer port] (invert) {}
+	(invert.in 1) node[anchor=east] {a}
+	(invert.out) node[anchor=west]{$ \overline{a} $}
+	(invert.bout) node[ocirc, right]{}
+	(invert.south) node[below]{Inverter/NICHT};
+\end{circuitikz}
+\caption{Symbole für die Operatoren (\glqq Gatter\grqq) nach DIN/IEC}
+\end{figure}
+
+\textbf{Konvetionen:}
+\begin{itemize}
+	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
+	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
+	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}
+		\draw 
+		(0,0) node[european and port] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.in 1) node[anchor=east]{c}
+		(A.in 2) node[anchor=east]{b}
+		(2, -2)node[european and port] (B){}
+		(B.bin 2) node[ocirc, left]{}
+		(B.in 2) node[anchor=east]{a}
+		(A.out) -| (B.in 1)
+		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\begin{circuitikz}
+		\draw 
+		(0,-2) node[european and port] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.in 1) node[anchor=east]{b}
+		(A.in 2) node[anchor=east]{a}
+		(2, 0)node[european and port] (B){}
+		(B.bin 1) node[ocirc, left]{}
+		(B.in 1) node[anchor=east]{c}
+		(A.out) -| (B.in 2)
+		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\begin{circuitikz}
+			\draw node[european and port, number inputs=3] (A){}
+			(A.in 1) node[anchor=east]{c}
+			(A.in 2) node[anchor=east]{b}
+			(A.in 3) node[anchor=east]{a}
+			(A.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\caption{Unterschiedliche Darstellungen einer UND-Verschaltung}
+\end{figure}
 
 \newpage
 \section*{Abkürzungsverzeichnis}
@@ -994,5 +1128,6 @@ Bsp: Speicherbausteine in \glqq NAND \grqq-Technologie.\\
 	\acro{TRG}{Taktrückgewinnung}
 	\acro{GSF}{Gleichspannungs-/stromfreiheit}
 	\acro{SSH}{Störsicherheit}
+	\acro{DNF}{Disjunktive Normalform}
 \end{acronym}
 \end{document}
