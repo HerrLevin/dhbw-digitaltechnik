@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.18)  16 JUN 2020 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.18)  17 JUN 2020 12:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1463,6 +1463,14 @@ Package circuitikz Warning: You did not specify one of the voltage directions:
 (circuitikz)                Default directions may have changed, 
 (circuitikz)                please check the manual.
 
+) (/usr/share/texmf-dist/tex/latex/tikzmark/tikzlibrarytikzmark.code.tex
+(/usr/share/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2019-10-11 LaTeX2e option processing using LaTeX3 keys
+)
+\l__sn_x_dim=\dimen323
+\l__sn_y_dim=\dimen324
+\l__sn_xa_dim=\dimen325
+\l__sn_ya_dim=\dimen326
 )
 (/usr/share/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.groupplots
 .code.tex
@@ -1489,6 +1497,9 @@ LaTeX Warning: Label `thm:fermat' multiply defined.
 LaTeX Warning: Label `thm:fermat' multiply defined.
 
 
+LaTeX Warning: Label `thm:hint' multiply defined.
+
+
 LaTeX Warning: Label `thm:fermat' multiply defined.
 
 
@@ -1500,27 +1511,27 @@ LaTeX Warning: Label `thm:fermat' multiply defined.
 )
 \openout1 = `Skript.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 8
-2.
+1.
  (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    ... okay on input line 81.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1560,13 +1571,13 @@ ABD: EveryShipout initializing macros
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count342
-\scratchdimen=\dimen323
+\scratchdimen=\dimen327
 \scratchbox=\box82
 \nofMPsegments=\count343
 \nofMParguments=\count344
 \everyMPshowfont=\toks47
 \MPscratchCnt=\count345
-\MPscratchDim=\dimen324
+\MPscratchDim=\dimen328
 \MPnumerator=\count346
 \makeMPintoPDFobject=\count347
 \everyMPtoPDFconversion=\toks48
@@ -1589,7 +1600,7 @@ e
 ))
 \c@lstlisting=\count348
 \AtBeginShipoutBox=\box83
-Package hyperref Info: Link coloring OFF on input line 82.
+Package hyperref Info: Link coloring OFF on input line 81.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1599,9 +1610,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count349
 )
-LaTeX Info: Redefining \ref on input line 82.
-LaTeX Info: Redefining \pageref on input line 82.
-LaTeX Info: Redefining \nameref on input line 82.
+LaTeX Info: Redefining \ref on input line 81.
+LaTeX Info: Redefining \pageref on input line 81.
+LaTeX Info: Redefining \nameref on input line 81.
  (./Skript.out) (./Skript.out)
 \@outlinefile=\write6
 \openout6 = `Skript.out'.
@@ -1613,7 +1624,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 82.
+(scrartcl)           before \begin{document} on input line 81.
  (/usr/share/texmf-dist/tex/latex/oberdiek/bookmark.sty
 Package: bookmark 2019/06/04 v1.27 PDF bookmarks (HO)
 
@@ -1631,19 +1642,19 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.16} into 
 your preamble.
- on input line 82.
+ on input line 81.
 
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 84
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 83
 .
 (/usr/share/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-Overfull \hbox (28.54341pt too wide) in paragraph at lines 85--93
+Overfull \hbox (28.54341pt too wide) in paragraph at lines 84--92
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
@@ -1652,214 +1663,277 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
-33.
+32.
 
 (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
 Package acronym Info: Label `acro:SWS' newly defined as it shall be overridden
-although it is yet undefined on input line 173.
+although it is yet undefined on input line 172.
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
+Underfull \hbox (badness 10000) in paragraph at lines 227--232
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
+Underfull \hbox (badness 10000) in paragraph at lines 227--232
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
+Underfull \hbox (badness 10000) in paragraph at lines 227--232
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 246--284
+Underfull \hbox (badness 10000) in paragraph at lines 245--283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 246--284
+Underfull \hbox (badness 10000) in paragraph at lines 245--283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--297
+Underfull \hbox (badness 10000) in paragraph at lines 293--296
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 335--339
+Underfull \hbox (badness 10000) in paragraph at lines 334--338
 
  []
 
 Package acronym Info: Label `acro:FKZ' newly defined as it shall be overridden
-although it is yet undefined on input line 350.
+although it is yet undefined on input line 349.
 Package acronym Info: Label `acro:GKZ' newly defined as it shall be overridden
-although it is yet undefined on input line 390.
+although it is yet undefined on input line 389.
 [5]
-<img/strom_spannung_signale.jpg, id=125, 805.0075pt x 305.14pt>
-File: img/strom_spannung_signale.jpg Graphic file (type jpg)
-<use img/strom_spannung_signale.jpg>
-Package pdftex.def Info: img/strom_spannung_signale.jpg  used on input line 439
-.
-(pdftex.def)             Requested size: 270.3012pt x 102.45648pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 447--452
+Underfull \hbox (badness 10000) in paragraph at lines 413--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--463
+Underfull \hbox (badness 10000) in paragraph at lines 413--416
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--422
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--422
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--458
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--458
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--458
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 444--458
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 478--479
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 523--542
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--542
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 551--554
+
+ []
+
+[7]
+<img/strom_spannung_signale.jpg, id=164, 805.0075pt x 305.14pt>
+File: img/strom_spannung_signale.jpg Graphic file (type jpg)
+<use img/strom_spannung_signale.jpg>
+Package pdftex.def Info: img/strom_spannung_signale.jpg  used on input line 597
+.
+(pdftex.def)             Requested size: 270.3012pt x 102.45648pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 605--610
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--621
 
  []
 
 Package acronym Info: Label `acro:TRG' newly defined as it shall be overridden
-although it is yet undefined on input line 481.
-[6 <./img/strom_spannung_signale.jpg>]
+although it is yet undefined on input line 639.
+[8 <./img/strom_spannung_signale.jpg>]
 Package acronym Info: Label `acro:GSF' newly defined as it shall be overridden
-although it is yet undefined on input line 484.
+although it is yet undefined on input line 642.
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--487
+Underfull \hbox (badness 10000) in paragraph at lines 642--645
 
  []
 
 Package acronym Info: Label `acro:NRZ' newly defined as it shall be overridden
-although it is yet undefined on input line 491.
+although it is yet undefined on input line 649.
 
-Underfull \hbox (badness 10000) in paragraph at lines 488--493
+Underfull \hbox (badness 10000) in paragraph at lines 646--651
 
  []
 
 Package acronym Info: Label `acro:SSH' newly defined as it shall be overridden
-although it is yet undefined on input line 493.
+although it is yet undefined on input line 651.
 Package acronym Info: Label `acro:AMI' newly defined as it shall be overridden
-although it is yet undefined on input line 496.
+although it is yet undefined on input line 654.
 Package acronym Info: Label `acro:RZ' newly defined as it shall be overridden
-although it is yet undefined on input line 497.
+although it is yet undefined on input line 655.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 Package acronym Info: Label `acro:BBB' newly defined as it shall be overridden
-although it is yet undefined on input line 546.
+although it is yet undefined on input line 704.
 
-Overfull \hbox (5.88194pt too wide) in paragraph at lines 545--551
+Overfull \hbox (5.88194pt too wide) in paragraph at lines 703--709
 \OT1/cmr/bx/n/10 Nyquist-Theorem: []\OT1/cmr/m/n/10 Uber einen []Ubertragungska
 nal mit be-schr[]ankter Band-brei-te kann ma-xi-mal mit der Schrit-tra-te []ube
 rtragen
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--551
+Underfull \hbox (badness 10000) in paragraph at lines 703--709
 
  []
 
 
-Overfull \hbox (10.00002pt too wide) in paragraph at lines 577--581
+Overfull \hbox (10.00002pt too wide) in paragraph at lines 735--739
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--581
+Underfull \hbox (badness 10000) in paragraph at lines 735--739
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--581
-
- []
-
-[7]
-
-Package tabularx Warning: X Columns too narrow (table too wide)
-(tabularx)                 on input line 602.
-
-
-Overfull \hbox (155.0003pt too wide) in alignment at lines 602--602
-[][][][][][][][][][][][][][][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 595--614
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 595--614
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 667--669
+Underfull \hbox (badness 10000) in paragraph at lines 735--739
 
  []
 
 [9]
-<img/schaltnetz_oder.png, id=247, 523.9575pt x 332.24126pt>
-File: img/schaltnetz_oder.png Graphic file (type png)
-<use img/schaltnetz_oder.png>
-Package pdftex.def Info: img/schaltnetz_oder.png  used on input line 702.
-(pdftex.def)             Requested size: 216.24178pt x 137.1171pt.
-<img/schaltnetz_und.png, id=248, 525.965pt x 308.15125pt>
-File: img/schaltnetz_und.png Graphic file (type png)
-<use img/schaltnetz_und.png>
-Package pdftex.def Info: img/schaltnetz_und.png  used on input line 708.
-(pdftex.def)             Requested size: 216.24178pt x 126.69077pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 716--717
+Package tabularx Warning: X Columns too narrow (table too wide)
+(tabularx)                 on input line 760.
+
+
+Overfull \hbox (155.0003pt too wide) in alignment at lines 760--760
+[][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 753--776
 
  []
 
-[10 <./img/schaltnetz_oder.png> <./img/schaltnetz_und.png>]
 
-Package caption Warning: \label without proper reference on input line 825.
+Underfull \hbox (badness 10000) in paragraph at lines 753--776
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 829--831
+
+ []
+
+[11]
+<img/schaltnetz_oder.png, id=285, 523.9575pt x 332.24126pt>
+File: img/schaltnetz_oder.png Graphic file (type png)
+<use img/schaltnetz_oder.png>
+Package pdftex.def Info: img/schaltnetz_oder.png  used on input line 864.
+(pdftex.def)             Requested size: 216.24178pt x 137.1171pt.
+<img/schaltnetz_und.png, id=286, 525.965pt x 308.15125pt>
+File: img/schaltnetz_und.png Graphic file (type png)
+<use img/schaltnetz_und.png>
+Package pdftex.def Info: img/schaltnetz_und.png  used on input line 870.
+(pdftex.def)             Requested size: 216.24178pt x 126.69077pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 878--879
+
+ []
+
+[12 <./img/schaltnetz_oder.png> <./img/schaltnetz_und.png>]
+
+Package caption Warning: \label without proper reference on input line 975.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `tab:beweiswahrheitstabelle' on page 11 undefined on i
-nput line 804.
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 847--850
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--865
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 856--865
-
- []
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 938--941
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 973--974
-
- []
+LaTeX Warning: Reference `tab:beweiswahrheitstabelle' on page 13 undefined on i
+nput line 966.
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 981--983
+Underfull \hbox (badness 10000) in paragraph at lines 1009--1012
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1018--1027
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1018--1027
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 1100--1103
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1135--1136
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 1143--1145
 
  []
 
 Package acronym Info: Label `acro:DNF' newly defined as it shall be overridden
-although it is yet undefined on input line 1012.
-[14] [15] [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1133.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1133.
+although it is yet undefined on input line 1174.
+[16] [17] [18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1295.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1295.
  (./Skript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1133.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1133.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1295.
 
 Package rerunfilecheck Info: File `Skript.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
@@ -1872,17 +1946,17 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 63741 strings out of 492167
- 1500442 string characters out of 6131558
- 1952743 words of memory out of 5000000
- 67253 multiletter control sequences out of 15000+600000
- 549591 words of font info for 82 fonts, out of 8000000 for 9000
+ 63959 strings out of 492167
+ 1505174 string characters out of 6131558
+ 1960841 words of memory out of 5000000
+ 67438 multiletter control sequences out of 15000+600000
+ 552314 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,18n,116p,10125b,1302s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,18n,116p,10125b,1304s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{/usr/share/tex
-mf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{/usr/share/texmf-dist/fonts/enc
-/dvips/mnsymbol/MnSymbolF.enc}{/usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/M
-nSymbolE.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{
+mf-dist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{/usr/share/texmf-dist/fonts/enc
+/dvips/mnsymbol/MnSymbolD.enc}{/usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/M
+nSymbolF.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{
 /usr/share/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolA.enc}</usr/share/texmf-
 dist/fonts/type1/public/mnsymbol/MnSymbol10.pfb></usr/share/texmf-dist/fonts/ty
 pe1/public/mnsymbol/MnSymbol7.pfb></usr/share/texmf-dist/fonts/type1/public/mns
@@ -1892,19 +1966,21 @@ are/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share
-/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/wasy2-ps/
-wasy10.pfb>
-Output written on Skript.pdf (16 pages, 344496 bytes).
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/eurosym/feymr10.p
+fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr
+/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-di
+st/fonts/type1/public/wasy2-ps/wasy10.pfb>
+Output written on Skript.pdf (18 pages, 383887 bytes).
 PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 499 PDF objects out of 1000 (max. 8388607)
+ 410 compressed objects within 5 object streams
+ 124 named destinations out of 1000 (max. 500000)
  268 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -17,15 +17,14 @@
 \usepackage{tikz, pgfplots}
 \usepackage{circuitikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{tikzmark}
 
-	\usepgfplotslibrary{groupplots}
+
+\usepgfplotslibrary{groupplots}
 
 \def\doubleunderline#1{\underline{\underline{#1}}}
 
 \def\rot{\rotatebox}
-
-
-\newcommand{\tikzmark}[2]{\tikz[overlay, remember picture] \node[inner sep=0pt, outer sep=0pt, anchor=base] (#1) {#2};}
 
 \newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
 	\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
@@ -398,9 +397,168 @@ $$
 \end{tabular}
 
 $$
-1,0 \cdot 10^0 = 10,0 * 10^{-1} = 100,0 \cdot 10^{-2} = 0,1 \cdot 10^{1} \ldots
+\underbrace{1,0}_{\text{Mantisse}} \cdot 10^{\overbrace{0}^{\text{Exponent}}} = 10,0 * 10^{-1} = 100,0 \cdot 10^{-2} = 0,1 \cdot 10^{1} \ldots
 $$
 
+\begin{Hint}{}{hint}
+	Es gibt unendlich viele Darstellungen jedes Zahlenwertes als \ac{GKZ}
+\end{Hint}
+
+Abhilfe: normalisierte Darstellung
+\begin{itemize}
+	\item[a)]  genau eine Vorkommastelle (Vkst), diese muss $ \neq 0 $ sein!
+	\item[b)] keine Vkst, erste Nkst $ \neq 0 $
+\end{itemize}
+
+Variante a) ist gängiger. In der Vorlesung wird diese üblicherweise verwendet.\\
+\\
+\textcolor{blue!60}{negative \ac{GKZ} $ \Rightarrow $ negative Mantisse} \\
+
+Darstellung der Mantisse: per Vorzeichen und Betrag (nicht Zweier-Komplement), um die Fallunterscheidungen beim Größenvergleich zwischen Vorzeichen- und normaler Stelle zu ersparen\footnote{Ist dann trotzdem insgesamt für die Zahl notwendig, nicht aber für die einzelnen Stellen.} und vor allem bei der Kommaverschiebung die Fallunterscheidung mit \glqq 0\grqq (bei positiven) oder \glqq 1\grqq (bei negativen) aufzufüllen zu ersparen.\\
+\\
+Vorzeichen des Exponenten gibt die Richtung der Kommaverschiebung an.\\
+Größenvergleich:\\
+\begin{enumerate}
+	\item Vorzeichen Mantisse: 
+		\subitem unterschiedlich, dann gehört das positive Vorzeichen zur größeren
+		\subitem gleich, dann Vergleich der Beträge und spätere Fallunterscheidung
+	\item Vergleich Betrag
+		\subitem größerer Exponent gehört zum größeren Betrag \\
+			$ \Rightarrow $ per Bias-Darstellung einfacher bitweiser Vergleich ohne Fallunterscheidung
+		\subitem bei gleichem Exponent: Größenvergleich der Mantisse (bitweise)
+	\item Fallunterscheidung abhängig vom Vorzeichen
+		\subitem positiv: größerer Betrag $ \rightarrow $ größere Zahl
+		\subitem negativ: größerer Betrag $ \rightarrow $ kleinere Zahl
+\end{enumerate}
+
+\subsubsection*{Darstellung des Exponenten}
+Exponent wird \glqq künstlich\grqq nicht-negativ gemacht, indem ein Bias aufaddiert wird.
+
+$$
+\text{Exp}_{\text{gespeichert}} = \text{Exp}_{\text{real}} + \text{Bias}
+$$
+
+Bias wird forher festgelegt, z.B. bei 8-bit-Exp: Bias=127.
+
+\subsubsection*{Im Computer: \ac{GKZ} zur Basis 2}
+normalisierte Darstellung $ \Rightarrow $ Vkst ist immer \glqq 1\grqq.\\
+$ \Rightarrow $ diese \glqq 1\grqq muss nicht explizit gespeichert werden\\
+$ \Rightarrow $ \glqq Hidden Bit\grqq
+$ \Rightarrow $ dieses eine Bit wird genutzt, um eine Nkst mehr speichern zu können\\
+\\
+\indent \textbf{Problem:} Darstellung der \glqq 0\grqq 
+\\\\
+$ \rightarrow $ für die \glqq 0\grqq gibt es keine normalisierte Darstellung\\
+$ \rightarrow $ mit \glqq Hidden Bit\grqq lässt sich der Zahlenwert \glqq 0\grqq nie darstellen.
+\\\\
+Abhilfe: kleinster Exponent (Bitmuster \glqq 0$\ldots$0) steht für denormalisierte \ac{GKZ} ohne Hidden Bit. Falls dann auch alle Mantissenbits \glqq 0\grqq sind, handelt es sich um die Darstellung der \glqq0\grqq.\\
+größter Exponent (Bitmuster \glqq1$\ldots$1\grqq) steht für eine Zahl, welche nicht im Wertebereich der gewählten \ac{GKZ} darstellbar ist.\\
+\indent falls Mantisse \glqq $0 \ldots 0$\grqq $\Rightarrow$ Zahl ist $\pm \infty$ (abhöngig von Mantissen-Vorzeichen)\\
+\indent falls Mantisse $\neq$ \glqq$0 \ldots 0$\grqq $\Rightarrow$ Zahl ist nicht als reele Zahl darstellbar (z.B. $ \sqrt{-2} $) $\Rightarrow$ NaN \glqq Not a Number\grqq.\\
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|l|l|l|l}
+		Genauigkeit & Speicher (bit) & Vz (bit) & Mantisse (bit) & Exponent (bit) & Bias \\ \hline
+		Single & 32 & 1 & 23 & 8 & 127\\
+		Double & 64 & 1 & 52 & 11 & 1023 \\
+		Half & 16 & 1 & 10 & 5 & 15\\
+	\end{tabular}
+\caption{\acl{GKZ} gemäß IEEE 754}
+\end{table}
+
+\noindent
+Wertebereich für Zahlen mit 16 Bit:
+\begin{itemize}
+	\item nicht negative ganze Zahlen: $ 0\ldots65535 $
+	\item 2er-Komplement (ganze Zahlen): $ -32768\ldots+32767 $
+	\item \ac{GKZ} half precision
+\end{itemize}
+
+Größte darstellbare Zahl:\\
+\begin{equation*}
+\underbrace{\tikzmark{vz1}0}_{\text{VZ}}\; \underbrace{11110}_{\text{Exponent}}\; \tikzmark{hb1} \underbrace{1111111111}_{\text{Mantisse}}\\
+\end{equation*}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[<-]([shift={(2pt,8pt)}]pic cs:vz1) |- ([shift={(-10pt,15pt)}]pic cs:vz1) 
+node[anchor=east] {positiv}; 
+\node[draw,green!80!black] at ([shift={(0,20pt)}]pic cs:hb1) {1,};
+\draw[<-,green!80!black]([shift={(10pt,20pt)}]pic cs:hb1) to ([shift={(30pt,20pt)}]pic cs:hb1)
+node[anchor=west]{Hidden Bit} ;
+\end{tikzpicture}
+
+\begin{equation*}
+\begin{aligned}
+Exp_{gesp} &= 2+4+8+16 \\
+&= 30\\
+Exp_{real} &= Exp_{gesp}-Bias\\
+&= 30-15 \\&= 15
+\end{aligned}
+\indent 2-\dfrac{1}{2^{10}} = 2-2^{-10}
+\end{equation*}
+\begin{equation*}
+\text{Wert} = (2-2^{-10})\cdot 2^{15} = 2^{16}-2^{5}=65536-32=65504
+\end{equation*}
+
+Kleinste darstellbare Zahl:
+\begin{equation*}
+1 \; 11110 \; 1111111111 \Rightarrow -65504
+\end{equation*}
+
+Kleinste Zahl $>$0:\\
+\indent normalisierte Darstellung
+\begin{equation*}
+	\tikzmark{vz2}0\; \underbrace{00001}_{Exp_{gesp}=1}\; \tikzmark{hb2} \underbrace{0000000000}_{\text{Mantisse} = 1}
+\end{equation*}
+\begin{align*}
+Exp_{real} &= 1-15 = -14\\
+Wert &=1\cdot2^{-14}
+\end{align*}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[<-]([shift={(2pt,8pt)}]pic cs:vz2) |- ([shift={(-10pt,15pt)}]pic cs:vz2) 
+node[anchor=east] {negativ}; 
+\node[draw,green!80!black] at ([shift={(0,20pt)}]pic cs:hb2) {1,};
+\end{tikzpicture}
+
+\textbf{Half-precision:}\\
+\begin{tabular}{cccc}
+	
+	Vz & Exp & Mantisse & Bias = 15\\
+	15bit & 5bitr & 10bit &
+\end{tabular}
+\\
+\\
+\begin{tabular}{rl}
+	größte Zahl: & 0 11110 1111111111\\
+kleinste Zahl:   & 0 11110 1111111111\\
+\end{tabular}
+\\
+\\
+Kleinster Betrag einer Zahl $ >0 $:\\
+\begin{tabular}{rl}
+	normalisierte: & 0 00001 0000000000\\
+	denormalisierte & 0 00000 0000000000\\
+\end{tabular}
+\begin{align*}
+Exp_{gesp} &= 0\\
+Exp_{real} &= -14
+\end{align*}
+(Um Darstellungslücke zwischen normalisierten und denormalisierten Zahlen zu verwenden)
+$$
+\text{Zahl} = 2^{-10}\cdot 2^{-14} = 2^{-24} \approx \dfrac{1}{1600000} = 0100000015
+$$
+
+Umrechnung einer Zahl (zur Basis 10) in eine \ac{GKZ} zur Basis im Computer.\\
+Bsp: $ -4,2 \cdot 10^{-1} $\\
+\begin{enumerate}
+	\item Vorzeichen Merken, weiter mit Betrag
+	\item Darstellen als \ac{FKZ}
+	\item Umrechnen der \ac{FKZ} in die Zielbasis
+	\item $ Exp_{real} $ durch Stellenverschiebung der \ac{FKZ} zur BAsis 2 bestimmen
+	\item $ Exp_{gesp} $ durch Aufaddieren des Bias auf $ Exp_{real} $ berechnen
+	\item $ Exp_{gesp} $ in Binärsystem umrechnen und passende Stellenzahl verwenden
+	\item Bitmuster in entsprechender Reihenfolge notieren
+\end{enumerate}
 %ToDo Rest aus Tablet übernehmen
 
 \section{Signalkodierung}
@@ -598,14 +756,18 @@ $ TTL-Pegel
 	\noindent\hspace*{3em}% 
 	\begin{tabularx}{10em}{ccccccccccccccc}
 		0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1\\
-		1 & 2 & 1 & 2 & \tikzmark{stuffing1}{3}& 1 & 2 & \tikzmark{stuffing2}{3} & 1 & 1 & 2 & \tikzmark{stuffing3}{3} & 1 & 2 & \tikzmark{stuffing4}{3}\\
+		1 & 2 & 1 & 2 & \tikzmark{stuffing1}3& 1 & 2 & \tikzmark{stuffing2}3 & 1 & 1 & 2 & \tikzmark{stuffing3}3 & 1 & 2 & \tikzmark{stuffing4}3\\
 	\end{tabularx}
-\tikz[overlay,remember picture] {
-	\draw[<-,red] ($(stuffing1)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
-	\draw[<-,red] ($(stuffing2)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
-	\draw[<-,red] ($(stuffing3)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
-	\draw[<-,red] ($(stuffing4)+(0.3,0.3)$) -- ++(-90:0.5cm) node[below]{0};
-}
+\begin{tikzpicture}[remember picture,overlay]
+	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing1) to ([shift={(0.4,-0.2)}]pic cs:stuffing1) 
+	node[below] {0}; 
+	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing2) to ([shift={(0.4,-0.2)}]pic cs:stuffing2) 
+	node[below] {0}; 
+	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing3) to ([shift={(0.4,-0.2)}]pic cs:stuffing3) 
+	node[below] {0}; 
+	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing4) to ([shift={(0.4,-0.2)}]pic cs:stuffing4) 
+	node[below] {0}; 
+\end{tikzpicture}
 \\ \\ \\
 	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.\\
 	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! \\
