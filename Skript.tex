@@ -1234,7 +1234,9 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 \begin{itemize}
 	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
 	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
-	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich
+	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich (Abb. \ref{abb:und_verschaltung})
+	\item \glqq Verzweigen\grqq von Leistungen auf mehrere nachfolgende Gattereingänge ist möglich, in dem an der Verzweigungsstelle ein ausgefüllter Kreis gezeichnet wird
+	\item Kreuzungen von Leitungen, die nicht miteinander verbunden sind, sind möglich. An der Kreuzungsstelle darf auch kein ausgefüllter Kreis notiert werden
 \end{itemize}
 
 \begin{figure}[h]
@@ -1273,7 +1275,246 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 			(A.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
 	\end{circuitikz}
 	\caption{Unterschiedliche Darstellungen einer UND-Verschaltung}
+	\label{abb:und_verschaltung}
 \end{figure}
+
+\begin{figure}[h!]
+	\centering
+	$$
+	f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a \vee \overline{c}ba \vee cba
+	$$
+	\begin{circuitikz}
+		\draw
+		(-2,1) node[anchor=east](inA){a}
+		(-1,1) node[anchor=east](inB){b}
+		(0,1) node[anchor=east](inC){c}
+		(2,0) node [european and port, number inputs=3] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.bin 3) node[ocirc, left]{}
+		(2, -2) node [european and port, number inputs=3] (B){}
+		(B.bin 1) node[ocirc, left]{}
+		(B.bin 2) node[ocirc, left]{}
+		(2, -4) node [european and port, number inputs=3] (C){}
+		(C.bin 1) node[ocirc, left]{}
+		(2, -6) node [european and port, number inputs=3] (D){}
+		(6, -2) node [european or port, number inputs=4] (E){}
+		(E.out) node[anchor=west] {$f(a,b,c)$}
+		(A.out) -| (E.in 1)
+		(B.out) |- (E.in 2)
+		(C.out) |- (E.in 3)
+		(D.out) -| (E.in 4)
+		(inA) |- (A.in 1)
+		(inA) |- (B.in 1)
+		(inA) |- (C.in 1)
+		(inA) |- (D.in 1)
+		(inB) |- (A.in 2)
+		(inB) |- (B.in 2)
+		(inB) |- (C.in 2)
+		(inB) |- (D.in 2)
+		(inC) |- (A.in 3)
+		(inC) |- (B.in 3)
+		(inC) |- (C.in 3)
+		(inC) |- (D.in 3);
+	\end{circuitikz}
+\caption{Realisierung der \ac{DNF} als Schaltnetz}
+\label{dnf:schaltnetz}
+\end{figure}
+
+Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
+\newpage
+\subsection{Aufwand}
+\begin{itemize}
+	\item Hardware-Aufwand
+	\item Zeitaufwand (nicht näher behandelt)
+\end{itemize}
+\subsubsection{Hardware-Aufwand}
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\ctikzset{european resistors}
+		\ctikzset{noarrowmos}
+		\draw
+		(0,5) node[anchor=east] (vcc) {+5V}
+		(0,5) -- (1,5)  node[circ] {}
+		(1,5) -- (1,3)
+		(3,3)node[nmos, rotate=-90](mosB){}
+		(3,5)node[nmos, rotate=-90](mosA){}
+		(1,5) |- (mosA.S)
+		(1,3) |- (mosB.S)
+		(mosA.G) node[anchor=south]{a}
+		(mosB.G) node[anchor=south]{b}
+		(mosA.D) -| (5,3) node[circ] {}
+		(mosB.D) -| (5,3)
+		(5,3) -- (6,3) node[anchor=west]{$a\vee b$};
+	\end{circuitikz}
+	\caption{ODER}
+	\label{abb:mos_or}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\begin{circuitikz}
+	\ctikzset{european resistors}
+	\ctikzset{noarrowmos}
+	\draw
+	(0,5) node[anchor=east] (vcc) {+5V}
+	(4,5)node[nmos, rotate=-90](mosB){}
+	(1,5)node[nmos, rotate=-90](mosA){}
+	(0,5) |- (mosA.S)
+	(mosA.D) -- (mosB.S)
+	(mosA.G) node[anchor=south]{a}
+	(mosB.G) node[anchor=south]{b}
+	(mosB.D) -- (5,5) node[anchor=west]{$a\vee b$};
+\end{circuitikz}
+\caption{UND}
+\label{abb:mos_and}
+\end{figure}
+
+$\Rightarrow$ wir \glqq messen\grqq den Hardware-Aufwand in Anzahl Transistoren.\\ 
+Bei UND (Abb. \ref{abb:mos_and}) und ODER (Abb. \ref{abb:mos_or}) brauchen wir so viele Transistoren, wie das Gatter Eingänge hat (bei nicht negierten Ein- und Ausgängen).
+
+\begin{figure}[h!]
+	\centering
+\begin{minipage}{0.6\textwidth}
+		\begin{circuitikz}
+		\ctikzset{european resistors}
+		\ctikzset{noarrowmos}
+		\draw
+		(0,0) node[anchor=south] (vcc){+5V}
+		(0,0) -- (0,-1)
+		(0,-1) to[R, l_=$R_{\text{Pull-Up}}$] (0,-2)
+		(0,-2) -- (0,-3)
+		(1,-3)node[nmos, rotate=-90](mosA){}
+		(3,-3)node[nmos, rotate=-90](mosB){}
+		(0,-2) |- (mosA.S)
+		(mosA.D) -- (mosB.S)
+		(mosA.G) node[anchor=south]{a}
+		(mosB.G) node[anchor=south]{b}
+		(mosB.D) |- (4,-3)
+		(4,-3) -- (4,-4)
+		(4,-4) to[R, l^=$R_{\text{Pull-Down}}$] (4,-5)
+		(4,-5) -- (4,-6)
+		(4,-6) node[ground]{};
+		\draw[red]
+		(-0.5,0.5) -- (0.5,-2.5)
+		(3.5, -3.5) -- (4.5,-6.5)
+		(0,-3) -- (0,-4)
+		(0,-4) to[R, color=red, l_=$R_{\text{Pull-Down}}$] (0,-5)
+		(0,-5) -- (0,-6)
+		(0,-6) node[ground]{}
+		(4,0) node[anchor=south] (vcc){+5V}
+		(4,0) -- (4,-1)
+		(4,-1) to[R, color=red, l^=$R_{\text{Pull-Up}}$] (4,-2)
+		(4,-2) -- (4,-3)
+		; 
+	\end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+	mit $R_{\text{Pull-Down}} >> R_{\text{Pull-Up}}$\\
+\textcolor{red}{mit $R_{\text{Pull-Up}} >> R_{\text{Pull-Down}}$}
+\end{minipage}
+\caption{UND \textcolor{red}{negierter Ausgang}}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{minipage}{0.4\textwidth}
+	\centering
+	\begin{circuitikz}
+		\draw
+		(0,0) node[npn] (Q){}
+		(Q.B) node[anchor=east]{Basis}
+		(Q.C) node[anchor=west]{Kollektor}
+		(Q.E) node[anchor=west]{Emitter}
+		;
+	\end{circuitikz}\\
+npn-Transistor\\
+schaltet bei positiver Basisspannung durch
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+	\centering
+	\begin{circuitikz}
+		\draw
+		(0,0) node[pnp] (Q){}
+		(Q.B) node[anchor=east]{Basis}
+		(Q.C) node[anchor=west]{Kollektor}
+		(Q.E) node[anchor=west]{Emitter}
+		;
+	\end{circuitikz}\\
+pnp-Transistor\\
+schaltet bei negativer Basisspannung durch
+\end{minipage}
+\caption{NPN und PNP-Transistor}
+\end{figure}
+\clearpage
+\noindent
+ $\Rightarrow$ negierte Eingänge durch Ersetzen der üblichen npn-Transistoen durch pnp-Transistoren\\
+ $\Rightarrow$ auch bei negierten Eingängen reicht ein Transistor je Eingang\\
+\\
+ nMOS: Realisierung nur mit npn-Transistoren\\
+ pMOS: Realisierung nur mit pnp-Transistoren\\
+ $\Rightarrow$ früher gängige Realisierungstechnologien\\
+ heute: CMOS: (\textbf{C}omplimentary \textbf{M}etal \textbf{O}xide \textbf{S}miconductor)\\
+ \hspace*{2em} Realisierung jedes Eingang durch 2 Transistoren (ein npn- und ein pnp-Transistor)\\
+\hspace*{2em} jeweils ein Transistor zeiht wechselweise nach oben oder nach unten\\
+\\
+$\Rightarrow$ der Einfachheit halber trotzdem:\\
+\hspace*{2em} bei UND und ODER (\glqq Elementargatter\grqq) entspricht die Anzahl der Eingänge der Anzahl dafür notwendiger Transistoren (nur zu Vergleichszwecken eingesetzt)
+
+\subsubsection{Schaltnetzanalyse}
+\begin{figure}[h!]
+	\centering
+	$$
+	g(a,b,c) = (a\wedge b) \vee(\overline{b} \vee \overline{c})
+	$$
+\begin{minipage}{0.4\textwidth}
+		\begin{circuitikz}
+		\draw
+		(0,2) node[anchor=east](inA){a}
+		(0,1) node[anchor=east](inB){b}
+		(0,0) node[anchor=east](inC){c}
+		(3,0) node[european and port](a1){}
+		(3,2) node[european and port](a2){}
+		(a1.bin 1) node[anchor=east,ocirc]{}
+		(a1.bin 2) node[anchor=east,ocirc]{}
+		(inA) |- (a2.in 1)
+		(inB) |- (1,1) node[circ]{}
+		(1,1) |- (a2.in 2)
+		(1,1) |- (a1.in 1)
+		(inC) |- (a1.in 2)
+		(5,1) node[european or port](o){}
+		(a2.out) |- (o.in 1)
+		(a1.out) |- (o.in 2)
+		(a2.out) node[anchor=west]{x}
+		(a1.out) node[anchor=west]{y}
+		(o.out) node[anchor=west]{$ g(a,b,c) $}
+		;
+	\end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+	\begin{tabular}{c|ccc|cc|c}
+		\# & c & b & a & x & y & $ x \vee y = g(a, b, c) $\\ \hline
+		0 & 0 & 0 & 0 & 0 & 1 & 1\\
+		1 & 0 & 0 & 1 & 0 & 1 & 1\\
+		2 & 0 & 1 & 0 & 0 & 0 & 0\\
+		3 & 0 & 1 & 1 & 1 & 0 & 1\\
+		4 & 1 & 0 & 0 & 0 & 0 & 0\\
+		5 & 1 & 0 & 1 & 0 & 0 & 0\\
+		6 & 1 & 1 & 0 & 0 & 0 & 0\\
+		7 & 1 & 1 & 1 & 1 & 0 & 1\\
+	
+	\end{tabular}
+\end{minipage}
+\label{abb:schaltnetz_g}
+\caption{}
+\end{figure}
+
+Im Schaltnetz (Abb. \ref{abb:schaltnetz_g}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
+\\
+Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
+\begin{Theorem}{}{fermat}
+	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
+	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
+\end{Theorem}
 
 \newpage
 \section*{Abkürzungsverzeichnis}
@@ -1292,5 +1533,6 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 	\acro{GSF}{Gleichspannungs-/stromfreiheit}
 	\acro{SSH}{Störsicherheit}
 	\acro{DNF}{Disjunktive Normalform}
+	\acro{DMF}{Disjunktivie Minimalform}
 \end{acronym}
 \end{document}
