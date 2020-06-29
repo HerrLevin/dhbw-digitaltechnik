@@ -15,6 +15,7 @@
 \usepackage{subcaption}
 \usepackage{acronym}
 \usepackage{tikz, pgfplots}
+\usepackage{multirow}
 \usepackage{circuitikz}
 \usetikzlibrary{calc}
 \usetikzlibrary{tikzmark}
@@ -560,6 +561,48 @@ Bsp: $ -4,2 \cdot 10^{-1} $\\
 	\item Bitmuster in entsprechender Reihenfolge notieren
 \end{enumerate}
 
+\begin{minipage}{0.4\textwidth}
+	\begin{align*}
+4,2 \cdot 10^{-1} &\\
+0,42 &\\
+0,42 \cdot 2 &= \tikzmark{hb3}0,84\\
+0,84 \cdot 2 &= 1,68\\
+0,68 \cdot 2 &= 1,36\\
+0,36 \cdot 2 &= 0,72\\
+0,72 \cdot 2 &= 1,44\\
+0,44 \cdot 2 &= 0,88\\
+0,88 \cdot 2 &= 1,76\\
+0,76 \cdot 2 &= 1,52\\
+0,52 \cdot 2 &= 1,04\\
+0,04 \cdot 2 &=  \tikzmark{hb4}0,08
+\end{align*}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+	$ 0,\textcolor{green!80!black}{0\tikzmark{hb5}1\textcolor{blue!70}{\underbrace{\textcolor{green!80!black}{1010111000}}_{\text{10 Stellen}}}0} $
+\end{minipage}
+
+\begin{tikzpicture}[remember picture, overlay]
+\draw[color=green!80!black, opacity=0.4, line width=5pt]
+([shift={(2pt, 10pt)}]pic cs:hb3) -- ([shift={(2pt, 0)}]pic cs:hb4);
+\draw[color=green!80!black,<-]([shift={(2pt, -1pt)}]pic cs:hb5) -- ([shift={(2pt, -20pt)}]pic cs:hb5)
+node[anchor=north]{Hidden Bit};
+\end{tikzpicture}\\
+
+\noindent
+\textbf{Wertecodierung: }Darstellung des Wertes in einem bestimmten Zahlensystem bzw. Umrechnung des Wertes von einem in ein anderes Zahlensysem.\\
+\\
+\textbf{Zifferncodierung:} Umrechnung der Darstellung einer Zahl in einem \ac{SWS} Ziffer für Ziffer in eine andere Darstellung\\
+\\
+\textbf{Beispiel für Zifferncodierung:}\\
+\begin{itemize}
+	\item \tikzmark{ziffernc1} Darstellung für Zahlen in Fließtext
+	\item Umrechnung von z.B. $ b=16 $ zu $ b=2 $ über Umrechnungstabelle
+\end{itemize}
+\tikzmark{ziffernc2} Nachteil: deutlich erhöhter Speicherplatzbedarf.
+\begin{tikzpicture}[remember picture, overlay]
+\draw[->,bend right=90]([shift={(-2em, 0)}]pic cs:ziffernc1) to (pic cs:ziffernc2);
+
+\end{tikzpicture}
 %ToDo Rest aus Tablet übernehmen
 
 \section{Signalkodierung}
@@ -1146,21 +1189,35 @@ Ausgangspunkt: Wertetabelle\\
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{c|ccc|c|c}
-	\# & c & b & a & $ f(a,b,c) $ & Minterm \\
-	0 & 0 & 0 & 0 & 1 & $ \overline{c} \overline{b} \overline{a} = (\overline{c} \wedge \overline{b}) \wedge \overline{a}$ \\
-	1 & 0 & 0 & 1 & 1 & $ \overline{c}\overline{b}a $\\
-	2 & 0 & 1 & 0 & 0 & \\
-	3 & 0 & 1 & 1 & 1 & $ \overline{c}ba $\\
-	4 & 1 & 0 & 0 & 0 & \\
-	5 & 1 & 0 & 1 & 0 & \\
-	6 & 1 & 1 & 0 & 0 & \\
-	7 & 1 & 1 & 1 & 1 & $ cba $
+	\begin{tabular}{c|ccc|c|cl}
+	\# & c & b & a & $ f(a,b,c) $ & Minterm & \\ \hline 
+	0 & 0 & 0 & 0 & 1 & $ \overline{c} \overline{b} \overline{a} = (\overline{c} \wedge \overline{b}) \wedge \overline{a}$\tikzmark{minterma} &\multirow{2}{*}{\tikzmark{mintermab}} \\
+	1 & 0 & 0 & 1 & 1 & $ \overline{c}\overline{b}a $ \tikzmark{mintermb}\\
+	2 & 0 & 1 & 0 & 0 & &\tikzmark{mintermbc}\\
+	3 & 0 & 1 & 1 & 1 & $ \overline{c}ba $ \tikzmark{mintermc}&\\
+	4 & 1 & 0 & 0 & 0 & &\\
+	5 & 1 & 0 & 1 & 0 & & \tikzmark{mintermcd}\\
+	6 & 1 & 1 & 0 & 0 & &\\
+	7 & 1 & 1 & 1 & 1 & $ cba $ \tikzmark{mintermd}
 \end{tabular}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[-](pic cs:minterma) to (pic cs:mintermab)
+node[right] {$ \overline{c}\overline{b} $}; 
+\draw[-](pic cs:mintermb) to (pic cs:mintermab); 
+\draw[-](pic cs:mintermb) to (pic cs:mintermbc)
+node[right] {$ \overline{c}a $}; 
+\draw[-](pic cs:mintermc) to (pic cs:mintermbc); 
+\draw[-](pic cs:mintermc) to (pic cs:mintermcd)
+node[right] {$ ba $}; 
+\draw[-](pic cs:mintermd) to (pic cs:mintermcd); 
+\end{tikzpicture}
 \end{table}
 
 \begin{equation*}
-f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\vee\overline{c}ba\vee cba
+f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\vee\overline{c}ba\vee cba \text{(\ac{DNF})}
+\end{equation*}
+\begin{equation*}
+g(a,b,c) = (a\wedge b) \vee (\overline{b} \wedge  \overline{c}) (\text{\ac{DMF}})
 \end{equation*}
 
 \begin{itemize}
@@ -1169,18 +1226,35 @@ f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\v
 	\item Ein Minterm ist ein Implikant, bei dem es für jede E-Variable ein Literal gibt. (Auch Viollkonjunktion genannt)
 \end{itemize}
 
-\begin{tabular}{rp{10cm}}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{rp{15cm}}
 	Satz: & Ein Minterm hat nur bei einer einzigen E-Belegung \glqq 1 \grqq als A-Belegung, in allen anderen Fällen der E-Belegung ergibt sich \glqq 0\grqq als A-Belegung.\\
 	Bew.:& geschenkt (Verständnis)\\ \hline
 	Satz: & Die \ac{DNF} der Funktion $ f $ ist ein äquivalent zur Funktion $ f $.\\
 	Bew.:& Verständnis/Bildungsregel\\ \hline
 	Satz: & Die\ac{DNF} ist (ausgenommen die Reihenfolge der Minterme, sowie die Reihenfolge der Literale in den Mintermen) für eine gegebene Funktion eindeutig.\\
-	Bew.:& Bildungsregel \& Wertetabelle ist eindeutig.\\
+	Bew.:& Bildungsregel \& Wertetabelle ist eindeutig.\\ \hline
+	Satz: & Zwei Implikanten einer Funktion lassen sich zu einem Implikanten zusammenfassen, falls:
+	\begin{itemize}[itemsep=0mm]
+		\item sie ausgenommen ein Literal identisch sind
+		\item das sich unterscheidende Literal dieselbe Variable einmal in negierter und einmal in nicht-negierter Form sein muss
+	\end{itemize}
+	Der Zusammengefasste Implikant ist dann der, welcher durch weglassen des unterschiedlichen Literals entsteht. \\
+	Bew.:&$ x \wedge a \vee x \wedge a \overset{H2}{=} x(a \vee \overline{a}) \overset{H4}{=} x1 \overset{H3}{=} x \blacksquare$\\ \hline
+	Satz: & Eine \ac{DMF} enthält ausschließlich Primimplikanten.\\
+	Bew.:& Ein Kernimplikant ist ein Primimplikant, welcher mindestens eine der Ausgangsbelegung exklusiv abdeckt (bzw. bei dem mindestens ein Minterm beim Zusammenfassen ausschließlich für diesen Primimplikanten verwendet wurde.) \\ \hline
+	Satz: & Eine \ac{DMF} enthält mindestens alle Kernprimzahlen
 \end{tabular}
+\end{table}
 
 \begin{Theorem}{}{fermat}
 	Die Disjunktion aller Minterme der Funktion $ f $ heißt \ac{DNF}.
 \end{Theorem}
+\begin{Theorem}{}{fermat}
+Ein Primimplikant ist ein Implikant, der mit keinem anderen Implikanten zusammengefasst werden kann
+\end{Theorem}
+
 
 \subsection{Darstellung von Funktionen}
 \subsubsection{Schaltnetze}
@@ -1515,6 +1589,84 @@ Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
 	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
 \end{Theorem}
+
+\subsubsection{KV-Diagramm}
+Graphische Darstellung der Ausgangsbelegung
+\begin{table}[h!]
+	\begin{tabular}{ccc}
+	\# & $ a $ & $ f(a) $\\
+	\hline
+	0 & 0 & $ f(0) $\\
+	1 & 1 & $ f(1) $\\
+\end{tabular}
+\quad
+\begin{tabular}{|wc{1cm}|wc{1cm}|}
+	$ \overline{a} $ & a \\ \hline
+	$ f(0)_{0} $ & $ f(1)_1 $ \\
+	\hline
+	
+	\hline
+\end{tabular}
+\end{table}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{c|cc|c}
+		\# & b & a & $ f(a,b) $\\ \hline
+		0 & 0 & 0 & $ f(0,0) $\\
+		1 & 0 & 1 & $ f(0,1) $\\
+		2 & 1 & 0 & $ f(1,0) $\\
+		3 & 1 & 1 & $ f(1,1) $\\
+	\end{tabular}
+\quad
+\begin{tabular}{c|c|c|}
+	\centering
+	 & $ \overline{a} $  &  $ a $\\ \hline
+	 $ \overline{b} $  &  $ f(0,0)_{0} $  &  $ f(1,0)_{1} $ \\ \hline
+	 $ b $ & $ f(0,1)_2 $  &  $ f(1,1) _3$ \\ \hline
+\end{tabular}
+\end{table}
+%KV-Diagramm ergänzen...
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c|}
+	$ \overline{b} $ & \tikzmark{kv30}{$ 1_0 $} & \tikzmark{kv31}{$ 1_1 $} & $ 0_5 $ & $ 0_4 $\\ \hline
+	$ b $ & $ 0_2 $ & \tikzmark{kv33}{$ 1_3 $} & \tikzmark{kv37}{$ 1_7 $} & $ 0_6 $\\ \hline
+	\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
+\end{tabular}
+\quad 
+$ f(a,b,c) $
+\begin{tabular}{cc}
+	\textcolor{blue}{$ \blacksquare $} & $ \overline{c}\overline(b) (0+1) $\\
+	\textcolor{red}{$ \blacksquare $} & $ \overline{c}a (1+3) $\\
+	\textcolor{green}{$ \blacksquare $} & $ ba (3+7) $\\
+\end{tabular}
+\begin{tikzpicture}[overlay,remember picture]
+\draw[blue,rounded corners=5pt] ([xshift=-4pt,yshift=.8em]pic cs:kv30) rectangle ([yshift=-.3em,xshift=14pt]pic cs:kv31);
+\draw[red,rounded corners=5pt] ([xshift=-4pt,yshift=.8em]pic cs:kv31) rectangle ([yshift=-.3em,xshift=14pt]pic cs:kv33);
+\draw[green,rounded corners=5pt] ([xshift=-4pt,yshift=.8em]pic cs:kv33) rectangle ([yshift=-.3em,xshift=14pt]pic cs:kv37);
+\end{tikzpicture}
+\caption{KV-Diagramm mit 3 Variablen}
+\end{table}
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c|}
+		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ \\ \hline
+		$ \overline{b} $ & $ _0 $ & $ _1 $ & $ _5 $ & $ _4 $\\ \hline
+		$ b $ & $ _2 $ & $ _3 $ & $ _7 $ & $ _6 $ \\ \hline
+		$ b $ & $ _{10} $ & $ _{11} $ & $ _{15} $ & $ _{14} $ \\ \hline
+		$ \overline{b} $ & $ _{8} $ & $ _{9} $ & $ _{13} $ & $ _{12} $ \\ \hline
+		\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
+	\end{tabular}
+\end{table}
+
+\noindent
+Primimplikanten können im KV-Diagramm gefunden werdne, indem wir Bereiche von Feldernmit \glqq 1\grqq-Belegung suchen, welche:
+\begin{itemize}
+	\item maximal groß sind
+	\item rechteckige Form haben
+	\item eine 2er-Potenz an Feldern umfassen
+\end{itemize}
 
 \newpage
 \section*{Abkürzungsverzeichnis}
