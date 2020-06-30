@@ -17,6 +17,8 @@
 \usepackage{tikz, pgfplots}
 \usepackage{multirow}
 \usepackage{circuitikz}
+\usepackage{placeins}
+\usepackage{mathtools}
 \usetikzlibrary{calc}
 \usetikzlibrary{tikzmark}
 
@@ -38,7 +40,12 @@
 	timing/h/.style={color=blue}
 }
 
-\newtcbtheorem[no counter]{Theorem}{Definition}{
+\makeatletter
+\newtcbtheorem{thm}{Theorem}{code={\edef\@currentlabelname{#2}}}{thm}
+%\newtcbtheorem{thm}{Theorem}{code={\NR@gettitle{#2}}}{thm}  % alternatively, if nameref is loaded
+\makeatother
+
+\newtcbtheorem{Theorem}{Definition}{
 	enhanced,
 	sharp corners,
 	attach boxed title to top left={
@@ -93,11 +100,11 @@
 
 \section{Codierung}
 
-	\begin{Theorem}{}{fermat}
+	\begin{Theorem}{}{}
 		Codierung ist die Darstellung von Informationen mit einem \glqq Alphabet\grqq.
 	\end{Theorem}
 		
-	\begin{Theorem}{}{fermat}
+	\begin{Theorem}{}{}
 		Alphabet ist eine \underline{endliche} Menge von Symbolen
 	\end{Theorem}
 	
@@ -607,7 +614,7 @@ node[anchor=north]{Hidden Bit};
 
 \section{Signalkodierung}
 
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 	Darstellung von abstrakten Informationen als Signalfolge. \\
 	Signal: physisch messbare Größe.
 \end{Theorem}
@@ -951,10 +958,10 @@ Ausdrücke der Schaltalgebra (\glqq boolsche Ausdrücke\grqq) bestehen aus:
 	\item Wert
 	\item Klammern
 \end{itemize}
-\begin{Theorem}{Eingangsbelegung}{fermat}
+\begin{Theorem}{Eingangsbelegung}{}
 	Jeder Variable wird ein konkreter Wert zugeordnet
 \end{Theorem}
-\begin{Theorem}{Ausgangsbelegung}{fermat}
+\begin{Theorem}{Ausgangsbelegung}{}
 	Der Wert, welcher sich bei einem boolschen Ausdruck bei einer konkreten E-Belegung ergibt, wenn man den boolschen Ausdruck \glqq auswertet\grqq.
 \end{Theorem}
 
@@ -1066,7 +1073,7 @@ Beweis: $ x \wedge 0 \overset{H4}{=} x \wedge (x \wedge \overline{x})  \overset{
 1-Absorption: $ x \vee 1 \overset{!}{=} $\\
 Beweis: \\
 %ToDo
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegung (der $ n $ Eingangsvariablen) wird genau eine Ausgangsbelegung zugeordnet.
 \end{Theorem}
 
@@ -1076,7 +1083,7 @@ Darstellung von Funktionen:
 	\item Wahrheitstabelle
 \end{enumerate}
 
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 	Zwei Funktionen sind äquivalent, wenn sie dieselbe Wahrheitstabelle aufweisen
 \end{Theorem}
 
@@ -1153,7 +1160,7 @@ Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
      3 & 1 & 1 & 1\\
 \end{tabular}
 
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 	Ein vollständiges Operatorensystem (der Boolschen Algebra/Schaltalgebra) ist eine Menge von Operatoren, mit denen jede (Boolsche) Funktion (der Schaltalgebra) dargestellt werden kann.
 \end{Theorem}
 
@@ -1178,7 +1185,7 @@ Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 
 Bsp: Speicherbausteine in \glqq NAND \grqq-Technologie.\\
 
-\begin{Hint}{}{fermat}
+\begin{Hint}{}{}
 	Funktionen können eindeutig durch die Wahrheitstabelle dargestellt werden. Die Darstellung als Funktionsterm ist dagegen nicht eindeutig.\\
 	$\Rightarrow$ für jede Funktion gibt es unendlich viele äquivalente Terme!\\
 	Wir suchen einen \glqq standardisierten\grqq Funktionsterm!
@@ -1213,12 +1220,16 @@ node[right] {$ ba $};
 \end{tikzpicture}
 \end{table}
 
-\begin{equation*}
-f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\vee\overline{c}ba\vee cba \text{(\ac{DNF})}
-\end{equation*}
-\begin{equation*}
-g(a,b,c) = (a\wedge b) \vee (\overline{b} \wedge  \overline{c}) (\text{\ac{DMF}})
-\end{equation*}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{lr}
+		$ f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a\vee\overline{c}ba\vee cba  $ & \ac*{DNF}\\
+		$ g(a,b,c) = (a\wedge b) \vee (\overline{b} \wedge  \overline{c}) $ & \ac*{DMF}\\
+	\end{tabular}
+$$ 
+\overline{c} \overline{b} \overline{a} \vee \vee \overline{c} \overline{b} a \overset{H2}{=} (\overline{c}\overline{b})\wedge (\overline{a} \ vee  a) \overset{H4}{=} \overline{c} \overline{b} \wedge 1 \overset{H3}{=} \overline{c} \overline{b} 
+$$
+\end{table}
 
 \begin{itemize}
 	\item Ein Literal ist eine Variable in negierter oder nicht-negierter Form
@@ -1242,17 +1253,20 @@ g(a,b,c) = (a\wedge b) \vee (\overline{b} \wedge  \overline{c}) (\text{\ac{DMF}}
 	\end{itemize}
 	Der Zusammengefasste Implikant ist dann der, welcher durch weglassen des unterschiedlichen Literals entsteht. \\
 	Bew.:&$ x \wedge a \vee x \wedge a \overset{H2}{=} x(a \vee \overline{a}) \overset{H4}{=} x1 \overset{H3}{=} x \blacksquare$\\ \hline
-	Satz: & Eine \ac{DMF} enthält ausschließlich Primimplikanten.\\
-	Bew.:& Ein Kernimplikant ist ein Primimplikant, welcher mindestens eine der Ausgangsbelegung exklusiv abdeckt (bzw. bei dem mindestens ein Minterm beim Zusammenfassen ausschließlich für diesen Primimplikanten verwendet wurde.) \\ \hline
+	Satz: & Eine \ac{DMF} enthält ausschließlich \ac{PI}.\\
+	Bew.:&  Siehe Definition \ref{thm:prim_kernprimimplikant} \\ \hline
 	Satz: & Eine \ac{DMF} enthält mindestens alle Kernprimzahlen
 \end{tabular}
 \end{table}
 
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 	Die Disjunktion aller Minterme der Funktion $ f $ heißt \ac{DNF}.
 \end{Theorem}
-\begin{Theorem}{}{fermat}
-Ein Primimplikant ist ein Implikant, der mit keinem anderen Implikanten zusammengefasst werden kann
+\begin{Theorem}{}{}
+Ein \ac{PI} ist ein Implikant, der mit keinem anderen Implikanten zusammengefasst werden kann
+\end{Theorem}
+\begin{Theorem}{}{prim_kernprimimplikant}
+	Ein \ac{KPI} ist ein \ac{PI}, welcher mindestens eine der Ausgangsbelegung exklusiv abdeckt (bzw. bei dem mindestens ein Minterm beim Zusammenfassen ausschließlich für diesen \ac{PI} verwendet wurde.)
 \end{Theorem}
 
 
@@ -1578,14 +1592,14 @@ $\Rightarrow$ der Einfachheit halber trotzdem:\\
 	
 	\end{tabular}
 \end{minipage}
-\label{abb:schaltnetz_g}
+\label{abb:schaltnetzG}
 \caption{}
 \end{figure}
 
-Im Schaltnetz (Abb. \ref{abb:schaltnetz_g}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
+Im Schaltnetz (Abb. \ref{abb:schaltnetzG}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
 \\
 Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
-\begin{Theorem}{}{fermat}
+\begin{Theorem}{}{}
 	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
 	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
 \end{Theorem}
@@ -1593,20 +1607,19 @@ Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 \subsubsection{KV-Diagramm}
 Graphische Darstellung der Ausgangsbelegung
 \begin{table}[h!]
+\centering
 	\begin{tabular}{ccc}
-	\# & $ a $ & $ f(a) $\\
-	\hline
-	0 & 0 & $ f(0) $\\
-	1 & 1 & $ f(1) $\\
-\end{tabular}
+		\# & $ a $ & $ f(a) $\\
+		\hline
+		0 & 0 & $ f(0) $\\
+		1 & 1 & $ f(1) $\\
+	\end{tabular}
 \quad
-\begin{tabular}{|wc{1cm}|wc{1cm}|}
-	$ \overline{a} $ & a \\ \hline
-	$ f(0)_{0} $ & $ f(1)_1 $ \\
-	\hline
-	
-	\hline
-\end{tabular}
+	\begin{tabular}{|wc{1cm}|wc{1cm}|}
+		$ \overline{a} $ & a \\ \hline
+		$ f(0)_{0} $ & $ f(1)_1 $ \\ \hline
+	\end{tabular}
+\caption{KV-Diagramm mit 1 Variable}
 \end{table}
 \begin{table}[h!]
 	\centering
@@ -1618,16 +1631,15 @@ Graphische Darstellung der Ausgangsbelegung
 		3 & 1 & 1 & $ f(1,1) $\\
 	\end{tabular}
 \quad
-\begin{tabular}{c|c|c|}
-	\centering
-	 & $ \overline{a} $  &  $ a $\\ \hline
-	 $ \overline{b} $  &  $ f(0,0)_{0} $  &  $ f(1,0)_{1} $ \\ \hline
-	 $ b $ & $ f(0,1)_2 $  &  $ f(1,1) _3$ \\ \hline
-\end{tabular}
+	\begin{tabular}{c|c|c|}
+		 & $ \overline{a} $  &  $ a $\\ \hline
+		 $ \overline{b} $  &  $ f(0,0)_{0} $  &  $ f(1,0)_{1} $ \\ \hline
+		 $ b $ & $ f(0,1)_2 $  &  $ f(1,1) _3$ \\ \hline
+	\end{tabular}	
+\caption{KV-Diagramm mit 2 Variablen}
 \end{table}
-%KV-Diagramm ergänzen...
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{c|c|c|c|c|}
 	$ \overline{b} $ & \tikzmark{kv30}{$ 1_0 $} & \tikzmark{kv31}{$ 1_1 $} & $ 0_5 $ & $ 0_4 $\\ \hline
@@ -1648,25 +1660,100 @@ $ f(a,b,c) $
 \end{tikzpicture}
 \caption{KV-Diagramm mit 3 Variablen}
 \end{table}
-\begin{table}
+\begin{table}[h!]
 	\centering
-	\begin{tabular}{c|c|c|c|c|}
-		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ \\ \hline
-		$ \overline{b} $ & $ _0 $ & $ _1 $ & $ _5 $ & $ _4 $\\ \hline
-		$ b $ & $ _2 $ & $ _3 $ & $ _7 $ & $ _6 $ \\ \hline
-		$ b $ & $ _{10} $ & $ _{11} $ & $ _{15} $ & $ _{14} $ \\ \hline
-		$ \overline{b} $ & $ _{8} $ & $ _{9} $ & $ _{13} $ & $ _{12} $ \\ \hline
+	\begin{tabular}{c|c|c|c|c|l}
+		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ &\\ \cline{1-5}
+		$ \overline{b} $ & $ \phantom{a}_0 $ & $ \phantom{a}_1 $ & $ \phantom{a}_5 $ & $ \phantom{a}_4 $& \multirow{2}{*}{$\begin{rcases*} \\ \\ \end{rcases*} \overline{d}$}\\ \cline{1-5}
+		$ b $ & $ \phantom{a}_2 $ & $ \phantom{a}_3 $ & $ \phantom{a}_7 $ & $ \phantom{a}_6 $ \\ \cline{1-5}
+		$ b $ & $ \phantom{a}_{10} $ & $ \phantom{a}_{11} $ & $ \phantom{a}_{15} $ & $ \phantom{a}_{14} $ & \multirow{2}{*}{$ \begin{rcases*} \\ \\ \end{rcases*} d $}\\ \cline{1-5}
+		$ \overline{b} $ & $ \phantom{a}_{8} $ & $ \phantom{a}_{9} $ & $ \phantom{a}_{13} $ & $ \phantom{a}_{12} $ \\ \cline{1-5}
 		\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
 	\end{tabular}
+	\quad
+	\begin{tabular}{rl}
+		3: & $ ab\overline{c} \overline{d}$\\
+		1: & $ a  \overline{b} \overline{c} \overline{d} $\\
+		2: & $ \overline{a} b \overline{c} \overline{d} $\\
+		7: & $ abc\overline{d} $\\
+	 11: & $ ab\overline{c}d $\\
+	 3+7 & $ ab\overline{d} $\\
+	 11+15 & $ abd $\\
+	 3+7+11+15 & $ ab $\\
+	\end{tabular}
+\caption{KV-Diagramm mit 4 Variablen}
 \end{table}
 
+\FloatBarrier
 \noindent
-Primimplikanten können im KV-Diagramm gefunden werdne, indem wir Bereiche von Feldernmit \glqq 1\grqq-Belegung suchen, welche:
+\ac{PI} können im KV-Diagramm gefunden werden, indem wir Bereiche von Feldern mit \glqq 1\grqq-Belegung suchen, welche:
 \begin{itemize}
 	\item maximal groß sind
 	\item rechteckige Form haben
 	\item eine 2er-Potenz an Feldern umfassen
 \end{itemize}
+\acfp*{KPI} erkennt man daran, dass mindestens ein Feld von keinen anderen \ac{PI} abgedeckt wird.\\
+
+\begin{Hint}{}{}
+	Zwei benachbarte Felder unterscheiden sich immer in der Belegung genau einer Variable. Nachbarfelder von Randfeldern finden sich am gegenüberliegenden Rand.
+\end{Hint}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{c|c|c|c|c|l}
+		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ &\\ \cline{1-5}
+		$ \overline{b} $ & $ \phantom{a}_0 $ & $ \phantom{a}_1 $ & $ \phantom{a}_5 $ & $ \phantom{a}_4 $& \multirow{2}{*}{$\begin{rcases*} \\ \\ \end{rcases*} \overline{d}$}\\ \cline{1-5}
+		$ b $ & $ 1_2 $ & $ \phantom{a}_3 $ & $ \phantom{a}_7 $ & $ 1_6 $ \\ \cline{1-5}
+		$ b $ & $ 1_{10} $ & $ 1_{11} $ & $ \phantom{a}_{15} $ & $ \phantom{a}_{14} $ & \multirow{2}{*}{$ \begin{rcases*} \\ \\ \end{rcases*} d $}\\ \cline{1-5}
+		$ \overline{b} $ & $ \phantom{a}_{8} $ & $ \phantom{a}_{9} $ & $ \phantom{a}_{13} $ & $ 1_{12} $ \\ \cline{1-5}
+		\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
+	\end{tabular}
+	\quad
+	\begin{tabular}{rlr}
+		&& \ac{KPI}\\
+		\hcancel[green]{2+6}: & $ \overline{a} b \overline{d} $ & \hcancel 6\\
+		\hcancel[green]{2+10}:&$ \overline{a} b \overline{c} $ & \hcancel{\phantom{a}}\\
+		\hcancel[green]{11+10}: & $ b\overline{c} d $& \hcancel[green]{11}\\
+		12: & $ \overline{a}\overline{b}cd $ & 12\\
+		\multicolumn{3}{l}{DMF: $ \overline{a} b \overline{d} \vee b\overline{c}d \vee \overline{a}\overline{b}cd $}\\
+		\hcancel[green]{\textcolor{blue}{6+7}}: & $ bc\overline{d} $ & \hcancel[green]7
+	\end{tabular}
+{\color{green}
+	\begin{tabular}{rlr}
+	2+3+6+7: & $ b \overline{d} $ & 6+7/\ac{KPI}\\
+	2+3+10+11: & $ b \overline{c} $ & 10+11/\ac{KPI}\\
+	\multicolumn{3}{l}{DMF: $ b \overline{d} \vee b \overline{c} \vee \overline{a} \overline{b}cd $}
+	\end{tabular}
+}
+\\
+\flushleft
+\textcolor{blue}{DMF: $ b \overline{c}d \vee \overline{a} \overline{b} cd \vee bc\overline{d} \vee \overline{a} b \overline{d} = b\overline{c} d \vee \overline{a} \overline{b} c d \vee b c \overline{d} \vee \overline{a} b \overline{d}$}\\
+\textcolor{blue}{$\Rightarrow$ Es gibt 2 \ac{DMF}s für diese Funktion $\Rightarrow$ \ac{DMF} nicht eindeutig!}
+\end{table}
+
+\textbf{Anmerkung:} 
+\begin{itemize}
+	\item Eine \ac{DMF}, welche nur aus \acp{KPI} besteht, ist immer eindeutig.
+	\item Wenn die \ac{KPI} nicht alle \glqq 1\grqq-Felder abdecken, benötigt man auch einfache \ac{PI} für eine \ac{DMF}.
+	\item Für jedes nicht von einem \ac{KPI} abgedeckte \glqq 1\grqq-Feld gibt es immer mindestens 2 \ac{PI}, welche dieses Feld abdecken. (Wenn es nur einen \ac{PI} gäbe, wäre dieser \ac{PI} ein \ac{KPI}!)
+	\item Falls ein \ac{PI} für die \ac{DMF} gebraucht wird, kann die \ac{DMF} nicht eindeutig sein; sie kann aber auch eindeutig sein, falls z.B. die beiden fas fehlende Feld abdeckender \ac{PI} unterschiedliche Größe haben.
+\end{itemize}
+
+\begin{tabular}{c|c|c|c|c|c|c|c|c|l}
+	& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ & $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ & \\ \cline{1-9}
+	$ \overline{b} $ & $ \phantom{a}_0 $ & $ \phantom{a}_1 $ & $ \phantom{a}_5 $ & $ \phantom{a}_4 $ & $ \phantom{a}_{20} $ & $ \phantom{a}_{21} $ & $ \phantom{a}_{17} $ & $ \phantom{a}_{16} $ & \multirow{2}{*}{$\begin{rcases*} \\ \\ \end{rcases*} \overline{d}$}\\ \cline{1-9}
+	$ b $ & $ \phantom{a}_2 $ & $ \phantom{a}_3 $ & $ \phantom{a}_7 $ & $ \phantom{a}_6 $ & $ \phantom{a}_{22} $ & $ \phantom{a}_{23} $ & $ \phantom{a}_{19} $ & $ \phantom{a}_{18} $ \\ \cline{1-9}
+	$ b $ & $ \phantom{a}_{10} $ & $ \phantom{a}_{11} $ & $ \phantom{a}_{15} $ & $ \phantom{a}_{14} $ &  $ \phantom{a}_{30} $ & $ \phantom{a}_{31} $ & $ \phantom{a}_{27} $ & $ \phantom{a}_{26} $ & \multirow{2}{*}{$ \begin{rcases*} \\ \\ \end{rcases*} d $}\\ \cline{1-9}
+	$ \overline{b} $ & $ \phantom{a}_{8} $ & $ \phantom{a}_{9} $ & $ \phantom{a}_{13} $ & $ \phantom{a}_{12} $ & $ \phantom{a}_{28} $ & $ \phantom{a}_{29} $ & $ \phantom{a}_{25} $ & $ \phantom{a}_{24} $ & \\ \cline{1-9}
+	\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr4\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr4\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr4\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr4\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $} & \\
+	\multicolumn{1}{c}{}& \multicolumn{4}{c}{$ \underbrace{\hspace*{\dimexpr12\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{e}} $}& \multicolumn{4}{c}{$ \underbrace{\hspace*{\dimexpr12\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{e} $}&
+\end{tabular}
+\begin{tabular}{rl}
+	3: & $ ab\overline{c}\overline{d}\overline{e} $\\
+	19: & $ ab\overline{c}\overline{d}e $ (Nachbar von 3?)\\
+\end{tabular}
+$\Rightarrow$ KV-Diagramm im 2-dimensionalen: bis 4 E-Variablen, im 3-dimensionalen bis 6 E-Variablen,  ...
+%Todo: 30.06. ergänzen
 
 \newpage
 \section*{Abkürzungsverzeichnis}
@@ -1686,5 +1773,8 @@ Primimplikanten können im KV-Diagramm gefunden werdne, indem wir Bereiche von F
 	\acro{SSH}{Störsicherheit}
 	\acro{DNF}{Disjunktive Normalform}
 	\acro{DMF}{Disjunktivie Minimalform}
+	\acro{KPI}{Kernprimimplikant}
+	\acroplural{KPI}[KPI]{Kernprimipimplikanten}
+	\acro{PI}{Primimplikant}
 \end{acronym}
 \end{document}
