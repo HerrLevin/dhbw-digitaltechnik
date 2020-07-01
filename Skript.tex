@@ -100,6 +100,8 @@
 \date{1. \& 2. Semester 2020}
 \title{Digitaltechnik-Skript}
 
+\setcounter{section}{-1}
+
 \begin{document}
 \begin{titlepage}
 	\newgeometry{left=7.5cm} %defines the geometry for the titlepage
@@ -154,26 +156,30 @@
 		\item Signalcodierung
 	\end{itemize}
 
-	\subsubsection{Zeichencodierung}
+	\subsection{Zeichencodierung}
 	\begin{itemize}
 		\item ASCII: Alphabet besteht aus (ganzen) Zahlen von 0 bis 127
-		\item ISO8859-x: Alphabet besteht aus 0\dots255
-		\subitem -x: verschiedene Sprachräume
-		\subitem -1: westeuropäisch
-		\subitem -5: kyrillisch
-		\subitem -7: griechisch
-		\subitem -15: westeuropäisch inkl. \euro{}
+		\item \begin{tabular}[t]{rl}
+			ISO8859-x: & Alphabet besteht aus 0\dots255\\
+			-x: & verschiedene Sprachräume\\
+			-1: & westeuropäisch\\
+			-5: & kyrillisch\\
+			-7: & griechisch\\
+		  -15: & westeuropäisch inkl. \euro{}
+		\end{tabular}
 		\item Unicode: Anspruch, alle (derzeitigen, künftigen, ehemaligen) Schriftsprachen abzudecken, auch Phantasiesprachen wie Klingonisch oder Elbisch
 		\subitem UTF-8: 256 Zahlenwerte
 		\subitem UTF-16: 65536 Zahlenwerte
 		\subitem$ \rightarrow $ Zeichen werden als variabel lange Symbolfolgen dargestellt. Gesetztes MSB zeigt an, dass mindestens ein Folgesymbol folgt.
 	\end{itemize}
-	\subsubsection{Zahlencodierung}
-	\paragraph{I. Abzählsysteme}
+	\subsection{Zahlencodierung}
+	\subsubsection{Abzählsysteme}
 	\subparagraph{Fingerabzählsysteme}
 	\begin{itemize}
-		\item[] Alphabet = \{Finger\}
-		\item[] Symbolwert (Finger) = 1
+		\item[] \begin{tabular}[t]{ll}
+			Alphabet & = \{Finger\}\\
+			Symbolwert (Finger) & =1\\
+		\end{tabular}
 		\item[$ \ominus $] stark beschränkter Wertebereich von 0 bis 10
 		\item[$ \ominus $] bis auf weiteres nur nicht-negative ganze Zahlen
 		\item[$ \oplus $] extrem einfach und verständlich		
@@ -183,35 +189,42 @@
 	\end{itemize}
 	\subparagraph{Strichliste (einfache)}
 	\begin{itemize}
-		\item[] Alphabet = \{I\}
-		\item[] Wert (I) = 1
+		\item[] \begin{tabular}[t]{ll}
+		Alphabet &= \{I\}\\
+		Wert (I) &= 1\\			
+		\end{tabular}
 		\item[$ \oplus $] unbeschränkter Wertebereich
 		\item[$ \oplus $] Addition weiter einfach, Subtraktion braucht man eine Entfernungsmöglichkeit/Entwertungsmöglichkeit
 		\item[$ \ominus $] Hilfsmittel (Schreibwerkzeug) notwendig
 		\item[$ \ominus $] unübersichtlich darstellbarer Wertebereich bis etwa 10 (10 Symbole notiert)
 	\end{itemize}
-	\subparagraph{erweiterte Strichliste (\glqq Lattenzaunsystem\grqq)}
+	\subparagraph{Erweiterte Strichliste (\glqq Lattenzaunsystem\grqq)}
 	\begin{itemize}
-		\item[] Alphabet = {I, \cancel{\text{IIII}}}
-		\item[] Wert ( I ) = 1
-		\item[] Wert ( \cancel{\text{IIII}} ) = 5
-		\item[] Regeln:Symbole müssen nach Wertigkeit sortiert notiert werden. Fünf einfache Striche müssen immer zu einem „Kombisymbol“ zusammengefasst werden.
+		\item[]
+		\begin{tabular}[t]{ll}
+			Alphabet & = {I, \cancel{\text{IIII}}}\\
+			Wert ( I )  & = 1\\
+			Wert ( \cancel{\text{IIII}} )& = 5\\
+		\end{tabular}
+		\item[] \textbf{Regeln:} Symbole müssen nach Wertigkeit sortiert notiert werden. Fünf einfache Striche müssen immer zu einem „Kombisymbol“ zusammengefasst werden.
 		\item[$ \oplus/\ominus $] Addition etwas erschwert durch Sortieren und Zusammenfassen; Subtraktion zusätzlich erschwert durch Auflösen des Kombisymbols 
 		\item[$ \oplus/\ominus $] etwas komplexer durch zweites Symbol und Sortierregel
 		\item[$ \oplus/\ominus $] übersichtlich darstellbarer Wert bis etwa 50 erweitert
 	\end{itemize}
 
-	\subparagraph{römisches Zahlensystem}
+	\subparagraph{Römisches Zahlensystem}
 	\begin{itemize}
-		\item[] Alphabet = \{I, V, X, L, C, D, M\}
-		\item[] Wert = \{1, 5, 10, 50, 100, 500, 1000\}
-		\item[] Zusatzregel: Symbol kleinerer Wertigkeit darf vor einem Symbol größerer Wertigkeit notiert werden Sein Symbolwert wird dann subtrahiert, statt addiert. Mehr als drei gleiche Symbole sind nicht hintereinander erlaubt 
+		\item[] \begin{tabular}[t]{ll}
+			Alphabet &= \{I, V, X, L, C, D, M\}\\
+			Wert &= \{1, 5, 10, 50, 100, 500, 1000\}\\
+		\end{tabular} 
+		\item[] \textbf{Zusatzregel:} Symbol kleinerer Wertigkeit darf vor einem Symbol größerer Wertigkeit notiert werden Sein Symbolwert wird dann subtrahiert, statt addiert. Mehr als drei gleiche Symbole sind nicht hintereinander erlaubt 
 		\item[$ \oplus/\ominus $] übersichtlich darstellbarer Wertebereich bis etwa 10.000 (?)
 		\item[$ \ominus $] beschränkter Wertebereich bis < 4000
 		\item[$ \ominus $] recht hohe Komplexität, relativ geringe Verständlichkeit
 		\item[$ \ominus $] extrem komplizierte Addition und Subtraktion
 	\end{itemize}
-	\paragraph{II. \acp{SWS}}
+	\subsubsection{\acfp{SWS}}
 	\subparagraph{Dezimalsystem}
 	\begin{itemize}
 		\item[] Alphabet = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}
@@ -273,11 +286,14 @@
 	\underline{Bsp.:} $ b_1=2 $ und $ b_2=16 $\\
 	$ \Rightarrow $ 4 Ziffern zur Basis $ 2 $ entsprechen einer Ziffer zur Basis $ 16 $.\\ \\
 	
+	\noindent
 	\underline{Gängige Basen im \ac{SWS}}\\
 	$ b=10 $ \glqq Dezimalsystem\grqq\ $ \Rightarrow $ Mensch\\
 	$ b=2 $ \glqq Binärsystem\grqq\/\glqq Dualsystem\grqq\ $ \Rightarrow $ Digitalrechner \\
 	$ b=16 $ \glqq Hexadezimalsystem\grqq\ $ \Rightarrow $ Computernahe Darstellung von Zahlen
 	\begin{itemize}
+		\itemsep0em
+		\vspace{-0.2cm}
 		\item weniger Stellen
 		\item einfache Umrechnung
 	\end{itemize}
@@ -337,7 +353,9 @@ $$
 auch negative Zahlen!
 \\
 \subsection{Darstellung negativer Zahlen}
- Vorzeichen und Betrag
+ \subsubsection{Vorzeichen und Betrag}
+ \label{section:vorzeichen}
+ Siehe Titel von Abschnitt \ref{section:vorzeichen}.
 \subsubsection{1er-Komplement}
 	\textit{(ab jetzt immer zur Basis 2)}\\
 	Alle Bits werden invertiert: $ 0 \rightarrow 1; \; 1\rightarrow 0 $\\
@@ -448,7 +466,7 @@ $$
 0,375_{10} = 0,01100_{2}
 $$
 
-\subsubsection{\acp{GKZ}(auch Fließkommazahlen)}
+\subsubsection{\acfp{GKZ}[auch Fließkommazahlen]}
 $$
 \text{Wert} = \text{Mantisse} \cdot \text{Basis}^{\text{Exponent}}
 $$
@@ -466,35 +484,39 @@ $$
 	Es gibt unendlich viele Darstellungen jedes Zahlenwertes als \ac{GKZ}
 \end{Hint}
 
-Abhilfe: normalisierte Darstellung
+\textbf{Abhilfe:} normalisierte Darstellung
 \begin{itemize}
 	\item[a)]  genau eine Vorkommastelle (Vkst), diese muss $ \neq 0 $ sein!
 	\item[b)] keine Vkst, erste Nkst $ \neq 0 $
 \end{itemize}
 
 Variante a) ist gängiger. In der Vorlesung wird diese üblicherweise verwendet.\\
-\\
-\textcolor{blue!60}{negative \ac{GKZ} $ \Rightarrow $ negative Mantisse} \\
-
-Darstellung der Mantisse: per Vorzeichen und Betrag (nicht Zweier-Komplement), um die Fallunterscheidungen beim Größenvergleich zwischen Vorzeichen- und normaler Stelle zu ersparen\footnote{Ist dann trotzdem insgesamt für die Zahl notwendig, nicht aber für die einzelnen Stellen.} und vor allem bei der Kommaverschiebung die Fallunterscheidung mit \glqq 0\grqq (bei positiven) oder \glqq 1\grqq (bei negativen) aufzufüllen zu ersparen.\\
+\begin{center}
+	\textcolor{blue!60}{negative \ac{GKZ} $ \Rightarrow $ negative Mantisse} \\
+\end{center}
+\noindent
+\subsubsection*{Darstellung der Mantisse}
+Per Vorzeichen und Betrag (nicht Zweier-Komplement), um die Fallunterscheidungen beim Größenvergleich zwischen Vorzeichen- und normaler Stelle zu ersparen\footnote{Ist dann trotzdem insgesamt für die Zahl notwendig, nicht aber für die einzelnen Stellen.} und vor allem bei der Kommaverschiebung die Fallunterscheidung mit \glqq 0\grqq (bei positiven) oder \glqq 1\grqq (bei negativen) aufzufüllen zu ersparen.\\
 \\
 Vorzeichen des Exponenten gibt die Richtung der Kommaverschiebung an.\\
-Größenvergleich:\\
+
+\subsubsection*{Größenvergleich}
 \begin{enumerate}
-	\item Vorzeichen Mantisse: 
+	\itemsep0.5em
+	\item \textbf{Vorzeichen Mantisse}
 		\subitem unterschiedlich, dann gehört das positive Vorzeichen zur größeren
 		\subitem gleich, dann Vergleich der Beträge und spätere Fallunterscheidung
-	\item Vergleich Betrag
+	\item \textbf{Vergleich Betrag}
 		\subitem größerer Exponent gehört zum größeren Betrag \\
-			$ \Rightarrow $ per Bias-Darstellung einfacher bitweiser Vergleich ohne Fallunterscheidung
+			\hspace*{10mm} $ \Rightarrow $ per Bias-Darstellung einfacher bitweiser Vergleich ohne Fallunterscheidung
 		\subitem bei gleichem Exponent: Größenvergleich der Mantisse (bitweise)
-	\item Fallunterscheidung abhängig vom Vorzeichen
+	\item \textbf{Fallunterscheidung abhängig vom Vorzeichen}
 		\subitem positiv: größerer Betrag $ \rightarrow $ größere Zahl
 		\subitem negativ: größerer Betrag $ \rightarrow $ kleinere Zahl
 \end{enumerate}
 
 \subsubsection*{Darstellung des Exponenten}
-Exponent wird \glqq künstlich\grqq nicht-negativ gemacht, indem ein Bias aufaddiert wird.
+Exponent wird \glqq künstlich\grqq{} nicht-negativ gemacht, indem ein Bias aufaddiert wird.
 
 $$
 \text{Exp}_{\text{gespeichert}} = \text{Exp}_{\text{real}} + \text{Bias}
@@ -661,7 +683,7 @@ node[anchor=north]{Hidden Bit};
 \end{itemize}
 \tikzmark{ziffernc2} Nachteil: deutlich erhöhter Speicherplatzbedarf.
 \begin{tikzpicture}[remember picture, overlay]
-\draw[->,bend right=90]([shift={(-2em, 0)}]pic cs:ziffernc1) to (pic cs:ziffernc2);
+\draw[->,bend right=90]([shift={(-2em, 0.2em)}]pic cs:ziffernc1) to (pic cs:ziffernc2);
 
 \end{tikzpicture}
 %ToDo Rest aus Tablet übernehmen
@@ -697,9 +719,15 @@ node[anchor=north]{Hidden Bit};
 \end{list}
 
 \subsubsection*{Strom Vs. Spannung}
-\begin{figure}
+\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{img/strom_spannung_signale}
+	\begin{circuitikz}
+		\draw
+		(0,0) to[battery1, n=B, l_=$ S $] (0,-1) node[pos=0.05,below right=1.5ex]{$ +5V$} node[pos=0.05,below right=3.5ex] {$ 50mA $}
+		|- (2.5,-2) to [lamp] node[pos=0.05,below right=1.5ex]{$ E $} node[pos=0.05,below right=3.5ex] {$ +5V $}node[pos=0.05,below right=5.5ex]{$ 50mA $}(2.5, 0.5) 
+		-- (2.5,0.5) to (0,0.5)
+		-- (0,0.5) to (0,0);
+	\end{circuitikz}
 	\caption{Schaltplan mit Spannungsquelle und Glühbirne}
 	\label{abb:schaltplan}
 \end{figure}
@@ -707,10 +735,9 @@ node[anchor=north]{Hidden Bit};
 \begin{tabularx}{\linewidth}{r X}
 	Spannung: & Verringert sich beim E durch Spannungsfall auf der Leitung, wird verändert durch Störungen von außen (\glqq Übersprechen\grqq\, elektromagnetische Einstrahlungen)\\
 	Strom: & Kaum davon betroffen; Stromstärke verändert sich im geschlossenen Stromkreis nicht.\\
+	Nachteil Strom: & hoher Energieaufwand, große Wärmeentwicklung\\
+	& \hspace*{2em}$\Rightarrow$ deshalb Spannung statt Strom bei den meisten Computerschnittstellen verwandt.
 \end{tabularx}
-\\
-Nachteil Strom: hoher Energieaufwand, große Wärmeentwicklung\\
-\hspace*{2em}$\Rightarrow$ deshalb Spannung statt Strom bei den meisten Computerschnittstellen verwandt.
 \\
 
 \subsection*{typische Spannungspegel:}
@@ -722,7 +749,7 @@ $ \left.  \begin{array}{ccc}
 $ TTL-Pegel
 \\\\
 \glqq Transistor-Transistor-Logic\grqq \\
-\hspace*{2em} $\Rightarrow$ \glqq erfunden\grqq um 1960 von TI (TexasInstruments)
+\hspace*{2em} $\Rightarrow$ \glqq erfunden\grqq um 1960 von TI (\textbf{T}exas\textbf{I}nstruments)
 
 \subsubsection*{große vs. kleine Spannungspegel}
 
@@ -741,10 +768,10 @@ $ TTL-Pegel
 \subsubsection*{4 Verfahren (1-4) und 4 Eigenschaften(a-d)}
 
 \begin{enumerate}
-	\item[a)] \ac{TRG}\\
+	\item[a)] \textbf{\underline{\ac{TRG}}}\\[0.5em]
 	Möglichkeit, nur aus dem übertragenen Datensignal eine Resynchronisierung biem Empfänger auf den Takt des Senders zu machen
 	
-	\item[b)] \ac{GSF} \\
+	\item[b)]\textbf{\underline{ \ac{GSF}}} \\[0.5em]
 	Motivation: Einsparung der Masseleitung. Im zeitlichen Mittel liegen auf der Signalleitung 0V an.\\
 	Ziel: Anhand des mittleren Signalpegels soll der Massepegel \glqq errechnet\grqq\ werden.\\
 	\subitem -Vermeidung einer Potentialverschiebung beim E.
@@ -753,7 +780,7 @@ $ TTL-Pegel
 	z.B. $1V \hat{=} +5v$ und $0 \hat{=} -5V$\\
 	dann: \ac{GSF} bei \ac{NRZ}: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleichverteilt)\\\\
 	Bei den meisten Anwendungs-, Zeichen- und Zahlencodierungen kann keine Gleichverteilung angenommen werden. Ausnahme: Verschlüsselung und Kompression.
-	\item[c)] \ac{SSH}\\
+	\item[c)] \textbf{\underline{\ac{SSH}}}\\[0.5em]
 	(Un-)Anfälligkeit eines Verfahrens ggü. Störungen, welche durch Spannungsschwankungen auf der Leitung verursacht werden.\\
 	$\Rightarrow$ direkt abhängig von der Anzahl der verwendeten Pegel, welche auf einen vorgegebenen Potentialbereich verteilt werden müssen (und so natürlich auch beim Empfänger voneinander unterschieden werden müssen)\\
 	\ac{SSH} bei \ac{AMI}: schlecht, da 3 Pegel\\
@@ -761,16 +788,16 @@ $ TTL-Pegel
 \end{enumerate}
 
 \begin{enumerate}
-	\item \ac{NRZ}\\
+	\item \textbf{\underline{\acf{NRZ}}}\\[0.5em]
 		Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
-	\item \ac{RZ}
+	\item \textbf{\underline{\acf{RZ}}}\\[0.5em]
 		Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
 		\subitem \ac{TRG} bei \ac{RZ}: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
-	\item \ac{AMI}\\
+	\item \textbf{\underline{\acf{AMI}}} \\[0.5em]
 		Ähnlich \ac{NRZ} mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
 		\subitem \ac{GSF} bei \ac{AMI}: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
 		\subitem \ac{TRG} bei \ac{AMI}: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine \ac{TRG} möglich
-	\item Manchester\\
+	\item \textbf{\underline{Manchester}}\\
 		Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq und fallende Flanke $\hat{=}$ \glqq 0\grqq.\\
 		ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
 		\subitem \ac{TRG} bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
@@ -798,18 +825,30 @@ $ TTL-Pegel
 				\node [below,font=\sffamily\bfseries\tiny,inner ysep=2pt] at (\x-.5,.5) {\b};
 			}
 			\vertlines[help lines, black]{}
-			\horlines[black,yshift=1.25mm]{}
+			\horlines[black!30!white,yshift=1.25mm]{}
+			\node[anchor=east] at (row2.north west){\tiny +5V};
+			\node[anchor=east] at (row2.west){\tiny 0V};
+			\node[anchor=east] at (row3.north west){\tiny +5V};
+			\node[anchor=east] at (row3.west){\tiny 0V};
+			\node[anchor=east] at (row4.north west){\tiny +5V};
+			\node[anchor=east] at (row4.west){\tiny 0V};
+			\node[anchor=east] at (row4.south west){\tiny -5V};
+			\node[anchor=east] at (row5.north west){\tiny +50};
+			\node[anchor=east] at (row5.west){\tiny 0V};
 		\end{pgfonlayer}
 	\end{tikztimingtable}
 \caption{Pegelgraphen der einzelnen Verfahren}
 \end{figure}
 
-\subsubsection*{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}
-	\textbf{Nyquist-Theorem:} Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.\\
+\subsubsection{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}
+	\begin{Theorem}{Nyquist-Theorem}{}
+		Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.
+	\end{Theorem}
+	\noindent
 	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
-	\textbf{\ac{BBB} bei \ac{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
-	\textbf{\ac{BBB} bei \ac{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
-	\textbf{\ac{BBB} bei \ac{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
+	\textbf{\ac{BBB} bei \acl{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
+	\textbf{\ac{BBB} bei \acl{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
+	\textbf{\ac{BBB} bei \acl{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
 	\textbf{\ac{BBB} bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq oder \glqq 111111\grqq)\\
 
 \begin{tabularx}{\textwidth}{l|Y|Y|Y|Y}
@@ -841,18 +880,20 @@ $ TTL-Pegel
 \\ \\
 \textbf{Einsatz:}\\
 \begin{itemize}
+	\itemsep0em
+	\vspace{-0.2cm}
 	\item \ac{NRZ} für interne Schnittstellen, bei denen der Verzicht auf Takt- oder Masseleitung nicht relevant ist
 	\item Manchester gerne für Netzwerkschnittstellen (z.B. Ethernet) um auf Takt- und Masseleitung verzichten zu können
 \end{itemize}
 
-\subsubsection*{3 Verfahren zur sicheren Taktrückgewinnung:}
+\subsubsection{3 Verfahren zur sicheren Taktrückgewinnung:}
 \begin{enumerate}
 	\item \textbf{Startbitsequenz} \\
-	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere \ac{TRG} ermöglicht. z.B. bei \ac{NRZ}: \glqq 01\grqq oder \glqq 10\grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\
+	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere \ac{TRG} ermöglicht. z.B. bei \ac{NRZ}: \glqq 01\grqq oder \glqq 10\grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\[0.5em]
 	\textbf{Nachteil:} relativ großer Overhead, effektive Nutzdatenrate deutlich kleiner als die Schrittrate.\\
 	\noindent\hspace*{2em}% 
 	Im Beispiel: Nutzdatenrate = $\dfrac{n}{n+2}\cdot Schrittweite$\\
-	Bsp: bei \ac{RZ} oder \ac{AMI} reicht ein einfaches \glqq 1\grqq-Startbit. (Keine \glqq Sequenz\grqq, weniger Overhead)\\
+	Bsp: bei \ac{RZ} oder \ac{AMI} reicht ein einfaches \glqq 1\grqq-Startbit. (Keine \glqq Sequenz\grqq, weniger Overhead)\\[0.5em]
 	\textbf{Anwendung:} z.B.serielle Schnittstelle RS232
 	
 	\item \textbf{Bitstuffing (\glqq Bitstopfen\grqq)}\\
@@ -874,15 +915,21 @@ $ TTL-Pegel
 	node[below] {0}; 
 \end{tikzpicture}
 \\ \\ \\
-	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.\\
-	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! \\
-	\textbf{bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1\grqq eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb\grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)\\
+	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.
+	\\[0.25em]
+	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! 
+	\\[0.25em]
+	\textbf{Bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1\grqq eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb\grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)
+	\\[0.25em]
 	\textbf{Anwendung:} Ethernet (um Bitmuster des Frame-Delimiters \glqq 01111110\grqq auszuschließen $\Rightarrow$ nach fünf \glqq 1\grqq wird eine Stopf-\glqq 0\grqq eingeschoben)
 	
 	\item \textbf{Blockcodierung}\\
-	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere \ac{TRG} ermöglichen.\\
-	\textbf{Nachteil:} konstant großer Overhead\\
-	\textbf{Vorteil:} ggf. sind weitere positive Eigenschaften erzielbar durch geeignete Auswahl der zu verwendenden Datenblöcke bei der Übertragung (vgl. 8B10B-Codierung und \ac{GSF}!)\\
+	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere \ac{TRG} ermöglichen.
+	\\[0.25em]
+	\textbf{Nachteil:} konstant großer Overhead
+	\\[0.25em]
+	\textbf{Vorteil:} ggf. sind weitere positive Eigenschaften erzielbar durch geeignete Auswahl der zu verwendenden Datenblöcke bei der Übertragung (vgl. 8B10B-Codierung und \ac{GSF}!)
+	\\[0.25em]
 	\textbf{Anwendung:} z.B. ISDN und viele andere
 \end{enumerate}
 
@@ -906,9 +953,10 @@ Ganggenauigkeit der Uhren und Anzahl der Schritte ohne Resynchronisierung:
 \end{tikzpicture}
 \end{center}
 Der Pegel wird beim Empfang in der Mitte der angenommenen Schrittzeit abgetastet.\\
-$\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\
+\hspace*{1em} $\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\[0.5em]
 Bsp: Bei 5\% spezifischer Ganggenauigkeit wären 5 Schirrte \glqq zu viel\grqq
 
+\newpage
 \section{Boolsche Algebra}
 \begin{center}
 	\textit{(angelehnt an das Skript von Burkhard Stiller an der Uni Zürich \glqq Info3 Modul Schaltnetze\grqq)
@@ -959,10 +1007,10 @@ $\overline{a} = \neg a \; \; NICHT, NOT$
 	(oder: $a \vee \neg a = 1, \; a \wedge \neg a = 0$)
 \end{itemize}
 
-\subsubsection{Warum Schaltalgebra?}
-$\Rightarrow$ Darstellung der zweistelligen Operatoren mit Schalttasten, wobei die Werte durch Schalter dargestellt wurden.
+\subsubsection*{Warum Schaltalgebra?}
+\hspace*{2em}$\Rightarrow$ Darstellung der zweistelligen Operatoren mit Schalttasten, wobei die Werte durch Schalter dargestellt wurden.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -980,8 +1028,9 @@ $\Rightarrow$ Darstellung der zweistelligen Operatoren mit Schalttasten, wobei d
 	\label{fig:test}
 \end{figure}
 
-Darstellung mit Wertetabellen:\\
-
+\FloatBarrier
+\noindent
+\subsubsection{Darstellung mit Wertetabellen}
 \begin{table}[h]
 	\centering
 	\begin{minipage}[b]{0.4\textwidth}
@@ -1053,7 +1102,8 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 \end{table}
 
 \subsubsection{Aus den Huntingtonschen axiomen abgeleitete (beweisbare Gesetze)}
-\begin{tabular}{ll}
+\begin{center}
+	\begin{tabular}{ll}
 	Assoziativgesetz & $(a \wedge b) \wedge c = a \wedge (b\wedge c)$ \\
 	 & $ (a \vee b) \vee c = a \vee (b \vee c) $\\
 	Idempotenzgesetz & $ a \wedge a = a $\\
@@ -1063,18 +1113,19 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
     DeMorgan-Gesetz  & $ \overline{(a \wedge b)} = \overline{a} \vee \overline{b} $\\
     				 & $ \overline{(a \vee b)} = \overline{a} \wedge \overline{b} $\\
 \end{tabular}
+\end{center}
 \subsubsection{Beweismethoden}
 \begin{itemize}
 	\item algebraische Umformungen mit Hilfe der Axiome und bereits bewiesener Gesetze: \\
 	$ a \overset{!}{=} a \wedge a $ (Idempotenzgesetz)\\
 	$ a \overset{H3}{=} a \wedge 1 \overset{H4}{=} a \wedge ( a \vee \overline{a} ) \overset{H2}{=} (a \wedge a) \vee (a \wedge \overline{a}) \overset{H4}{=} (a \wedge a) \vee 0 \overset{H3}{=} a \wedge a$
-	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle Eingangsbelegugen dieselbe Ausgagsbelegung haben (\reftbl{tab:beweiswahrheitstabelle})
+	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle Eingangsbelegugen dieselbe Ausgagsbelegung haben (Tabelle \ref{tab:beweiswhtbl})
 	\item spezielle Interpretation von $H4$:\\
 	falls $ a \vee \overline{b} = 1 $ und $ a \wedge \overline{b} = 0 $, dann $ a = b $\\
 	$ a \vee (b \vee c) \overset{!}{=} (a \vee b) \vee c $ (Assoziativgesetz)
 \end{itemize}
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{c|ccc|c|c|c|c}
 	\# & c & b & a & $ b \vee c $ & $ a \vee (b \vee c) $ & $ a \vee b $ & $ (a \vee b) \vee c$\\
@@ -1089,7 +1140,7 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 	 \multicolumn{5}{c}{}& \multicolumn{1}{c}{$\uparrow$}&\multicolumn{1}{c}{}& $\uparrow$\\
 	 \multicolumn{5}{c}{}&\multicolumn{3}{c}{gleiche Ausgangsbelegungen}
 \end{tabular}
-\label{tab:beweiswahrheitstabelle}
+\label{tab:beweiswhtbl}
 \caption{Beweis anhand einer Wahrheitstabelle}
 \end{table}
 
@@ -1131,7 +1182,7 @@ Beweis: \\
 Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegung (der $ n $ Eingangsvariablen) wird genau eine Ausgangsbelegung zugeordnet.
 \end{Theorem}
 
-Darstellung von Funktionen:
+\subsection{Darstellung von Funktionen:}
 \begin{enumerate}
 	\item algebraischer Funktionsterm
 	\item Wahrheitstabelle
@@ -1144,9 +1195,8 @@ Darstellung von Funktionen:
 \begin{Hint}{}{hint}
 	Zwei äquivalente Funktionen können durch sehr unterschiedliche Funktionsterme dargestellt werden. (algebraische Umformungen mit Hilfe der Axiome und abgeleiteten Gesetze sind immer möglich)
 \end{Hint}
-
 \subsubsection{Funktionen abhängig von Ausgangsvariablen}
-\begin{table}[h]
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{|r|l|l|}
 	\hline
@@ -1162,12 +1212,14 @@ Darstellung von Funktionen:
 \label{tab:funktionenausgang}
 \caption{Funktionen abhängig von Ausgangsvariablen ($ n = 0 \ldots 1 $)}
 \end{table}
+\FloatBarrier
 
 \subsubsection*{Anzahl verschiedener Funktionen?}
 Anzahl Zeilen in der Wertetabelle: $ 2^n $\\
 Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktionen abhängig von Eingangsvariablen.
 \\
-\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\begin{minipage}{0.45\textwidth}
 	\begin{tabular}{cccl}
 		n & $ 2^n $ & $ 2^{2^{n}} $& \\ \cline{1-3}
 		0 & 1 & 2 &\\
@@ -1178,7 +1230,7 @@ Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktio
 		6 & 64 & $ \approx $ 16 Trio & $ \approx $ 1.000.000.000.000.000.000
 	\end{tabular}
 \end{minipage}
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.2\textwidth}
 \fbox{$
 	\begin{array}{ccc}
 	2^{10} & = & 1024\\
@@ -1186,11 +1238,12 @@ Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktio
 	\end{array}
 	$}
 \end{minipage}
+\end{center}
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{cc|cccccccccccccccc}
-		b & a & $ f_{0} $ & $ f_{1} $ & $ f_{2} $ & $ f_{3} $ & $ f_{4} $ & $ f_{5} $ & $ f_{6} $ & $ f_{7} $ & $ f_{8} $ & $ f_{9} $ & $ f_{10} $ & $ f_{11} $ & $ f_{12} $ & $ f_{13} $ & $ f_{14} $ & $ f_{15} $ \\
+		b & a & $ f_{0} $ & $ f_{1} $ & $ f_{2} $ & $ f_{3} $ & $ f_{4} $ & $ f_{5} $ & $ f_{6} $ & $ f_{7} $ & $ f_{8} $ & $ f_{9} $ & $ f_{10} $ & $ f_{11} $ & $ f_{12} $ & $ f_{13} $ & $ f_{14} $ & $ f_{15} $ \\ \hline
 		0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\
 		0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1\\
 		1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1\\
@@ -1202,23 +1255,26 @@ Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktio
 \caption{Wahrheitstabelle boolscher Operationen}
 \end{table}
 
+\noindent
 \textbf{Implikation:} $ a \Rightarrow b $ (\glqq aus a folgt b\grqq)\\
 Aussage a: \glqq An der DHBW KA gibt es einen Corona-Fall.\grqq\\
 Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 
-\begin{tabular}{ccc|c}
+\begin{center}
+	\begin{tabular}{ccc|c}
 	\# & b & a & $ a \Rightarrow b $ \\ \hline
      0 & 0 & 0 & 1\\
      1 & 0 & 1 & 0\\
      2 & 1 & 0 & 1\\
      3 & 1 & 1 & 1\\
 \end{tabular}
+\end{center}
 
 \begin{Theorem}{}{}
 	Ein vollständiges Operatorensystem (der Boolschen Algebra/Schaltalgebra) ist eine Menge von Operatoren, mit denen jede (Boolsche) Funktion (der Schaltalgebra) dargestellt werden kann.
 \end{Theorem}
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{rp{10cm}}
 	Satz: & $ \{\wedge, \vee, \neg\} $ ist ein vollständiges Operatorensystem.\\
@@ -1242,10 +1298,9 @@ Bsp: Speicherbausteine in \glqq NAND\grqq-Technologie.\\
 \begin{Hint}{}{}
 	Funktionen können eindeutig durch die Wahrheitstabelle dargestellt werden. Die Darstellung als Funktionsterm ist dagegen nicht eindeutig.\\
 	$\Rightarrow$ für jede Funktion gibt es unendlich viele äquivalente Terme!\\
-	Wir suchen einen \glqq standardisierten\grqq Funktionsterm!
 \end{Hint}
 
-Wir suchen einen standardisierten Funktionsterm!\\
+\subsubsection*{Wir suchen einen standardisierten Funktionsterm!}
 Ausgangspunkt: Wertetabelle\\
 
 \begin{table}[h]
@@ -1325,146 +1380,8 @@ Ein \ac{PI} ist ein Implikant, der mit keinem anderen Implikanten zusammengefass
 
 
 \subsection{Darstellung von Funktionen}
-\subsubsection{Schaltnetze}
-Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstellung von Funktionen als Graph, genauer als gerichteter Graph (\glqq Reihenfolge\grqq!)\\
-\begin{tabular}{ll}
-	Gatter: Knoten & $ \hat{=} $ Operatoren\\
-	Leitungsverbindungen: Kanten & $ \hat{=} $ Reihenfolge
-\end{tabular}
-\begin{figure}[h]
-	\centering
-	\begin{circuitikz} 
-	\draw (0,0) node[european and port] (and) {}
-	(and.in 1) node[anchor=east] {a}
-	(and.in 2) node[anchor=east] {b}
-	(and.out) node[anchor=west]{$ a \wedge b $}
-	(and.south) node[below]{AND};
-	
-	\draw (4,0) node[european or port] (or) {}
-	(or.in 1) node[anchor=east] {a}
-	(or.in 2) node[anchor=east] {b}
-	(or.out) node[anchor=west]{$ a \vee  b $}
-	(or.south) node[below]{OR};
-	
-	\draw (0,-2) node[and port] (aand) {}
-	(aand.in 1) node[anchor=east] {a}
-	(aand.in 2) node[anchor=east] {b}
-	(aand.out) node[anchor=west]{$ a \wedge b $}
-	(aand.south) node[below]{Amerikanisches AND};
-	
-	\draw (4,-2) node[or port] (aor) {}
-	(aor.in 1) node[anchor=east] {a}
-	(aor.in 2) node[anchor=east] {b}
-	(aor.out) node[anchor=west]{$ a \vee b $}
-	(aor.south) node[below]{Amerikanisches OR};
-	
-	\draw (0,-4) node[european buffer port] (ident) {}
-	(ident.in 1) node[anchor=east] {a}
-	(ident.out) node[anchor=west]{a}
-	(ident.south) node[below]{Identer/Identität};
-	
-	\draw (4,-4) node[european buffer port] (invert) {}
-	(invert.in 1) node[anchor=east] {a}
-	(invert.out) node[anchor=west]{$ \overline{a} $}
-	(invert.bout) node[ocirc, right]{}
-	(invert.south) node[below]{Inverter/NICHT};
-\end{circuitikz}
-\caption{Symbole für die Operatoren (\glqq Gatter\grqq) nach DIN/IEC}
-\end{figure}
-
-\textbf{Konvetionen:}
-\begin{itemize}
-	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
-	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
-	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich (Abb. \ref{abb:und_verschaltung})
-	\item \glqq Verzweigen\grqq von Leistungen auf mehrere nachfolgende Gattereingänge ist möglich, in dem an der Verzweigungsstelle ein ausgefüllter Kreis gezeichnet wird
-	\item Kreuzungen von Leitungen, die nicht miteinander verbunden sind, sind möglich. An der Kreuzungsstelle darf auch kein ausgefüllter Kreis notiert werden
-\end{itemize}
-
-\begin{figure}[h]
-	\centering
-	\begin{circuitikz}
-		\draw 
-		(0,0) node[european and port] (A){}
-		(A.bin 1) node[ocirc, left]{}
-		(A.bin 2) node[ocirc, left]{}
-		(A.in 1) node[anchor=east]{c}
-		(A.in 2) node[anchor=east]{b}
-		(2, -2)node[european and port] (B){}
-		(B.bin 2) node[ocirc, left]{}
-		(B.in 2) node[anchor=east]{a}
-		(A.out) -| (B.in 1)
-		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
-	\end{circuitikz}
-	\begin{circuitikz}
-		\draw 
-		(0,-2) node[european and port] (A){}
-		(A.bin 1) node[ocirc, left]{}
-		(A.bin 2) node[ocirc, left]{}
-		(A.in 1) node[anchor=east]{b}
-		(A.in 2) node[anchor=east]{a}
-		(2, 0)node[european and port] (B){}
-		(B.bin 1) node[ocirc, left]{}
-		(B.in 1) node[anchor=east]{c}
-		(A.out) -| (B.in 2)
-		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
-	\end{circuitikz}
-	\begin{circuitikz}
-			\draw node[european and port, number inputs=3] (A){}
-			(A.in 1) node[anchor=east]{c}
-			(A.in 2) node[anchor=east]{b}
-			(A.in 3) node[anchor=east]{a}
-			(A.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
-	\end{circuitikz}
-	\caption{Unterschiedliche Darstellungen einer UND-Verschaltung}
-	\label{abb:und_verschaltung}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	$$
-	f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a \vee \overline{c}ba \vee cba
-	$$
-	\begin{circuitikz}
-		\draw
-		(-2,1) node[anchor=east](inA){a}
-		(-1,1) node[anchor=east](inB){b}
-		(0,1) node[anchor=east](inC){c}
-		(2,0) node [european and port, number inputs=3] (A){}
-		(A.bin 1) node[ocirc, left]{}
-		(A.bin 2) node[ocirc, left]{}
-		(A.bin 3) node[ocirc, left]{}
-		(2, -2) node [european and port, number inputs=3] (B){}
-		(B.bin 1) node[ocirc, left]{}
-		(B.bin 2) node[ocirc, left]{}
-		(2, -4) node [european and port, number inputs=3] (C){}
-		(C.bin 1) node[ocirc, left]{}
-		(2, -6) node [european and port, number inputs=3] (D){}
-		(6, -2) node [european or port, number inputs=4] (E){}
-		(E.out) node[anchor=west] {$f(a,b,c)$}
-		(A.out) -| (E.in 1)
-		(B.out) |- (E.in 2)
-		(C.out) |- (E.in 3)
-		(D.out) -| (E.in 4)
-		(inA) |- (A.in 1)
-		(inA) |- (B.in 1)
-		(inA) |- (C.in 1)
-		(inA) |- (D.in 1)
-		(inB) |- (A.in 2)
-		(inB) |- (B.in 2)
-		(inB) |- (C.in 2)
-		(inB) |- (D.in 2)
-		(inC) |- (A.in 3)
-		(inC) |- (B.in 3)
-		(inC) |- (C.in 3)
-		(inC) |- (D.in 3);
-	\end{circuitikz}
-\caption{Realisierung der \ac{DNF} als Schaltnetz}
-\label{dnf:schaltnetz}
-\end{figure}
-
-Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
-\newpage
+\subsection{Schaltnetze}
+Siehe Abschnitt \ref{subsec:schaltnetze}.
 \subsection{Aufwand}
 \begin{itemize}
 	\item Hardware-Aufwand
@@ -1808,6 +1725,150 @@ $ f(a,b,c) $
 \end{tabular}
 $\Rightarrow$ KV-Diagramm im 2-dimensionalen: bis 4 E-Variablen, im 3-dimensionalen bis 6 E-Variablen,  ...
 %Todo: 30.06. ergänzen
+
+
+\subsubsection{Schaltnetze}
+\label{subsec:schaltnetze}
+Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstellung von Funktionen als Graph, genauer als gerichteter Graph (\glqq Reihenfolge\grqq!)\\
+\begin{tabular}{ll}
+	Gatter: Knoten & $ \hat{=} $ Operatoren\\
+	Leitungsverbindungen: Kanten & $ \hat{=} $ Reihenfolge
+\end{tabular}
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz} 
+		\draw (0,0) node[european and port] (and) {}
+		(and.in 1) node[anchor=east] {a}
+		(and.in 2) node[anchor=east] {b}
+		(and.out) node[anchor=west]{$ a \wedge b $}
+		(and.south) node[below]{AND};
+		
+		\draw (4,0) node[european or port] (or) {}
+		(or.in 1) node[anchor=east] {a}
+		(or.in 2) node[anchor=east] {b}
+		(or.out) node[anchor=west]{$ a \vee  b $}
+		(or.south) node[below]{OR};
+		
+		\draw (0,-2) node[and port] (aand) {}
+		(aand.in 1) node[anchor=east] {a}
+		(aand.in 2) node[anchor=east] {b}
+		(aand.out) node[anchor=west]{$ a \wedge b $}
+		(aand.south) node[below]{Amerikanisches AND};
+		
+		\draw (4,-2) node[or port] (aor) {}
+		(aor.in 1) node[anchor=east] {a}
+		(aor.in 2) node[anchor=east] {b}
+		(aor.out) node[anchor=west]{$ a \vee b $}
+		(aor.south) node[below]{Amerikanisches OR};
+		
+		\draw (0,-4) node[european buffer port] (ident) {}
+		(ident.in 1) node[anchor=east] {a}
+		(ident.out) node[anchor=west]{a}
+		(ident.south) node[below]{Identer/Identität};
+		
+		\draw (4,-4) node[european buffer port] (invert) {}
+		(invert.in 1) node[anchor=east] {a}
+		(invert.out) node[anchor=west]{$ \overline{a} $}
+		(invert.bout) node[ocirc, right]{}
+		(invert.south) node[below]{Inverter/NICHT};
+	\end{circuitikz}
+	\caption{Symbole für die Operatoren (\glqq Gatter\grqq) nach DIN/IEC}
+\end{figure}
+
+\textbf{Konvetionen:}
+\begin{itemize}
+	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
+	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
+	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich (Abb. \ref{abb:und_verschaltung})
+	\item \glqq Verzweigen\grqq von Leistungen auf mehrere nachfolgende Gattereingänge ist möglich, in dem an der Verzweigungsstelle ein ausgefüllter Kreis gezeichnet wird
+	\item Kreuzungen von Leitungen, die nicht miteinander verbunden sind, sind möglich. An der Kreuzungsstelle darf auch kein ausgefüllter Kreis notiert werden
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\begin{circuitikz}
+		\draw 
+		(0,0) node[european and port] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.in 1) node[anchor=east]{c}
+		(A.in 2) node[anchor=east]{b}
+		(2, -2)node[european and port] (B){}
+		(B.bin 2) node[ocirc, left]{}
+		(B.in 2) node[anchor=east]{a}
+		(A.out) -| (B.in 1)
+		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\begin{circuitikz}
+		\draw 
+		(0,-2) node[european and port] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.in 1) node[anchor=east]{b}
+		(A.in 2) node[anchor=east]{a}
+		(2, 0)node[european and port] (B){}
+		(B.bin 1) node[ocirc, left]{}
+		(B.in 1) node[anchor=east]{c}
+		(A.out) -| (B.in 2)
+		(B.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\begin{circuitikz}
+		\draw node[european and port, number inputs=3] (A){}
+		(A.in 1) node[anchor=east]{c}
+		(A.in 2) node[anchor=east]{b}
+		(A.in 3) node[anchor=east]{a}
+		(A.out) node[anchor=west]{$ \overline{c}\overline{b}\overline{a} $};
+	\end{circuitikz}
+	\caption{Unterschiedliche Darstellungen einer UND-Verschaltung}
+	\label{abb:und_verschaltung}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	$$
+	f(a,b,c) = \overline{c}\overline{b}\overline{a} \vee \overline{c}\overline{b}a \vee \overline{c}ba \vee cba
+	$$
+	\begin{circuitikz}
+		\draw
+		(-2,1) node[anchor=east](inA){a}
+		(-1,1) node[anchor=east](inB){b}
+		(0,1) node[anchor=east](inC){c}
+		(2,0) node [european and port, number inputs=3] (A){}
+		(A.bin 1) node[ocirc, left]{}
+		(A.bin 2) node[ocirc, left]{}
+		(A.bin 3) node[ocirc, left]{}
+		(2, -2) node [european and port, number inputs=3] (B){}
+		(B.bin 1) node[ocirc, left]{}
+		(B.bin 2) node[ocirc, left]{}
+		(2, -4) node [european and port, number inputs=3] (C){}
+		(C.bin 1) node[ocirc, left]{}
+		(2, -6) node [european and port, number inputs=3] (D){}
+		(6, -2) node [european or port, number inputs=4] (E){}
+		(E.out) node[anchor=west] {$f(a,b,c)$}
+		(A.out) -| (E.in 1)
+		(B.out) |- (E.in 2)
+		(C.out) |- (E.in 3)
+		(D.out) -| (E.in 4)
+		(inA) |- (A.in 1)
+		(inA) |- (B.in 1)
+		(inA) |- (C.in 1)
+		(inA) |- (D.in 1)
+		(inB) |- (A.in 2)
+		(inB) |- (B.in 2)
+		(inB) |- (C.in 2)
+		(inB) |- (D.in 2)
+		(inC) |- (A.in 3)
+		(inC) |- (B.in 3)
+		(inC) |- (C.in 3)
+		(inC) |- (D.in 3);
+	\end{circuitikz}
+	\caption{Realisierung der \ac{DNF} als Schaltnetz}
+	\label{dnf:schaltnetz}
+\end{figure}
+
+Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
+\newpage
+
 
 \newpage
 \section*{Abkürzungsverzeichnis}
