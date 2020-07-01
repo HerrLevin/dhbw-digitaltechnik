@@ -2,24 +2,23 @@
 \contentsline {section}{\numberline {1}Begriffe}{3}{section.1}%
 \contentsline {section}{\numberline {2}Codierung}{3}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Arten von Codierungen}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Codierungen}{3}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Zeichencodierung}{3}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Zahlencodierung}{3}{subsubsection.2.2.2}%
-\contentsline {paragraph}{\nonumberline I. Abzählsysteme}{3}{section*.4}%
-\contentsline {subparagraph}{\nonumberline Fingerabzählsysteme}{4}{section*.5}%
-\contentsline {subparagraph}{\nonumberline Strichliste (einfache)}{4}{section*.6}%
-\contentsline {subparagraph}{\nonumberline erweiterte Strichliste (\glqq Lattenzaunsystem \grqq )}{4}{section*.7}%
-\contentsline {subparagraph}{\nonumberline römisches Zahlensystem}{4}{section*.8}%
-\contentsline {paragraph}{\nonumberline II. \acp {SWS}}{4}{section*.9}%
-\contentsline {subparagraph}{\nonumberline Dezimalsystem}{5}{section*.11}%
-\contentsline {subparagraph}{\nonumberline \ac {SWS} zur Basis b}{5}{section*.12}%
-\contentsline {subsection}{\numberline {2.3}Darstellung negativer Zahlen}{6}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}1er-Komplement}{6}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}2er Komplement}{7}{subsubsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.4}Darstellung nicht-ganzer (aber vorläufig nicht-negativer) Zahlen}{7}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Bruch: Darstellung mit Zähler \& Nenner}{7}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}\acp {FKZ}}{7}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}\acp {GKZ}(auch Fließkommazahlen)}{8}{subsubsection.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.1.1}Zeichencodierung}{3}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Zahlencodierung}{3}{subsubsection.2.1.2}%
+\contentsline {paragraph}{\nonumberline I. Abzählsysteme}{3}{section*.3}%
+\contentsline {subparagraph}{\nonumberline Fingerabzählsysteme}{4}{section*.4}%
+\contentsline {subparagraph}{\nonumberline Strichliste (einfache)}{4}{section*.5}%
+\contentsline {subparagraph}{\nonumberline erweiterte Strichliste (\glqq Lattenzaunsystem\grqq )}{4}{section*.6}%
+\contentsline {subparagraph}{\nonumberline römisches Zahlensystem}{4}{section*.7}%
+\contentsline {paragraph}{\nonumberline II. \acp {SWS}}{4}{section*.8}%
+\contentsline {subparagraph}{\nonumberline Dezimalsystem}{5}{section*.10}%
+\contentsline {subparagraph}{\nonumberline \acl {SWS} zur Basis b}{5}{section*.11}%
+\contentsline {subsection}{\numberline {2.2}Darstellung negativer Zahlen}{6}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}1er-Komplement}{6}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}2er Komplement}{7}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Darstellung nicht-ganzer (aber vorläufig nicht-negativer) Zahlen}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Bruch: Darstellung mit Zähler \& Nenner}{7}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}\aclp {FKZ}}{7}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}\acp {GKZ}(auch Fließkommazahlen)}{8}{subsubsection.2.3.3}%
 \contentsline {section}{\numberline {3}Signalkodierung}{11}{section.3}%
 \contentsline {subsection}{\numberline {3.1}mögliche Signalformen}{11}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Umsetzung von Bitfolgen in Spannungspegelfolgen}{12}{subsection.3.2}%
