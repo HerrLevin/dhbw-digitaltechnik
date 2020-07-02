@@ -676,7 +676,7 @@ node[anchor=north]{Hidden Bit};
 \\
 \textbf{Zifferncodierung:} Umrechnung der Darstellung einer Zahl in einem \ac{SWS} Ziffer für Ziffer in eine andere Darstellung\\
 \\
-\textbf{Beispiel für Zifferncodierung:}\\
+\subsection{Beispiel für Zifferncodierung:}
 \begin{itemize}
 	\item \tikzmark{ziffernc1} Darstellung für Zahlen in Fließtext
 	\item Umrechnung von z.B. $ b=16 $ zu $ b=2 $ über Umrechnungstabelle
@@ -684,18 +684,104 @@ node[anchor=north]{Hidden Bit};
 \tikzmark{ziffernc2} Nachteil: deutlich erhöhter Speicherplatzbedarf.
 \begin{tikzpicture}[remember picture, overlay]
 \draw[->,bend right=90]([shift={(-2em, 0.2em)}]pic cs:ziffernc1) to (pic cs:ziffernc2);
-
 \end{tikzpicture}
-%ToDo Rest aus Tablet übernehmen
 
-\section{Signalkodierung}
+\subsubsection{\acf{BCD}}
+\hspace*{2em} $\Rightarrow$ Jede Dezimalziffer wird als 4bit-Wert dargestellt\\
+
+\begin{minipage}{0.45\textwidth}
+	\begin{tabular}{c|c|cl}
+	\# & Bitfolge & Dezimalziffer\\
+	0 & 0000 & 0& \\
+	1 & 0001 & 1& \\
+	2 & 0010 & 2& \\
+	3 & 0011 & 3& \\
+	4 & 0100 & 4& \\
+	5 & 0101 & 5& \\
+	6 & 0110 & 6& \\
+	7 & 0111 & 7& \\
+	8 & 1000 & 8& \\
+	9 & 1001 & 9& \\
+	10 & 1010 & &  \multirow{5}{*}{\hspace*{-2em}$\begin{rcases*} \\ \\ \\ \\ \\ \end{rcases*} \text{nicht definiert in } \ac{BCD}$}\\
+	11 & 1011 & & \\
+	12 & 1100 & & \\
+	13 & 1101 & & \\
+	14 & 1110 & & \\
+	15 & 1111 & & \\
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\textbf{	Realisierung math. Operatoren mit \ac{BCD}-Zahlen:\\}
+	\begin{enumerate}
+		\itemsep0em
+		\vspace{-2em}
+		\item per Software: Bibliotheksroutinen (z.B. Programmiersprache ABAP)
+		\item per Hardware: z.B. im MOS6502 (Apple II, C64, VC20, \ldots) oder auch in früheren Intel CPUs (8088, 8086, \ldots 80486)
+	\end{enumerate}
+\end{minipage}
+
+\subsubsection{Einschrittiger Code (Gray Code )}
+
+\begin{Theorem}{}{}
+	Ein einstelliger Zahlencode ist einZahlencode bei dem sich zwei aufeinanderfolgende Zahlen um nur eine Stelle ändert.
+\end{Theorem}
+
+\begin{minipage}{0.45\textwidth}
+	\begin{tabular}{c|c|c}
+		\# & Binär & Graycode\\
+		0 & 0000 & 0000\\
+		1 & 0001 & 0001\\
+		2 & 0010 & 0011\\
+		3 & 0011 & 0010\\
+		4 & 0100 & 0110\\
+		5 & 0101 & 0111\\
+		6 & 0110 & 0101\\
+		7 & 0111 & 0100\\
+		8 & 1000 & 1100\\
+		9 & 1001 & 1101\\
+		10 & 1010 & 1111\\
+		11 & 1011 & 1110\\
+		12 & 1100 & 1010\\
+		13 & 1101 & 1011\\
+		14 & 1110 & 1001\\
+		15 & 1111 & 1000\\
+	\end{tabular}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+	\textbf{Bildungsregel}\\
+	\begin{enumerate}
+		\itemsep0em
+		\vspace*{-2em}
+		\item von rechts nach links wird genau eine Ziffer verändert; \\ falls das neue Bitmuster bereits verwendet wird, probieren wir die nächste Ziffer. \\ Falls ein neues Bitmuster entsteht, ist das der nächste Zahlenwert.
+		\item Erweiterte Schreibweise: Die bisherigen Bitmuster werden in umgekehrter Reihenfolge notiert;\\
+		bei dem alten Bitmuster wird eine \glqq 0\grqq, beim anderen eine \glqq 1\grqq{} vorangestellt.
+	\end{enumerate}
+\end{minipage}
+\\\\
+\textbf{Bewertung}\\
+\begin{itemize}
+	\itemsep0em
+	\vspace*{-2em}
+	\item[$\bigoplus$] einschrittig
+	\item[$\bigoplus$] mit $ n $ Stellen sind $ 2^n $ Zahlenwerte darstellbar
+	\item[$ \bigominus $] schwierige Wertebestimmung
+	\item[$ \bigominus $] quasi unmöglich damit zu rechnen
+\end{itemize}
+
+\noindent
+$\Rightarrow$ Verwendung nicht grundsätzlich zur Zahlendarstellung im Computer, sondern nur zur Zahlenübertragung von fortlaufenden Zahlenwerten über parallele Schnittstellen.\\
+\\
+Graycode ist weder Abzähl- noch Stellenwertsystem. Es ist eine ganz andere Wertecodierung.6
+
+\newpage
+\subsection{Signalcodierung}
 
 \begin{Theorem}{}{}
 	Darstellung von abstrakten Informationen als Signalfolge. \\
 	Signal: physisch messbare Größe.
 \end{Theorem}
 
-\subsection{mögliche Signalformen}
+\subsubsection{mögliche Signalformen}
 \begin{itemize}
 	\renewcommand\labelitemi{--}
 	
@@ -760,7 +846,7 @@ $ TTL-Pegel
 	\item[$\bigoplus$] schnelleres Spannungswechseln bei kleinen Spannungshüben möglich
 \end{itemize}
 
-\subsection{Umsetzung von Bitfolgen in Spannungspegelfolgen}
+\subsubsection{Umsetzung von Bitfolgen in Spannungspegelfolgen}
 \hspace*{2em} meist getaktet, d.h. festes Zeitraster für die Bitfolge, d.h. jedes Bit braucht eine konstante, gleichlange zeitdauer
 
 
@@ -1378,202 +1464,8 @@ Ein \ac{PI} ist ein Implikant, der mit keinem anderen Implikanten zusammengefass
 	Ein \ac{KPI} ist ein \ac{PI}, welcher mindestens eine der Ausgangsbelegung exklusiv abdeckt (bzw. bei dem mindestens ein Minterm beim Zusammenfassen ausschließlich für diesen \ac{PI} verwendet wurde.)
 \end{Theorem}
 
-
-\subsection{Darstellung von Funktionen}
-\subsection{Schaltnetze}
+\subsubsection{Schaltnetze}
 Siehe Abschnitt \ref{subsec:schaltnetze}.
-\subsection{Aufwand}
-\begin{itemize}
-	\item Hardware-Aufwand
-	\item Zeitaufwand (nicht näher behandelt)
-\end{itemize}
-\subsubsection{Hardware-Aufwand}
-\begin{figure}[h!]
-	\centering
-	\begin{circuitikz}
-		\ctikzset{european resistors}
-		\ctikzset{noarrowmos}
-		\draw
-		(0,5) node[anchor=east] (vcc) {+5V}
-		(0,5) -- (1,5)  node[circ] {}
-		(1,5) -- (1,3)
-		(3,3)node[nmos, rotate=-90](mosB){}
-		(3,5)node[nmos, rotate=-90](mosA){}
-		(1,5) |- (mosA.S)
-		(1,3) |- (mosB.S)
-		(mosA.G) node[anchor=south]{a}
-		(mosB.G) node[anchor=south]{b}
-		(mosA.D) -| (5,3) node[circ] {}
-		(mosB.D) -| (5,3)
-		(5,3) -- (6,3) node[anchor=west]{$a\vee b$};
-	\end{circuitikz}
-	\caption{ODER}
-	\label{abb:mos_or}
-\end{figure}
-\begin{figure}[h!]
-\centering
-\begin{circuitikz}
-	\ctikzset{european resistors}
-	\ctikzset{noarrowmos}
-	\draw
-	(0,5) node[anchor=east] (vcc) {+5V}
-	(4,5)node[nmos, rotate=-90](mosB){}
-	(1,5)node[nmos, rotate=-90](mosA){}
-	(0,5) |- (mosA.S)
-	(mosA.D) -- (mosB.S)
-	(mosA.G) node[anchor=south]{a}
-	(mosB.G) node[anchor=south]{b}
-	(mosB.D) -- (5,5) node[anchor=west]{$a\vee b$};
-\end{circuitikz}
-\caption{UND}
-\label{abb:mos_and}
-\end{figure}
-
-$\Rightarrow$ wir \glqq messen\grqq den Hardware-Aufwand in Anzahl Transistoren.\\ 
-Bei UND (Abb. \ref{abb:mos_and}) und ODER (Abb. \ref{abb:mos_or}) brauchen wir so viele Transistoren, wie das Gatter Eingänge hat (bei nicht negierten Ein- und Ausgängen).
-
-\begin{figure}[h!]
-	\centering
-\begin{minipage}{0.6\textwidth}
-		\begin{circuitikz}
-		\ctikzset{european resistors}
-		\ctikzset{noarrowmos}
-		\draw
-		(0,0) node[anchor=south] (vcc){+5V}
-		(0,0) -- (0,-1)
-		(0,-1) to[R, l_=$R_{\text{Pull-Up}}$] (0,-2)
-		(0,-2) -- (0,-3)
-		(1,-3)node[nmos, rotate=-90](mosA){}
-		(3,-3)node[nmos, rotate=-90](mosB){}
-		(0,-2) |- (mosA.S)
-		(mosA.D) -- (mosB.S)
-		(mosA.G) node[anchor=south]{a}
-		(mosB.G) node[anchor=south]{b}
-		(mosB.D) |- (4,-3)
-		(4,-3) -- (4,-4)
-		(4,-4) to[R, l^=$R_{\text{Pull-Down}}$] (4,-5)
-		(4,-5) -- (4,-6)
-		(4,-6) node[ground]{};
-		\draw[red]
-		(-0.5,0.5) -- (0.5,-2.5)
-		(3.5, -3.5) -- (4.5,-6.5)
-		(0,-3) -- (0,-4)
-		(0,-4) to[R, color=red, l_=$R_{\text{Pull-Down}}$] (0,-5)
-		(0,-5) -- (0,-6)
-		(0,-6) node[ground]{}
-		(4,0) node[anchor=south] (vcc){+5V}
-		(4,0) -- (4,-1)
-		(4,-1) to[R, color=red, l^=$R_{\text{Pull-Up}}$] (4,-2)
-		(4,-2) -- (4,-3)
-		; 
-	\end{circuitikz}
-\end{minipage}
-\begin{minipage}{0.3\textwidth}
-	mit $R_{\text{Pull-Down}} >> R_{\text{Pull-Up}}$\\
-\textcolor{red}{mit $R_{\text{Pull-Up}} >> R_{\text{Pull-Down}}$}
-\end{minipage}
-\caption{UND \textcolor{red}{negierter Ausgang}}
-\end{figure}
-
-\begin{figure}[h!]
-	\begin{minipage}{0.4\textwidth}
-	\centering
-	\begin{circuitikz}
-		\draw
-		(0,0) node[npn] (Q){}
-		(Q.B) node[anchor=east]{Basis}
-		(Q.C) node[anchor=west]{Kollektor}
-		(Q.E) node[anchor=west]{Emitter}
-		;
-	\end{circuitikz}\\
-npn-Transistor\\
-schaltet bei positiver Basisspannung durch
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
-	\centering
-	\begin{circuitikz}
-		\draw
-		(0,0) node[pnp] (Q){}
-		(Q.B) node[anchor=east]{Basis}
-		(Q.C) node[anchor=west]{Kollektor}
-		(Q.E) node[anchor=west]{Emitter}
-		;
-	\end{circuitikz}\\
-pnp-Transistor\\
-schaltet bei negativer Basisspannung durch
-\end{minipage}
-\caption{NPN und PNP-Transistor}
-\end{figure}
-\clearpage
-\noindent
- $\Rightarrow$ negierte Eingänge durch Ersetzen der üblichen npn-Transistoen durch pnp-Transistoren\\
- $\Rightarrow$ auch bei negierten Eingängen reicht ein Transistor je Eingang\\
-\\
- nMOS: Realisierung nur mit npn-Transistoren\\
- pMOS: Realisierung nur mit pnp-Transistoren\\
- $\Rightarrow$ früher gängige Realisierungstechnologien\\
- heute: CMOS: (\textbf{C}omplimentary \textbf{M}etal \textbf{O}xide \textbf{S}miconductor)\\
- \hspace*{2em} Realisierung jedes Eingang durch 2 Transistoren (ein npn- und ein pnp-Transistor)\\
-\hspace*{2em} jeweils ein Transistor zeiht wechselweise nach oben oder nach unten\\
-\\
-$\Rightarrow$ der Einfachheit halber trotzdem:\\
-\hspace*{2em} bei UND und ODER (\glqq Elementargatter\grqq) entspricht die Anzahl der Eingänge der Anzahl dafür notwendiger Transistoren (nur zu Vergleichszwecken eingesetzt)
-
-\subsubsection{Schaltnetzanalyse}
-\begin{figure}[h!]
-	\centering
-	$$
-	g(a,b,c) = (a\wedge b) \vee(\overline{b} \vee \overline{c})
-	$$
-\begin{minipage}{0.4\textwidth}
-		\begin{circuitikz}
-		\draw
-		(0,2) node[anchor=east](inA){a}
-		(0,1) node[anchor=east](inB){b}
-		(0,0) node[anchor=east](inC){c}
-		(3,0) node[european and port](a1){}
-		(3,2) node[european and port](a2){}
-		(a1.bin 1) node[anchor=east,ocirc]{}
-		(a1.bin 2) node[anchor=east,ocirc]{}
-		(inA) |- (a2.in 1)
-		(inB) |- (1,1) node[circ]{}
-		(1,1) |- (a2.in 2)
-		(1,1) |- (a1.in 1)
-		(inC) |- (a1.in 2)
-		(5,1) node[european or port](o){}
-		(a2.out) |- (o.in 1)
-		(a1.out) |- (o.in 2)
-		(a2.out) node[anchor=west]{x}
-		(a1.out) node[anchor=west]{y}
-		(o.out) node[anchor=west]{$ g(a,b,c) $}
-		;
-	\end{circuitikz}
-\end{minipage}
-\begin{minipage}{0.3\textwidth}
-	\begin{tabular}{c|ccc|cc|c}
-		\# & c & b & a & x & y & $ x \vee y = g(a, b, c) $\\ \hline
-		0 & 0 & 0 & 0 & 0 & 1 & 1\\
-		1 & 0 & 0 & 1 & 0 & 1 & 1\\
-		2 & 0 & 1 & 0 & 0 & 0 & 0\\
-		3 & 0 & 1 & 1 & 1 & 0 & 1\\
-		4 & 1 & 0 & 0 & 0 & 0 & 0\\
-		5 & 1 & 0 & 1 & 0 & 0 & 0\\
-		6 & 1 & 1 & 0 & 0 & 0 & 0\\
-		7 & 1 & 1 & 1 & 1 & 0 & 1\\
-	
-	\end{tabular}
-\end{minipage}
-\label{abb:schaltnetzG}
-\caption{}
-\end{figure}
-
-Im Schaltnetz (Abb. \ref{abb:schaltnetzG}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
-\\
-Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
-\begin{Theorem}{}{}
-	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
-	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
-\end{Theorem}
 
 \subsubsection{KV-Diagramm}
 Graphische Darstellung der Ausgangsbelegung
@@ -1727,7 +1619,7 @@ $\Rightarrow$ KV-Diagramm im 2-dimensionalen: bis 4 E-Variablen, im 3-dimensiona
 %Todo: 30.06. ergänzen
 
 
-\subsubsection{Schaltnetze}
+\section{Schaltnetze}
 \label{subsec:schaltnetze}
 Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstellung von Funktionen als Graph, genauer als gerichteter Graph (\glqq Reihenfolge\grqq!)\\
 \begin{tabular}{ll}
@@ -1869,6 +1761,198 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
 \newpage
 
+\subsection{Aufwand}
+\begin{itemize}
+	\item Hardware-Aufwand
+	\item Zeitaufwand (nicht näher behandelt)
+\end{itemize}
+\subsubsection{Hardware-Aufwand}
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\ctikzset{european resistors}
+		\ctikzset{noarrowmos}
+		\draw
+		(0,5) node[anchor=east] (vcc) {+5V}
+		(0,5) -- (1,5)  node[circ] {}
+		(1,5) -- (1,3)
+		(3,3)node[nmos, rotate=-90](mosB){}
+		(3,5)node[nmos, rotate=-90](mosA){}
+		(1,5) |- (mosA.S)
+		(1,3) |- (mosB.S)
+		(mosA.G) node[anchor=south]{a}
+		(mosB.G) node[anchor=south]{b}
+		(mosA.D) -| (5,3) node[circ] {}
+		(mosB.D) -| (5,3)
+		(5,3) -- (6,3) node[anchor=west]{$a\vee b$};
+	\end{circuitikz}
+	\caption{ODER}
+	\label{abb:mos_or}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\ctikzset{european resistors}
+		\ctikzset{noarrowmos}
+		\draw
+		(0,5) node[anchor=east] (vcc) {+5V}
+		(4,5)node[nmos, rotate=-90](mosB){}
+		(1,5)node[nmos, rotate=-90](mosA){}
+		(0,5) |- (mosA.S)
+		(mosA.D) -- (mosB.S)
+		(mosA.G) node[anchor=south]{a}
+		(mosB.G) node[anchor=south]{b}
+		(mosB.D) -- (5,5) node[anchor=west]{$a\vee b$};
+	\end{circuitikz}
+	\caption{UND}
+	\label{abb:mos_and}
+\end{figure}
+
+$\Rightarrow$ wir \glqq messen\grqq den Hardware-Aufwand in Anzahl Transistoren.\\ 
+Bei UND (Abb. \ref{abb:mos_and}) und ODER (Abb. \ref{abb:mos_or}) brauchen wir so viele Transistoren, wie das Gatter Eingänge hat (bei nicht negierten Ein- und Ausgängen).
+
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.6\textwidth}
+		\begin{circuitikz}
+			\ctikzset{european resistors}
+			\ctikzset{noarrowmos}
+			\draw
+			(0,0) node[anchor=south] (vcc){+5V}
+			(0,0) -- (0,-1)
+			(0,-1) to[R, l_=$R_{\text{Pull-Up}}$] (0,-2)
+			(0,-2) -- (0,-3)
+			(1,-3)node[nmos, rotate=-90](mosA){}
+			(3,-3)node[nmos, rotate=-90](mosB){}
+			(0,-2) |- (mosA.S)
+			(mosA.D) -- (mosB.S)
+			(mosA.G) node[anchor=south]{a}
+			(mosB.G) node[anchor=south]{b}
+			(mosB.D) |- (4,-3)
+			(4,-3) -- (4,-4)
+			(4,-4) to[R, l^=$R_{\text{Pull-Down}}$] (4,-5)
+			(4,-5) -- (4,-6)
+			(4,-6) node[ground]{};
+			\draw[red]
+			(-0.5,0.5) -- (0.5,-2.5)
+			(3.5, -3.5) -- (4.5,-6.5)
+			(0,-3) -- (0,-4)
+			(0,-4) to[R, color=red, l_=$R_{\text{Pull-Down}}$] (0,-5)
+			(0,-5) -- (0,-6)
+			(0,-6) node[ground]{}
+			(4,0) node[anchor=south] (vcc){+5V}
+			(4,0) -- (4,-1)
+			(4,-1) to[R, color=red, l^=$R_{\text{Pull-Up}}$] (4,-2)
+			(4,-2) -- (4,-3)
+			; 
+		\end{circuitikz}
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+		mit $R_{\text{Pull-Down}} >> R_{\text{Pull-Up}}$\\
+		\textcolor{red}{mit $R_{\text{Pull-Up}} >> R_{\text{Pull-Down}}$}
+	\end{minipage}
+	\caption{UND \textcolor{red}{negierter Ausgang}}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{minipage}{0.4\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw
+			(0,0) node[npn] (Q){}
+			(Q.B) node[anchor=east]{Basis}
+			(Q.C) node[anchor=west]{Kollektor}
+			(Q.E) node[anchor=west]{Emitter}
+			;
+		\end{circuitikz}\\
+		npn-Transistor\\
+		schaltet bei positiver Basisspannung durch
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw
+			(0,0) node[pnp] (Q){}
+			(Q.B) node[anchor=east]{Basis}
+			(Q.C) node[anchor=west]{Kollektor}
+			(Q.E) node[anchor=west]{Emitter}
+			;
+		\end{circuitikz}\\
+		pnp-Transistor\\
+		schaltet bei negativer Basisspannung durch
+	\end{minipage}
+	\caption{NPN und PNP-Transistor}
+\end{figure}
+\clearpage
+\noindent
+$\Rightarrow$ negierte Eingänge durch Ersetzen der üblichen npn-Transistoen durch pnp-Transistoren\\
+$\Rightarrow$ auch bei negierten Eingängen reicht ein Transistor je Eingang\\
+\\
+nMOS: Realisierung nur mit npn-Transistoren\\
+pMOS: Realisierung nur mit pnp-Transistoren\\
+$\Rightarrow$ früher gängige Realisierungstechnologien\\
+heute: CMOS: (\textbf{C}omplimentary \textbf{M}etal \textbf{O}xide \textbf{S}miconductor)\\
+\hspace*{2em} Realisierung jedes Eingang durch 2 Transistoren (ein npn- und ein pnp-Transistor)\\
+\hspace*{2em} jeweils ein Transistor zeiht wechselweise nach oben oder nach unten\\
+\\
+$\Rightarrow$ der Einfachheit halber trotzdem:\\
+\hspace*{2em} bei UND und ODER (\glqq Elementargatter\grqq) entspricht die Anzahl der Eingänge der Anzahl dafür notwendiger Transistoren (nur zu Vergleichszwecken eingesetzt)
+
+\subsubsection{Schaltnetzanalyse}
+\begin{figure}[h!]
+	\centering
+	$$
+	g(a,b,c) = (a\wedge b) \vee(\overline{b} \vee \overline{c})
+	$$
+	\begin{minipage}{0.4\textwidth}
+		\begin{circuitikz}
+			\draw
+			(0,2) node[anchor=east](inA){a}
+			(0,1) node[anchor=east](inB){b}
+			(0,0) node[anchor=east](inC){c}
+			(3,0) node[european and port](a1){}
+			(3,2) node[european and port](a2){}
+			(a1.bin 1) node[anchor=east,ocirc]{}
+			(a1.bin 2) node[anchor=east,ocirc]{}
+			(inA) |- (a2.in 1)
+			(inB) |- (1,1) node[circ]{}
+			(1,1) |- (a2.in 2)
+			(1,1) |- (a1.in 1)
+			(inC) |- (a1.in 2)
+			(5,1) node[european or port](o){}
+			(a2.out) |- (o.in 1)
+			(a1.out) |- (o.in 2)
+			(a2.out) node[anchor=west]{x}
+			(a1.out) node[anchor=west]{y}
+			(o.out) node[anchor=west]{$ g(a,b,c) $}
+			;
+		\end{circuitikz}
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+		\begin{tabular}{c|ccc|cc|c}
+			\# & c & b & a & x & y & $ x \vee y = g(a, b, c) $\\ \hline
+			0 & 0 & 0 & 0 & 0 & 1 & 1\\
+			1 & 0 & 0 & 1 & 0 & 1 & 1\\
+			2 & 0 & 1 & 0 & 0 & 0 & 0\\
+			3 & 0 & 1 & 1 & 1 & 0 & 1\\
+			4 & 1 & 0 & 0 & 0 & 0 & 0\\
+			5 & 1 & 0 & 1 & 0 & 0 & 0\\
+			6 & 1 & 1 & 0 & 0 & 0 & 0\\
+			7 & 1 & 1 & 1 & 1 & 0 & 1\\
+			
+		\end{tabular}
+	\end{minipage}
+	\label{abb:schaltnetzG}
+	\caption{}
+\end{figure}
+
+Im Schaltnetz (Abb. \ref{abb:schaltnetzG}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
+\\
+Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
+\begin{Theorem}{}{}
+	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
+	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
+\end{Theorem}
 
 \newpage
 \section*{Abkürzungsverzeichnis}
@@ -1879,6 +1963,7 @@ Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist mei
 	\acroplural{FKZ}[FKZ]{Festkommazahlen}
 	\acro{GKZ}{Gleitkommazahl}
 	\acroplural{GKZ}[GKZ]{Gleitkommazahlen}
+	\acro{BCD}{Binary Coded Decimal}
 	\acro{BBB}{Bandbreitenbedarf}
 	\acro{NRZ}{Non-Return-to-zero}
 	\acro{RZ}{Return-to-Zero}

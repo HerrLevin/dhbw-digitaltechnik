@@ -5,13 +5,13 @@
 \contentsline {subsection}{\numberline {1.2}Zeichencodierung}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Zahlencodierung}{3}{subsection.1.3}%
 \contentsline {subsubsection}{\numberline {1.3.1}Abzählsysteme}{3}{subsubsection.1.3.1}%
-\contentsline {subparagraph}{\nonumberline Fingerabzählsysteme}{3}{section*.4}%
-\contentsline {subparagraph}{\nonumberline Strichliste (einfache)}{4}{section*.5}%
-\contentsline {subparagraph}{\nonumberline Erweiterte Strichliste (\glqq Lattenzaunsystem\grqq )}{4}{section*.6}%
-\contentsline {subparagraph}{\nonumberline Römisches Zahlensystem}{4}{section*.7}%
+\contentsline {subparagraph}{\nonumberline Fingerabzählsysteme}{3}{section*.5}%
+\contentsline {subparagraph}{\nonumberline Strichliste (einfache)}{4}{section*.6}%
+\contentsline {subparagraph}{\nonumberline Erweiterte Strichliste (\glqq Lattenzaunsystem\grqq )}{4}{section*.7}%
+\contentsline {subparagraph}{\nonumberline Römisches Zahlensystem}{4}{section*.8}%
 \contentsline {subsubsection}{\numberline {1.3.2}\acfp {SWS}}{4}{subsubsection.1.3.2}%
-\contentsline {subparagraph}{\nonumberline Dezimalsystem}{4}{section*.8}%
-\contentsline {subparagraph}{\nonumberline \acl {SWS} zur Basis b}{5}{section*.9}%
+\contentsline {subparagraph}{\nonumberline Dezimalsystem}{4}{section*.9}%
+\contentsline {subparagraph}{\nonumberline \acl {SWS} zur Basis b}{5}{section*.10}%
 \contentsline {subsection}{\numberline {1.4}Darstellung negativer Zahlen}{6}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}Vorzeichen und Betrag}{6}{subsubsection.1.4.1}%
 \contentsline {subsubsection}{\numberline {1.4.2}1er-Komplement}{6}{subsubsection.1.4.2}%
@@ -20,23 +20,25 @@
 \contentsline {subsubsection}{\numberline {1.5.1}Bruch: Darstellung mit Zähler \& Nenner}{7}{subsubsection.1.5.1}%
 \contentsline {subsubsection}{\numberline {1.5.2}\aclp {FKZ}}{7}{subsubsection.1.5.2}%
 \contentsline {subsubsection}{\numberline {1.5.3}\acfp {GKZ}[auch Fließkommazahlen]}{8}{subsubsection.1.5.3}%
-\contentsline {section}{\numberline {2}Signalkodierung}{11}{section.2}%
-\contentsline {subsection}{\numberline {2.1}mögliche Signalformen}{11}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Umsetzung von Bitfolgen in Spannungspegelfolgen}{12}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}{13}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}3 Verfahren zur sicheren Taktrückgewinnung:}{14}{subsubsection.2.2.2}%
-\contentsline {section}{\numberline {3}Boolsche Algebra}{15}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Schaltalgebra}{15}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Huntingtonsche Axiome in der Schaltalgebra}{15}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Darstellung mit Wertetabellen}{16}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Aus den Huntingtonschen axiomen abgeleitete (beweisbare Gesetze)}{17}{subsubsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.4}Beweismethoden}{17}{subsubsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.2}Darstellung von Funktionen:}{18}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Funktionen abhängig von Ausgangsvariablen}{18}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Darstellung von Funktionen}{21}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Schaltnetze}{21}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Aufwand}{21}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Hardware-Aufwand}{21}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Schaltnetzanalyse}{23}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}KV-Diagramm}{23}{subsubsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.4}Schaltnetze}{25}{subsubsection.3.5.4}%
+\contentsline {subsection}{\numberline {1.6}Beispiel für Zifferncodierung:}{10}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}\acf {BCD}}{11}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Einschrittiger Code (Gray Code )}{11}{subsubsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.7}Signalcodierung}{12}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}mögliche Signalformen}{12}{subsubsection.1.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.2}Umsetzung von Bitfolgen in Spannungspegelfolgen}{13}{subsubsection.1.7.2}%
+\contentsline {subsubsection}{\numberline {1.7.3}Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}{14}{subsubsection.1.7.3}%
+\contentsline {subsubsection}{\numberline {1.7.4}3 Verfahren zur sicheren Taktrückgewinnung:}{15}{subsubsection.1.7.4}%
+\contentsline {section}{\numberline {2}Boolsche Algebra}{16}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Schaltalgebra}{16}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Huntingtonsche Axiome in der Schaltalgebra}{16}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Darstellung mit Wertetabellen}{17}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Aus den Huntingtonschen axiomen abgeleitete (beweisbare Gesetze)}{18}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Beweismethoden}{18}{subsubsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.2}Darstellung von Funktionen:}{19}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Funktionen abhängig von Ausgangsvariablen}{19}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Schaltnetze}{22}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}KV-Diagramm}{22}{subsubsection.2.2.3}%
+\contentsline {section}{\numberline {3}Schaltnetze}{24}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Aufwand}{25}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Hardware-Aufwand}{25}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Schaltnetzanalyse}{27}{subsubsection.3.1.2}%
