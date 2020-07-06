@@ -26,8 +26,7 @@
 \contentsline {subsection}{\numberline {1.7}Signalcodierung}{12}{subsection.1.7}%
 \contentsline {subsubsection}{\numberline {1.7.1}mögliche Signalformen}{12}{subsubsection.1.7.1}%
 \contentsline {subsubsection}{\numberline {1.7.2}Umsetzung von Bitfolgen in Spannungspegelfolgen}{13}{subsubsection.1.7.2}%
-\contentsline {subsubsection}{\numberline {1.7.3}Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}{14}{subsubsection.1.7.3}%
-\contentsline {subsubsection}{\numberline {1.7.4}3 Verfahren zur sicheren Taktrückgewinnung:}{15}{subsubsection.1.7.4}%
+\contentsline {subsubsection}{\numberline {1.7.3}3 Verfahren zur sicheren Taktrückgewinnung:}{15}{subsubsection.1.7.3}%
 \contentsline {section}{\numberline {2}Boolsche Algebra}{16}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Schaltalgebra}{16}{subsection.2.1}%
 \contentsline {subsubsection}{\numberline {2.1.1}Huntingtonsche Axiome in der Schaltalgebra}{16}{subsubsection.2.1.1}%
@@ -38,7 +37,10 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Funktionen abhängig von Ausgangsvariablen}{19}{subsubsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2}Schaltnetze}{22}{subsubsection.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.3}KV-Diagramm}{22}{subsubsection.2.2.3}%
-\contentsline {section}{\numberline {3}Schaltnetze}{24}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Aufwand}{25}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Hardware-Aufwand}{25}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Schaltnetzanalyse}{27}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {2.2.4}KxF}{24}{subsubsection.2.2.4}%
+\contentsline {section}{\numberline {3}Schaltnetze}{25}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Aufwand}{26}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Hardware-Aufwand}{26}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Schaltnetzanalyse}{28}{subsubsection.3.1.2}%
+\contentsline {section}{\numberline {4}Schaltwerke}{29}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Schaltwerksanalyse}{29}{subsection.4.1}%

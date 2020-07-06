@@ -20,8 +20,10 @@
 \usepackage{placeins}
 \usepackage{mathtools}
 \usepackage{fancyhdr}
+\usepackage{pifont}
 \usetikzlibrary{calc}
 \usetikzlibrary{tikzmark}
+\usetikzlibrary{positioning}
 
 
 \usepgfplotslibrary{groupplots}
@@ -80,6 +82,9 @@
 }{thm}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newcommand{\cmark}{\textcolor{green!80!black}{\ding{51}}}%
+\newcommand{\xmark}{\textcolor{red}{\ding{55}}}%
 
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
 		\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
@@ -400,7 +405,7 @@ $$
 \subsubsection*{Nachteile 1er-Komplement}
 \begin{itemize}
 	\item Manchmal (leicht) falsche Ergebnisse
-	\item Zwei verschiedene Darstellungen der \glqq 0\grqq \\
+	\item Zwei verschiedene Darstellungen der \glqq 0\grqq{} \\
 	$  +0 \hat{=} 0000 \xrightarrow{e.K.} 1111 \hat{=} -0 $
 \end{itemize}
 \subsubsection*{Wertebereich 8bit-1-Komplement-Zahlen:}
@@ -427,8 +432,8 @@ $ \bigominus $ Es gibt unendlich viele Darstellungen jeder Zahl als Bruch. Lösu
 $ \Rightarrow $ Normalerweise keine Darstellung von Zahlen als Bruch im PC (Ausnahme: algebraisches Lösen von Gleichungssystemen)
 
 \subsubsection{\aclp{FKZ}}
-Alphabet mit Ziffern wird erweitert um \glqq Komma\grqq (\glqq \textbf{,}\grqq)\\
-$ \Rightarrow $ In der Symbolfolge ist maximal ein komma erlaubt. \\
+Alphabet mit Ziffern wird erweitert um \glqq Komma\grqq{} (\glqq \textbf{,}\grqq)\\
+$ \Rightarrow $ In der Symbolfolge ist maximal ein Komma erlaubt. \\
 Bsp: Zahl mit $n$ Vor- und Nachkommastellen
 $$
 Z_{n-1} Z_{n-2}\ldots Z_2 Z_1 Z_0,Z_{-1} Z_{-2} \ldots Z_{-m+1} Z_{-m+2}
@@ -496,7 +501,7 @@ Variante a) ist gängiger. In der Vorlesung wird diese üblicherweise verwendet.
 \end{center}
 \noindent
 \subsubsection*{Darstellung der Mantisse}
-Per Vorzeichen und Betrag (nicht Zweier-Komplement), um die Fallunterscheidungen beim Größenvergleich zwischen Vorzeichen- und normaler Stelle zu ersparen\footnote{Ist dann trotzdem insgesamt für die Zahl notwendig, nicht aber für die einzelnen Stellen.} und vor allem bei der Kommaverschiebung die Fallunterscheidung mit \glqq 0\grqq (bei positiven) oder \glqq 1\grqq (bei negativen) aufzufüllen zu ersparen.\\
+Per Vorzeichen und Betrag (nicht Zweier-Komplement), um die Fallunterscheidungen beim Größenvergleich zwischen Vorzeichen- und normaler Stelle zu ersparen\footnote{Ist dann trotzdem insgesamt für die Zahl notwendig, nicht aber für die einzelnen Stellen.} und vor allem bei der Kommaverschiebung die Fallunterscheidung mit \glqq 0\grqq{} (bei positiven) oder \glqq 1\grqq{} (bei negativen) aufzufüllen zu ersparen.\\
 \\
 Vorzeichen des Exponenten gibt die Richtung der Kommaverschiebung an.\\
 
@@ -526,19 +531,19 @@ Bias wird forher festgelegt, z.B. bei 8-bit-Exp: Bias=127.
 
 \subsubsection*{Im Computer: \ac{GKZ} zur Basis 2}
 normalisierte Darstellung $ \Rightarrow $ Vkst ist immer \glqq 1\grqq.\\
-$ \Rightarrow $ diese \glqq 1\grqq muss nicht explizit gespeichert werden\\
+$ \Rightarrow $ diese \glqq 1\grqq{} muss nicht explizit gespeichert werden\\
 $ \Rightarrow $ \glqq Hidden Bit\grqq
 $ \Rightarrow $ dieses eine Bit wird genutzt, um eine Nkst mehr speichern zu können\\
 \\
-\indent \textbf{Problem:} Darstellung der \glqq 0\grqq 
+\indent \textbf{Problem:} Darstellung der \glqq 0\grqq{} 
 \\\\
-$ \rightarrow $ für die \glqq 0\grqq gibt es keine normalisierte Darstellung\\
-$ \rightarrow $ mit \glqq Hidden Bit\grqq lässt sich der Zahlenwert \glqq 0\grqq nie darstellen.
+$ \rightarrow $ für die \glqq 0\grqq{} gibt es keine normalisierte Darstellung\\
+$ \rightarrow $ mit \glqq Hidden Bit\grqq{} lässt sich der Zahlenwert \glqq 0\grqq{} nie darstellen.
 \\\\
-Abhilfe: kleinster Exponent (Bitmuster \glqq 0$\ldots$0) steht für denormalisierte \ac{GKZ} ohne Hidden Bit. Falls dann auch alle Mantissenbits \glqq 0\grqq sind, handelt es sich um die Darstellung der \glqq0\grqq.\\
+\textbf{Abhilfe:} kleinster Exponent (Bitmuster \glqq 0$\ldots$0\grqq) steht für denormalisierte \ac{GKZ} ohne Hidden Bit. Falls dann auch alle Mantissenbits \glqq 0\grqq{} sind, handelt es sich um die Darstellung der \glqq0\grqq.\\
 größter Exponent (Bitmuster \glqq1$\ldots$1\grqq) steht für eine Zahl, welche nicht im Wertebereich der gewählten \ac{GKZ} darstellbar ist.\\
-\indent falls Mantisse \glqq $0 \ldots 0$\grqq $\Rightarrow$ Zahl ist $\pm \infty$ (abhöngig von Mantissen-Vorzeichen)\\
-\indent falls Mantisse $\neq$ \glqq$0 \ldots 0$\grqq $\Rightarrow$ Zahl ist nicht als reele Zahl darstellbar (z.B. $ \sqrt{-2} $) $\Rightarrow$ NaN \glqq Not a Number\grqq.\\
+\indent $\Rightarrow$ falls Mantisse \glqq $0 \ldots 0$\grqq{} $\Rightarrow$ Zahl ist $\pm \infty$ (abhängig von Mantissen-Vorzeichen)\\
+\indent $\Rightarrow$ falls Mantisse $\neq$ \glqq$0 \ldots 0$\grqq{} $\Rightarrow$ Zahl ist nicht als reelle Zahl darstellbar (z.B. $ \sqrt{-2} $) $\Rightarrow$ NaN \glqq Not a Number\grqq.\\
 
 \begin{table}[h]
 	\centering
@@ -554,11 +559,13 @@ größter Exponent (Bitmuster \glqq1$\ldots$1\grqq) steht für eine Zahl, welche
 \noindent
 Wertebereich für Zahlen mit 16 Bit:
 \begin{itemize}
+	\itemsep 0em
+	\vspace*{-0.56em}
 	\item nicht negative ganze Zahlen: $ 0\ldots65535 $
 	\item 2er-Komplement (ganze Zahlen): $ -32768\ldots+32767 $
 	\item \ac{GKZ} half precision
 \end{itemize}
-
+\vspace*{0.5em}
 Größte darstellbare Zahl:\\
 \begin{equation*}
 \underbrace{\tikzmark{vz1}0}_{\text{VZ}}\; \underbrace{11110}_{\text{Exponent}}\; \tikzmark{hb1} \underbrace{1111111111}_{\text{Mantisse}}\\
@@ -608,7 +615,7 @@ node[anchor=east] {negativ};
 \begin{tabular}{cccc}
 	
 	Vz & Exp & Mantisse & Bias = 15\\
-	15bit & 5bitr & 10bit &
+	15bit & 5bit & 10bit &
 \end{tabular}
 \\
 \\
@@ -621,7 +628,7 @@ kleinste Zahl:   & 0 11110 1111111111\\
 Kleinster Betrag einer Zahl $ >0 $:\\
 \begin{tabular}{rl}
 	normalisierte: & 0 00001 0000000000\\
-	denormalisierte & 0 00000 0000000000\\
+	denormalisierte & 1 00000 0000000000\\
 \end{tabular}
 \begin{align*}
 Exp_{gesp} &= 0\\
@@ -638,7 +645,7 @@ Bsp: $ -4,2 \cdot 10^{-1} $\\
 	\item Vorzeichen Merken, weiter mit Betrag
 	\item Darstellen als \ac{FKZ}
 	\item Umrechnen der \ac{FKZ} in die Zielbasis
-	\item $ Exp_{real} $ durch Stellenverschiebung der \ac{FKZ} zur BAsis 2 bestimmen
+	\item $ Exp_{real} $ durch Stellenverschiebung der \ac{FKZ} zur Basis 2 bestimmen
 	\item $ Exp_{gesp} $ durch Aufaddieren des Bias auf $ Exp_{real} $ berechnen
 	\item $ Exp_{gesp} $ in Binärsystem umrechnen und passende Stellenzahl verwenden
 	\item Bitmuster in entsprechender Reihenfolge notieren
@@ -661,7 +668,19 @@ Bsp: $ -4,2 \cdot 10^{-1} $\\
 \end{align*}
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
-	$ 0,\textcolor{green!80!black}{0\tikzmark{hb5}1\textcolor{blue!70}{\underbrace{\textcolor{green!80!black}{1010111000}}_{\text{10 Stellen}}}0} $
+	$$ 0,\textcolor{green!80!black}{0\tikzmark{hb5}1\textcolor{blue!70}{\underbrace{\textcolor{green!80!black}{1010111000}}_{\text{10 Stellen}}}0} $$
+	
+	\vspace*{3em}
+	
+	\begin{equation*}
+	\tikzmark{vz2}1\; \underbrace{01101}_{Exp_{gesp}=1}\; \tikzmark{hb2} \underbrace{1010111000}_{\text{Mantisse} = 1}
+	\end{equation*}
+	\begin{tikzpicture}[remember picture,overlay]
+	\draw[<-]([shift={(2pt,8pt)}]pic cs:vz2) |- ([shift={(-10pt,15pt)}]pic cs:vz2) 
+	node[anchor=east] {VZ}; 
+	\node[draw,green!80!black] at ([shift={(0,20pt)}]pic cs:hb2) {1,};
+	\end{tikzpicture}
+	
 \end{minipage}
 
 \begin{tikzpicture}[remember picture, overlay]
@@ -718,6 +737,9 @@ node[anchor=north]{Hidden Bit};
 		\item per Software: Bibliotheksroutinen (z.B. Programmiersprache ABAP)
 		\item per Hardware: z.B. im MOS6502 (Apple II, C64, VC20, \ldots) oder auch in früheren Intel CPUs (8088, 8086, \ldots 80486)
 	\end{enumerate}
+
+
+
 \end{minipage}
 
 \subsubsection{Einschrittiger Code (Gray Code )}
@@ -834,8 +856,8 @@ $ \left.  \begin{array}{ccc}
 \end{array} \right\rbrace 
 $ TTL-Pegel
 \\\\
-\glqq Transistor-Transistor-Logic\grqq \\
-\hspace*{2em} $\Rightarrow$ \glqq erfunden\grqq um 1960 von TI (\textbf{T}exas\textbf{I}nstruments)
+\glqq Transistor-Transistor-Logic\grqq{} \\
+\hspace*{2em} $\Rightarrow$ \glqq erfunden\grqq{} um 1960 von TI (\textbf{T}exas\textbf{I}nstruments)
 
 \subsubsection*{große vs. kleine Spannungspegel}
 
@@ -852,6 +874,23 @@ $ TTL-Pegel
 
 
 \subsubsection*{4 Verfahren (1-4) und 4 Eigenschaften(a-d)}
+\begin{enumerate}
+	\item \textbf{\underline{\acf{NRZ}}}\\[0.5em]
+	Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
+	\item \textbf{\underline{\acf{RZ}}}\\[0.5em]
+	Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
+	\subitem \ac{TRG} bei \ac{RZ}: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
+	\item \textbf{\underline{\acf{AMI}}} \\[0.5em]
+	Ähnlich \ac{NRZ} mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
+	\subitem \ac{GSF} bei \ac{AMI}: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
+	\subitem \ac{TRG} bei \ac{AMI}: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine \ac{TRG} möglich
+	\item \textbf{\underline{Manchester}}\\
+	Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq{} und fallende Flanke $\hat{=}$ \glqq 0\grqq.\\
+	ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
+	\subitem \ac{TRG} bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
+	\subitem \ac{GSF} bei Manchester: immer, da sich die Pegel in erster und zweiter Schrittzeithälfte gegenseitig ausgleichen
+	\subitem \ac{SSH} bei Manchester: optimal, da \glqq nur\grqq{} 2 Pegel
+\end{enumerate}
 
 \begin{enumerate}
 	\item[a)] \textbf{\underline{\ac{TRG}}}\\[0.5em]
@@ -859,11 +898,11 @@ $ TTL-Pegel
 	
 	\item[b)]\textbf{\underline{ \ac{GSF}}} \\[0.5em]
 	Motivation: Einsparung der Masseleitung. Im zeitlichen Mittel liegen auf der Signalleitung 0V an.\\
-	Ziel: Anhand des mittleren Signalpegels soll der Massepegel \glqq errechnet\grqq\ werden.\\
+	Ziel: Anhand des mittleren Signalpegels soll der Massepegel \glqq errechnet\grqq\ werden.
 	\subitem -Vermeidung einer Potentialverschiebung beim E.
-	\subitem -Pseudoargument: keine Energieübertragung beim vom S zum E.\\
+	\subitem -Pseudoargument: keine Energieübertragung vom S zum E.\\
 	Grundvoraussetzung: symmetrische Pegel statt single-ended. \\
-	z.B. $1V \hat{=} +5v$ und $0 \hat{=} -5V$\\
+	z.B. $1V \hat{=} +5V$ und $0 \hat{=} -5V$\\
 	dann: \ac{GSF} bei \ac{NRZ}: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleichverteilt)\\\\
 	Bei den meisten Anwendungs-, Zeichen- und Zahlencodierungen kann keine Gleichverteilung angenommen werden. Ausnahme: Verschlüsselung und Kompression.
 	\item[c)] \textbf{\underline{\ac{SSH}}}\\[0.5em]
@@ -871,25 +910,19 @@ $ TTL-Pegel
 	$\Rightarrow$ direkt abhängig von der Anzahl der verwendeten Pegel, welche auf einen vorgegebenen Potentialbereich verteilt werden müssen (und so natürlich auch beim Empfänger voneinander unterschieden werden müssen)\\
 	\ac{SSH} bei \ac{AMI}: schlecht, da 3 Pegel\\
 	\ac{SSH} bei \ac{NRZ} und \ac{RZ}: gut, da \glqq nur\grqq\ 2 Pegel (und weniger Pegel geht nicht \smiley{})
+	
+	\item[d)] \textbf{\underline{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}}\\[0.5em]
+	\noindent
+	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
+	\textbf{\ac{BBB} bei \acl{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
+	\textbf{\ac{BBB} bei \acl{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq{} )\\
+	\textbf{\ac{BBB} bei \acl{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
+	\textbf{\ac{BBB} bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq{} oder \glqq 111111\grqq)\\
 \end{enumerate}
 
-\begin{enumerate}
-	\item \textbf{\underline{\acf{NRZ}}}\\[0.5em]
-		Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
-	\item \textbf{\underline{\acf{RZ}}}\\[0.5em]
-		Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
-		\subitem \ac{TRG} bei \ac{RZ}: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
-	\item \textbf{\underline{\acf{AMI}}} \\[0.5em]
-		Ähnlich \ac{NRZ} mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
-		\subitem \ac{GSF} bei \ac{AMI}: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
-		\subitem \ac{TRG} bei \ac{AMI}: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine \ac{TRG} möglich
-	\item \textbf{\underline{Manchester}}\\
-		Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq und fallende Flanke $\hat{=}$ \glqq 0\grqq.\\
-		ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
-		\subitem \ac{TRG} bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
-		\subitem \ac{GSF} bei Manchester: immer, da sich die Pegel in erster und zweiter Schrittzeithälfte gegenseitig ausgleichen
-		\subitem \ac{SSH} bei Manchester: optimal, da \glqq nur\grqq 2 Pegel
-\end{enumerate}
+\begin{Theorem}{Nyquist-Theorem}{}
+	Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.
+\end{Theorem}
 
 \begin{figure}[h]
 	\centering
@@ -926,16 +959,7 @@ $ TTL-Pegel
 \caption{Pegelgraphen der einzelnen Verfahren}
 \end{figure}
 
-\subsubsection{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}
-	\begin{Theorem}{Nyquist-Theorem}{}
-		Über einen Übertragungskanal mit beschränkter Bandbreite kann maximal mit der Schrittrate übertragen werden, welche der doppelten Bandbreite entspricht.
-	\end{Theorem}
-	\noindent
-	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
-	\textbf{\ac{BBB} bei \acl{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
-	\textbf{\ac{BBB} bei \acl{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq )\\
-	\textbf{\ac{BBB} bei \acl{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
-	\textbf{\ac{BBB} bei Manchester:} Schrittrate (max Frequenz bei \glqq 000000...\grqq oder \glqq 111111\grqq)\\
+
 
 \begin{tabularx}{\textwidth}{l|Y|Y|Y|Y}
 	 & \ac{TRG} 
@@ -943,18 +967,18 @@ $ TTL-Pegel
 	 & \ac{SSH} \newline abhängig von Anzahl Pegel 
 	 & \ac{BBB} \newline abhängig von Schrittrate \\ \hline \rule{0pt}{2em} 
 	 \ac{NRZ} 
-	 & bei \glqq 01\grqq und \glqq 10\grqq \newline \circled{$=$} 
-	 & \#\glqq 1\grqq = \# \glqq 0\grqq \newline (1 und 0 gleichverteilt) \newline \circled{$-$}
+	 & bei \glqq 01\grqq{} und \glqq 10\grqq{} \newline \circled{$--$} 
+	 & \#\glqq 1\grqq{} = \# \glqq 0\grqq{} \newline (1 und 0 gleichverteilt) \newline \circled{$-$}
 	 & 2 \newline \circled{$+$}
 	 & halbe \newline \circled{$+$}\\ \hline \rule{0pt}{2em}
 	 \ac{RZ}
-	 & bei jeder \glqq 1\grqq \newline \circled{$-$}
-	 & symm. Pegel \& nur \glqq 1\grqq, single ended \& nur \glqq 0\grqq, \#1 = \#0 und umgekehrt \newline \circled{$=$}
+	 & bei jeder \glqq 1\grqq{} \newline \circled{$-$}
+	 & symm. Pegel \& nur \glqq 1\grqq, single ended \& nur \glqq 0\grqq, \#1 = \#0 und umgekehrt \newline \circled{$--$}
 	 & 2 \newline \circled{$+$}
 	 & ganze \newline \circled{$-$} \\ \hline \rule{0pt}{2em}
 	 \ac{AMI}
-	 & bei jeder \glqq 1\grqq \newline \circled{$-$}
-	 & nach jeder zweiten \glqq 1\grqq, in der Praxis \glqq immer\grqq \newline \circled{$+$}
+	 & bei jeder \glqq 1\grqq{} \newline \circled{$-$}
+	 & nach jeder zweiten \glqq 1\grqq, in der Praxis \glqq immer\grqq{} \newline \circled{$+$}
 	 & 3 \newline \circled{$-$}
 	 & halbe \newline \circled{$+$} \\ \hline \rule{0pt}{2em}
 	 Manch. 
@@ -975,7 +999,7 @@ $ TTL-Pegel
 \subsubsection{3 Verfahren zur sicheren Taktrückgewinnung:}
 \begin{enumerate}
 	\item \textbf{Startbitsequenz} \\
-	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere \ac{TRG} ermöglicht. z.B. bei \ac{NRZ}: \glqq 01\grqq oder \glqq 10\grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\[0.5em]
+	Vor $n$ Nutzdatenbit wird eine Startbitsequenz gestellt, welche sichere \ac{TRG} ermöglicht. z.B. bei \ac{NRZ}: \glqq 01\grqq{} oder \glqq 10\grqq. $n$ ist abhängig von der Genauigkeit der Uhren. \\[0.5em]
 	\textbf{Nachteil:} relativ großer Overhead, effektive Nutzdatenrate deutlich kleiner als die Schrittrate.\\
 	\noindent\hspace*{2em}% 
 	Im Beispiel: Nutzdatenrate = $\dfrac{n}{n+2}\cdot Schrittweite$\\
@@ -994,20 +1018,20 @@ $ TTL-Pegel
 	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing1) to ([shift={(0.4,-0.2)}]pic cs:stuffing1) 
 	node[below] {0}; 
 	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing2) to ([shift={(0.4,-0.2)}]pic cs:stuffing2) 
-	node[below] {0}; 
+	node[below] {1}; 
 	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing3) to ([shift={(0.4,-0.2)}]pic cs:stuffing3) 
 	node[below] {0}; 
 	\draw[<-,red]([shift={(0.4,0.4)}]pic cs:stuffing4) to ([shift={(0.4,-0.2)}]pic cs:stuffing4) 
 	node[below] {0}; 
 \end{tikzpicture}
 \\ \\ \\
-	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.
+	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq{} entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.
 	\\[0.25em]
 	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! 
 	\\[0.25em]
-	\textbf{Bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq wird eine \glqq 1\grqq eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb\grqq teuer\grqq und \glqq fehleranfällig\grqq . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)
+	\textbf{Bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq{} wird eine \glqq 1\grqq{} eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb\grqq{} teuer\grqq{} und \glqq fehleranfällig\grqq{} . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)
 	\\[0.25em]
-	\textbf{Anwendung:} Ethernet (um Bitmuster des Frame-Delimiters \glqq 01111110\grqq auszuschließen $\Rightarrow$ nach fünf \glqq 1\grqq wird eine Stopf-\glqq 0\grqq eingeschoben)
+	\textbf{Anwendung:} HDLC\footnote{High-Level Data Link Control \href{https://de.wikipedia.org/wiki/High-Level_Data_Link_Control}{(Wikipedia)}}, ISDN (um Bitmuster des Frame-Delimiters \glqq 01111110\grqq{} auszuschließen $\Rightarrow$ nach fünf \glqq 1\grqq{} wird eine Stopf-\glqq 0\grqq{} eingeschoben)
 	
 	\item \textbf{Blockcodierung}\\
 	Ein Block von $n$ Nutzdatenbit wird als Block von ($n+i$) zu übertragende Datenbit codiert, wobei nur solche Blöcke verwendet werden, welche sichere \ac{TRG} ermöglichen.
@@ -1040,7 +1064,7 @@ Ganggenauigkeit der Uhren und Anzahl der Schritte ohne Resynchronisierung:
 \end{center}
 Der Pegel wird beim Empfang in der Mitte der angenommenen Schrittzeit abgetastet.\\
 \hspace*{1em} $\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\[0.5em]
-Bsp: Bei 5\% spezifischer Ganggenauigkeit wären 5 Schirrte \glqq zu viel\grqq
+Bsp: Bei 5\% spezifischer Ganggenauigkeit wären 5 Schritte \glqq zu viel\grqq
 
 \newpage
 \section{Boolsche Algebra}
@@ -1286,13 +1310,13 @@ Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegun
 	\centering
 	\begin{tabular}{|r|l|l|}
 	\hline
-	$ n = 0 $ & $ f_0() = 0 $ & \glqq Nullfunktion\grqq \\
-					 & $ f_1() = 1 $ & \glqq Einsfunktion\grqq \\ \hline
+	$ n = 0 $ & $ f_0() = 0 $ & \glqq Nullfunktion\grqq{} \\
+					 & $ f_1() = 1 $ & \glqq Einsfunktion\grqq{} \\ \hline
 \multicolumn{3}{|l|}{$ \Rightarrow $ (nur) 2 verschiedene Funktionen abhängig von 0 Variablen!}\\ \hline
-	$ n = 1 $ & $ f_0(a) = 0 $ & \glqq Nullfunktion\grqq \\
-					 & $ f_1(a) = \overline{a} $ & \glqq Negation\grqq \\
-					 & $ f_2(a) = a $ & \glqq Identität\grqq \\
-					 & $ f_3(a) = 1 $ & \glqq Einsfunktion\grqq \\ \hline
+	$ n = 1 $ & $ f_0(a) = 0 $ & \glqq Nullfunktion\grqq{} \\
+					 & $ f_1(a) = \overline{a} $ & \glqq Negation\grqq{} \\
+					 & $ f_2(a) = a $ & \glqq Identität\grqq{} \\
+					 & $ f_3(a) = 1 $ & \glqq Einsfunktion\grqq{} \\ \hline
  \multicolumn{3}{|l|}{$ \Rightarrow $ genau 4 verschiedene Funktionen abhängig vn 1 Variablen!}\\ \hline
 \end{tabular}
 \label{tab:funktionenausgang}
@@ -1374,7 +1398,9 @@ Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 	\newline $ \neg a = \overline{a} \overset{Id.pot.}{=} \overline{(a \wedge a)} \;\overset{\text{1. Hälfte}}{\blacksquare}$
 	\newline $ a \vee b \overset{\text{dopp.Neg.}}{=} \overline{\overline{a \vee b}} \overset{\text{De Morgan}}{=} \overline{\overline{a} \wedge \overline{b}} = \overline{\overline{a \wedge a} \wedge \overline{b \wedge b}} \;\overset{\text{2. Hälfte}}{\blacksquare}$\\ \hline
 	Satz: & $ \{\overline{\vee}\} $ (\glqq NOR\grqq) ist ein vollständiges Operatorensystem.\\
-	Bew.: & $  $\\ %ToDo
+	Bew.: &anhand des vollständigen Operatorensystems $ \{\vee, \neg\}\ldots $
+	\newline $ \neg a = \overline{a} \overset{Id.pot.}{=} \overline{(a \vee a)} \;\overset{\text{1. Hälfte}}{\blacksquare}$
+	\newline $ a \wedge b \overset{\text{dopp.Neg.}}{=} \overline{\overline{a \wedge b}} \overset{\text{De Morgan}}{=} \overline{\overline{a} \vee \overline{b}} = \overline{\overline{a \vee a} \vee \overline{b \vee b}} \;\overset{\text{2. Hälfte}}{\blacksquare}$\\ %ToDo
 \end{tabular}
 \caption{Sätze/Beweise über vollständige Operatorensysteme}
 \end{table}
@@ -1428,14 +1454,14 @@ $$
 
 \begin{itemize}
 	\item Ein Literal ist eine Variable in negierter oder nicht-negierter Form
-	\item Ein Implikant ist eine Konkunktion von Literalen, für den gilt $ i \implies f $
-	\item Ein Minterm ist ein Implikant, bei dem es für jede E-Variable ein Literal gibt. (Auch Viollkonjunktion genannt)
+	\item Ein Implikant ist eine Konjunktion von Literalen, für den gilt $ i \implies f $
+	\item Ein Minterm ist ein Implikant, bei dem es für jede E-Variable ein Literal gibt. (Auch Vollkonjunktion genannt)
 \end{itemize}
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{rp{15cm}}
-	Satz: & Ein Minterm hat nur bei einer einzigen E-Belegung \glqq 1\grqq als A-Belegung, in allen anderen Fällen der E-Belegung ergibt sich \glqq 0\grqq als A-Belegung.\\
+	Satz: & Ein Minterm hat nur bei einer einzigen E-Belegung \glqq 1\grqq{} als A-Belegung, in allen anderen Fällen der E-Belegung ergibt sich \glqq 0\grqq{} als A-Belegung.\\
 	Bew.:& geschenkt (Verständnis)\\ \hline
 	Satz: & Die \ac{DNF} der Funktion $ f $ ist ein äquivalent zur Funktion $ f $.\\
 	Bew.:& Verständnis/Bildungsregel\\ \hline
@@ -1505,6 +1531,7 @@ Graphische Darstellung der Ausgangsbelegung
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{c|c|c|c|c|}
+		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ \\ \hline
 	$ \overline{b} $ & \tikzmark{kv30}{$ 1_0 $} & \tikzmark{kv31}{$ 1_1 $} & $ 0_5 $ & $ 0_4 $\\ \hline
 	$ b $ & $ 0_2 $ & \tikzmark{kv33}{$ 1_3 $} & \tikzmark{kv37}{$ 1_7 $} & $ 0_6 $\\ \hline
 	\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
@@ -1566,7 +1593,7 @@ $ f(a,b,c) $
 	\begin{tabular}{c|c|c|c|c|l}
 		& $ \overline{a} $ & $ a $ & $ a $ & $ \overline{a} $ &\\ \cline{1-5}
 		$ \overline{b} $ & $ \phantom{a}_0 $ & $ \phantom{a}_1 $ & $ \phantom{a}_5 $ & $ \phantom{a}_4 $& \multirow{2}{*}{$\begin{rcases*} \\ \\ \end{rcases*} \overline{d}$}\\ \cline{1-5}
-		$ b $ & $ 1_2 $ & $ \phantom{a}_3 $ & $ \phantom{a}_7 $ & $ 1_6 $ \\ \cline{1-5}
+		$ b $ & $ 1_2 $ & $ {\textcolor{green!80!black}{1}}_3 $ & $ {\textcolor{blue}{1}}_7 $ & $ 1_6 $ \\ \cline{1-5}
 		$ b $ & $ 1_{10} $ & $ 1_{11} $ & $ \phantom{a}_{15} $ & $ \phantom{a}_{14} $ & \multirow{2}{*}{$ \begin{rcases*} \\ \\ \end{rcases*} d $}\\ \cline{1-5}
 		$ \overline{b} $ & $ \phantom{a}_{8} $ & $ \phantom{a}_{9} $ & $ \phantom{a}_{13} $ & $ 1_{12} $ \\ \cline{1-5}
 		\multicolumn{1}{c}{}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{\overline{c}} $}& \multicolumn{2}{c}{$ \underbrace{\hspace*{\dimexpr2\tabcolsep+1\arrayrulewidth}\hphantom{012}}_{c} $}
@@ -1574,14 +1601,14 @@ $ f(a,b,c) $
 	\quad
 	\begin{tabular}{rlr}
 		&& \ac{KPI}\\
-		\hcancel[green]{2+6}: & $ \overline{a} b \overline{d} $ & \hcancel 6\\
-		\hcancel[green]{2+10}:&$ \overline{a} b \overline{c} $ & \hcancel{\phantom{a}}\\
-		\hcancel[green]{11+10}: & $ b\overline{c} d $& \hcancel[green]{11}\\
+		\hcancel[green!80!black]{2+6}: & $ \overline{a} b \overline{d} $ & \hcancel 6\\
+		\hcancel[green!80!black]{2+10}:&$ \overline{a} b \overline{c} $ & \hcancel{\phantom{a}}\\
+		\hcancel[green!80!black]{11+10}: & $ b\overline{c} d $& \hcancel[green!80!black]{11}\\
 		12: & $ \overline{a}\overline{b}cd $ & 12\\
 		\multicolumn{3}{l}{DMF: $ \overline{a} b \overline{d} \vee b\overline{c}d \vee \overline{a}\overline{b}cd $}\\
-		\hcancel[green]{\textcolor{blue}{6+7}}: & $ bc\overline{d} $ & \hcancel[green]7
+		\hcancel[green!80!black]{\textcolor{blue}{6+7}}: & $ bc\overline{d} $ & \hcancel[green!80!black]7
 	\end{tabular}
-{\color{green}
+{\color{green!80!black}
 	\begin{tabular}{rlr}
 	2+3+6+7: & $ b \overline{d} $ & 6+7/\ac{KPI}\\
 	2+3+10+11: & $ b \overline{c} $ & 10+11/\ac{KPI}\\
@@ -1616,9 +1643,15 @@ $ f(a,b,c) $
 	19: & $ ab\overline{c}\overline{d}e $ (Nachbar von 3?)\\
 \end{tabular}
 $\Rightarrow$ KV-Diagramm im 2-dimensionalen: bis 4 E-Variablen, im 3-dimensionalen bis 6 E-Variablen,  ...
-%Todo: 30.06. ergänzen
 
+\subsubsection{KxF}
+\begin{itemize}
+	\item Statt DxF (\ac{DNF}, \ac{DMF}) als Disjunktion von Konjunktionen von Literalen gibt es auch KxF (\ac{KNF}, \ac{KMF}) als Konjunktion von Disjunktionen von Literalen.
+	\item Statt Feldern und Bereichen mit \glqq 1\grqq-Belegung werden Felder und Bereiche mit \glqq0\grqq-Belegung beschrieben. Diese werden durch Implikate (\ac{PI}, \ac{KPI}, Maxterm, Volldisjunktion) statt Implikanten ($\ldots$) beschrieben.
+	\item bei einer mehrheitlichen A-Belegung von 1 ist die/eine KxF sinnvoller als eine DxF, um Transistoren (also Hardware-Aufwand) zu sparen.
+\end{itemize}
 
+\newpage
 \section{Schaltnetze}
 \label{subsec:schaltnetze}
 Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstellung von Funktionen als Graph, genauer als gerichteter Graph (\glqq Reihenfolge\grqq!)\\
@@ -1672,7 +1705,7 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
 	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
 	\item UND- und ODER-Gatter sind auch mit mehr als zwei (mit beliebig vielen) Eingängen möglich (Abb. \ref{abb:und_verschaltung})
-	\item \glqq Verzweigen\grqq von Leistungen auf mehrere nachfolgende Gattereingänge ist möglich, in dem an der Verzweigungsstelle ein ausgefüllter Kreis gezeichnet wird
+	\item \glqq Verzweigen\grqq{} von Leistungen auf mehrere nachfolgende Gattereingänge ist möglich, in dem an der Verzweigungsstelle ein ausgefüllter Kreis gezeichnet wird
 	\item Kreuzungen von Leitungen, die nicht miteinander verbunden sind, sind möglich. An der Kreuzungsstelle darf auch kein ausgefüllter Kreis notiert werden
 \end{itemize}
 
@@ -1758,7 +1791,7 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 	\label{dnf:schaltnetz}
 \end{figure}
 
-Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
+Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist meist ungünstig, da es meist \glqq günstigere\grqq{} (weniger Hardware-aufwändige) Schaltnetze für dieselbe Funktion gibt.
 \newpage
 
 \subsection{Aufwand}
@@ -1808,7 +1841,7 @@ Die Realisierung der \ac{DNF} als Schaltnetz (Abb. \ref{dnf:schaltnetz}) ist mei
 	\label{abb:mos_and}
 \end{figure}
 
-$\Rightarrow$ wir \glqq messen\grqq den Hardware-Aufwand in Anzahl Transistoren.\\ 
+$\Rightarrow$ wir \glqq messen\grqq{} den Hardware-Aufwand in Anzahl Transistoren.\\ 
 Bei UND (Abb. \ref{abb:mos_and}) und ODER (Abb. \ref{abb:mos_or}) brauchen wir so viele Transistoren, wie das Gatter Eingänge hat (bei nicht negierten Ein- und Ausgängen).
 
 \begin{figure}[h!]
@@ -1950,9 +1983,154 @@ Im Schaltnetz (Abb. \ref{abb:schaltnetzG}) ist $ g $ äquivalent zu $ f $ (Abb. 
 \\
 Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 \begin{Theorem}{}{}
-	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq ist.\\
+	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq{} ist.\\
 	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
 \end{Theorem}
+
+\newpage
+\section{Schaltwerke}
+\begin{tabular}{ll}
+	Verhalten: & Können sich etwas merken/\glqq speichern\grqq\\
+	Afubau: & Rückkopplungen (von Aus- zu Eingängen) sind erlaubt \\
+\end{tabular}
+
+\begin{figure}[h!]
+	\centering
+	
+	\begin{circuitikz}
+		\draw
+		(0,2) node[anchor=east](inA){a}
+		(0,0) node[anchor=east](inB){b}
+		(3,0) node[european or port](o1){}
+		(3,2) node[european or port](o2){}
+		(o1.bout) node[anchor=west,ocirc]{}
+		(o2.bout) node[anchor=west,ocirc]{}
+		(inA) |- (o2.in 1)
+		(inB) |- (o1.in 2)
+		
+		(o1.out) |- (3,0.75)
+		(o2.out) |- (3,1.25)
+		(1,0.75) |- (o1.in 1)
+		(1,1.25) |- (o2.in 2)
+		(1,0.75) -- (3,1.25)
+		(1,1.25) -- (3,0.75)
+		
+		(5,2) node[anchor=west](outx){x $ \; \; x = \overline{a \vee y'} $}
+		(5,0) node[anchor=west](outy){y $ \; \; y = \overline{b \vee x'} $}
+		
+		(o2.in 1) node[anchor=north east]{y'}
+		(o1.in 2) node[anchor=south east]{x'}
+		(o2.out) |- (outx)
+		(o1.out) |- (outy)
+		;
+	\end{circuitikz}
+\caption{Beispielschaltung zur Schaltwerksanalyse}
+\label{abb:schaltwerk1}
+\end{figure}
+
+\subsection{Schaltwerksanalyse}
+\begin{enumerate}
+	\itemsep0em
+	\item Auftrennen der Rückkopplung und \glqq Neubenennen\grqq{} der bislang rückgekoppelten Eingänge
+	\item Aufstellen der Wertetabelle, wobei die vormals rückgekoppelten Eingänge zuerst (ganz links) notiert werden.
+	\item Notieren von stabilen und instabilen Zeilen der Wertetabelle, wobei bei den stabilen Zeilen die Belegung der rückgekoppelten Eingänge der Belegung der entsprechenden Ausgänge entspricht.
+	\item Bei instabilen Tabellenzeilen wird die Folgezeile notiert, indem die E-Belegung durch die entsprechende A-Belegung ersetzt wird, bis wir entweder eine stabile Zeile erreichen, oder ein Zustand zweimal vorkommt (Kreislauf!)
+	\item Benennen der Zustände anhand der Belegung der rückgekoppelten Eingänge
+	\item Aufstellen eines Zustandsübergangsdiagramms
+	\item Interpretation des Zustandsübergangsdiagramms, um ein \glqq sinnvolles\grqq, \glqq schlüssiges\grqq{} Verhalten festzustellen.
+\end{enumerate}
+
+\begin{table}[h!]
+	\centering
+	$y = \overline{b \vee x'} \;\; x = \overline{a \vee y'}$
+	\\[1em]
+	\begin{tabular}{c|cc|cc|cc|l}
+		\# & y'  & x'  & b & a & y & x & \\ \hline
+		0 & 0 & 0 & 0 & 0 & 1 & 1 & \xmark $\rightarrow$ 12 $\rightarrow$ 0 \textcolor{red}{\lightning}\\
+		1 & 0 & 0 & 0 & 1 & 1 & 0 & \xmark $\rightarrow$ 9 \cmark \\
+		2 & 0 & 0 & 1 & 0 & 0 & 1 & \xmark $\rightarrow$ 6 \cmark\\
+		3 & 0 & 0 & 1 & 1 & 0 & 0 & \cmark \\ \cline{2-3}
+		4 & 0 & 1 & 0 & 0 & 0 & 1 & \cmark\\
+		5 & 0 & 1 & 0 & 1 & 0 & 0 & \xmark $\rightarrow$ 1 $\rightarrow$ 9 \cmark\\
+		6 & 0 & 1 & 1 & 0 & 0 & 1 & \cmark\\
+		7 & 0 & 1 & 1 & 1 & 0 & 0 & \xmark $\rightarrow$ 3 \cmark\\ \cline{2-3}
+		8 & 1 & 0 & 0 & 0 & 1 & 0 & \cmark\\
+		9 & 1 & 0 & 0 & 1 & 1 & 0 & \cmark\\
+		10 & 1 & 0 & 1 & 0 & 0 & 0 & \xmark $\rightarrow$ 2 $\rightarrow$ 6 \cmark\\
+		11 & 1 & 0 & 1 & 1 & 0 & 0 & \xmark $\rightarrow$ 3 \cmark\\ \cline{2-3}
+		12 & 1 & 1 & 0 & 0 & 0 & 0 & \xmark $\rightarrow$ 0 $\rightarrow$ 12 \textcolor{red}{\lightning}\\
+		13 & 1 & 1 & 0 & 1 & 0 & 0 & \xmark $\rightarrow$ 1 $\rightarrow$ 9 \cmark\\
+		14 & 1 & 1 & 1 & 0 & 0 & 0 & \xmark $\rightarrow$ 2 $\rightarrow$ 6 \cmark\\
+		15 & 1 & 1 & 1 & 1 & 0 & 0 & \xmark $\rightarrow$ 3 \cmark\\
+	\end{tabular}
+\caption{Wahrheitstabelle der Schaltwerksanalyse für Abbildung \ref{abb:schaltwerk1}}.
+\end{table}
+
+%ToDo: Zustandsdiagramm
+\textbf{Zustandsdiagramm fehlt noch!}\\
+
+\subsubsection*{RS-FF: Reset-Set-Flip-Flop (Abbildung \ref{abb:schaltwerk1})}
+\begin{tabularx}{\textwidth}{llX}
+	\multicolumn{3}{l}{\textbf{1-bit-Speicherbaustein}}\\
+	\multicolumn{2}{l}{\textbf{2 Arbeitszustände}:} & 10 gesetzt\\
+	\multicolumn{2}{l}{}& 01 rückgesetzt\\
+	\textbf{Ausgänge}: & Q & Zustand\\
+	& Q* & invertierter Zustand\\
+	\textbf{Eingänge}: & S & Setzeingang\\
+	& R & Rücksetzeingang\\
+	\textbf{Verhalten}: &\multicolumn{2}{l}{R = 0 \& S = 0: Arbeitszustand bleibt erhalten}\\
+	& \multicolumn{2}{l}{R = 0 \& S = 1: FF wird gesetzt}\\
+	& \multicolumn{2}{l}{R = 1 \& S = 0: FF wird rückgesetzt}\\
+	& \multicolumn{2}{l}{R = 1 \& S = 1: verbotene Eingangsbelegung, um unerwünschten Zustand 00 nicht zu erreichen}\\
+	\multicolumn{3}{l}{\textbf{Weitere Zustände}:}\\
+	& 00 & unerwünscht, soll nicht erreicht werden, da bei E-Belegung R=S=0 ein Zustandsflimmern statt Zustand beibehalten eintritt.\\
+	& 11 & wird nie stabil, sondern nur beim Zustandsflimmern immer nur kurzzeitig erreicht.
+\end{tabularx}
+\\[1em]
+\textbf{Schaltsymbol}:\\
+\begin{center}
+	\begin{circuitikz}
+		\tikzset{rs-ff/.style={flipflop, flipflop def={t1=R, t3=S, t6={Q*},t4=Q}}}
+		\draw
+		node[rs-ff]{};
+	\end{circuitikz}
+\end{center}
+
+\textbf{Anwendung RS-FF}\\
+Lichtschalter mit 2 Tastern für An und Aus (Aus $\hat{=}$ Not-Aus)\\
+
+\subsubsection*{2. FF-Typ: D-FF (\glqq Data\grqq)}
+Nur einen D-Eingang über den das FF sowohl gesetzt als auch rückgesetzt werden kann. (bei D=1: FF wird gesetzt, bei D=0 FF wird rückgesetzt)
+
+\begin{center}
+	\begin{circuitikz}
+\tikzset{rs-ff/.style={flipflop, flipflop def={t1=R, t3=S, t6={Q*},t4=Q}}}
+\draw
+node[european buffer port](not){}
+(not.bout) node[anchor=west,ocirc]{}
+node[rs-ff,right=1cm of not, anchor=pin 1](RS){}
+(RS.pin 3) to[short, -*] ++(-3.5,0) coordinate(punkt)
+(punkt) to[short] ++(-1,0) coordinate(n)
+(n) node[anchor=east]{D}
+(not.in) -| (punkt)
+(RS.pin 6) to[short] ++(3,0) coordinate(qs)
+(RS.pin 4) to[short] ++(3,0) coordinate(q)
+(qs) node[anchor=west]{Q*}
+(q) node[anchor=west]{Q}
+(RS.pin 1) -- (not.out)
+;
+\end{circuitikz}
+\\ etwas aufwändige Realisierung für eine einfache Leitung: \\
+\begin{circuitikz}
+	\draw
+	(0,0) node[anchor=east](d){D}
+	(0,0) to[short] ++(10,0) coordinate(q)
+	(q) node[anchor=west]{Q}
+	;
+\end{circuitikz}
+\end{center}
+
+Das D-FF braucht einen Takt, es muss taktgesteuert arbeiten.
 
 \newpage
 \section*{Abkürzungsverzeichnis}
@@ -1973,6 +2151,8 @@ Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 	\acro{SSH}{Störsicherheit}
 	\acro{DNF}{Disjunktive Normalform}
 	\acro{DMF}{Disjunktivie Minimalform}
+	\acro{KNF}{Konjunktive Normalform}
+	\acro{KMF}{Konjunktive Minimalform}
 	\acro{KPI}{Kernprimimplikant}
 	\acroplural{KPI}[KPI]{Kernprimipimplikanten}
 	\acro{PI}{Primimplikant}
