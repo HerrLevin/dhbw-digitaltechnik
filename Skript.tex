@@ -21,9 +21,7 @@
 \usepackage{mathtools}
 \usepackage{fancyhdr}
 \usepackage{pifont}
-\usetikzlibrary{calc}
-\usetikzlibrary{tikzmark}
-\usetikzlibrary{positioning}
+\usetikzlibrary{tikzmark,calc,positioning,shapes,arrows}
 
 
 \usepgfplotslibrary{groupplots}
@@ -2065,9 +2063,34 @@ Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 	\end{tabular}
 \caption{Wahrheitstabelle der Schaltwerksanalyse für Abbildung \ref{abb:schaltwerk1}}.
 \end{table}
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt, line width=2pt, 
+node distance=4cm, style ={minimum size=20mm}]
+\tikzstyle{every node}=[font=\huge]
+\node [circle, draw] (a) {00};
+\node [circle, draw] (b) [below left=of a] {01};
+\node [circle, draw] (c) [below right=of a] {10};
+\node [circle, draw] (d) [below right=of b]{11};
+\path  (a) edge [loop above] node [above=-0.7cm]{11} (a);
+\path  (b) edge [loop left] node {10+00} (b);
+\path  (c) edge [loop right] node {01+00} (c);
 
-%ToDo: Zustandsdiagramm
-\textbf{Zustandsdiagramm fehlt noch!}\\
+ \path (a) edge                    node [below=-0.7cm]{10}     (b)
+                edge                    node [below=-0.7cm]{01}    (c)
+                edge [bend left]   node [above=-0.7cm]{00}   node [at end] {\textcolor{red}{\lightning}} ++(4,2)
+          (b) edge [bend left]    node [above=-0.7cm]{11}    (a)
+                edge                     node [near start, above=-1cm]{01}   (c)
+          (c) edge [bend right]  node [above=-0.7cm]{11}    (a)
+                edge [bend left]    node [near start, below=-0.7cm]{10} (b)
+          (d) edge [bend left]     node [below=-0.7cm]{10}    (b)
+                edge [bend right]  node [below=-0.7cm]{01}    (c)
+                edge                     node [near end, right=-1cm]{11}  (a)
+                edge [bend right]  node [below=-0.7cm]{00} node [at end] {\textcolor{red}{\lightning}} ++(4,-2)
+           ;
+\end{tikzpicture}
+\caption{Zustandsübergangsdiagramm (gerichteter Graph)}
+\end{figure}
 
 \subsubsection*{RS-FF: Reset-Set-Flip-Flop (Abbildung \ref{abb:schaltwerk1})}
 \begin{tabularx}{\textwidth}{llX}
