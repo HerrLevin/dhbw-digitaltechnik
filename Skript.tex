@@ -2091,8 +2091,8 @@ node distance=4cm, style ={minimum size=20mm}]
 \end{tikzpicture}
 \caption{Zustandsübergangsdiagramm (gerichteter Graph)}
 \end{figure}
-
-\subsubsection*{RS-FF: Reset-Set-Flip-Flop (Abbildung \ref{abb:schaltwerk1})}
+\subsection{FlipFlops}
+\subsubsection{RS-FF: Reset-Set-Flip-Flop (Abbildung \ref{abb:schaltwerk1})}
 \begin{tabularx}{\textwidth}{llX}
 	\multicolumn{3}{l}{\textbf{1-bit-Speicherbaustein}}\\
 	\multicolumn{2}{l}{\textbf{2 Arbeitszustände}:} & 10 gesetzt\\
@@ -2122,7 +2122,7 @@ node distance=4cm, style ={minimum size=20mm}]
 \textbf{Anwendung RS-FF}\\
 Lichtschalter mit 2 Tastern für An und Aus (Aus $\hat{=}$ Not-Aus)\\
 
-\subsubsection*{2. FF-Typ: D-FF (\glqq Data\grqq)}
+\subsubsection{2. FF-Typ: D-FF (\glqq Data\grqq)}
 Nur einen D-Eingang über den das FF sowohl gesetzt als auch rückgesetzt werden kann. (bei D=1: FF wird gesetzt, bei D=0 FF wird rückgesetzt)
 
 \begin{center}
@@ -2153,8 +2153,32 @@ node[rs-ff,right=1cm of not, anchor=pin 1](RS){}
 \end{circuitikz}
 \end{center}
 
-Das D-FF braucht einen Takt, es muss taktgesteuert arbeiten.
+$\Rightarrow$ Wir brauchen einen Takt!
 
+\begin{Theorem}{Taktsteuerung}{}
+	Die Schaltung übernimmt die E-Belegung/ändert die A-Belegung nur bei aktivem Takt. Bei inaktivem Takt hat die E-Belegung keine Auswirkung auf die A-Belegung/die A-Belegung ändert sich nicht.
+\end{Theorem}
+
+\begin{Hint}{}{}
+	Ein Schaltnetz mit Taktsteuerung wird zum Schaltwerk, da es die A-Belegung und/oder E-Belegung beim letzten aktiven Takt speichern und solange ausgeben muss, bis der Takt inaktiv ist.
+\end{Hint}
+
+\subsection{Taktsteuerung}
+\subsubsection{\ac{TPS}}
+\begin{itemize}
+	\vspace*{-0.5em}
+	\itemsep 0em
+	\item \textbf{positive \ac{TPS}:} Der Takt ist aktiv, solange der Takt den Pegel \glqq 1\grqq{} hat.
+	\item\textbf{negative \ac{TPS}:} Der Takt ist aktiv, solange der Takt den Pegel \glqq 0\grqq{} hat.
+\end{itemize}
+
+\subsubsection{\ac{TFS}}
+\begin{itemize}
+	\vspace*{-0.5em}
+	\itemsep 0em
+	\item \textbf{positive \ac{TFS}:} Der Takt ist aktiv, wenn der Takt von Pegel \glqq 0\grqq{} auf \glqq 1\grqq{} wechselt.
+	\item \textbf{negative \ac{TFS}:} Der Takt ist aktiv, wenn der Takt von Pegel \glqq 1\grqq{} auf \glqq 0\grqq{} wechselt.
+\end{itemize}
 \newpage
 \section*{Abkürzungsverzeichnis}
 \begin{acronym}[Bash]
@@ -2179,5 +2203,7 @@ Das D-FF braucht einen Takt, es muss taktgesteuert arbeiten.
 	\acro{KPI}{Kernprimimplikant}
 	\acroplural{KPI}[KPI]{Kernprimipimplikanten}
 	\acro{PI}{Primimplikant}
+	\acro{TFS}{Taktflankensteuerung}
+	\acro{TPS}{Taktpegelsteuerung}
 \end{acronym}
 \end{document}
