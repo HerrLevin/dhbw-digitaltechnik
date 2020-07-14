@@ -2125,7 +2125,8 @@ Lichtschalter mit 2 Tastern für An und Aus (Aus $\hat{=}$ Not-Aus)\\
 \subsubsection{2. FF-Typ: D-FF (\glqq Data\grqq)}
 Nur einen D-Eingang über den das FF sowohl gesetzt als auch rückgesetzt werden kann. (bei D=1: FF wird gesetzt, bei D=0 FF wird rückgesetzt)
 
-\begin{center}
+\begin{figure}[h!]
+	\centering
 	\begin{circuitikz}
 \tikzset{rs-ff/.style={flipflop, flipflop def={t1=R, t3=S, t6={Q*},t4=Q}}}
 \draw
@@ -2151,7 +2152,8 @@ node[rs-ff,right=1cm of not, anchor=pin 1](RS){}
 	(q) node[anchor=west]{Q}
 	;
 \end{circuitikz}
-\end{center}
+\caption{Ersatzschaltbild D-FlipFlop}
+\end{figure}
 
 $\Rightarrow$ Wir brauchen einen Takt!
 
@@ -2179,6 +2181,249 @@ $\Rightarrow$ Wir brauchen einen Takt!
 	\item \textbf{positive \ac{TFS}:} Der Takt ist aktiv, wenn der Takt von Pegel \glqq 0\grqq{} auf \glqq 1\grqq{} wechselt.
 	\item \textbf{negative \ac{TFS}:} Der Takt ist aktiv, wenn der Takt von Pegel \glqq 1\grqq{} auf \glqq 0\grqq{} wechselt.
 \end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	
+	\begin{circuitikz}
+		\tikzset{rs-ff/.style={flipflop, flipflop def={t1=R, t3=S, t6={Q*},t4=Q}}}
+		\draw
+		node[european and port](a1){}
+		node[rs-ff,right=1cm of a1, anchor=pin 1](RS){}
+		node[european and port,below=0.75cm of a1](a2){}
+		(a1.in 1) to[short] ++(-3,0) coordinate(er)
+		(a2.in 2) to[short] ++(-3,0) coordinate(es)
+		(a1.in 2) to[short,] ++(-0.5,0) coordinate(p1)
+		(p1) to[short, -*] ++(0,-0.5) coordinate(p2)
+		(a2.in 1) -| (p2)
+		(p2) to[short] ++(-2.5,0) coordinate(et)
+
+		(er) node[anchor=east]{R}
+		(et) node[anchor=east]{T}
+		(es) node[anchor=east]{S}
+		
+		(RS.pin 6) to[short] ++(3,0) coordinate(qs)
+		(RS.pin 4) to[short] ++(3,0) coordinate(q)
+		(qs) node[anchor=west]{Q*}
+		(q) node[anchor=west]{Q}
+		(RS.pin 1) |- (a1.out)
+		(RS.pin 3) |- (a2.out)
+		
+		(a1.bin 2) node[color=red,anchor=east,ocirc]{}
+		(a2.bin 1) node[color=red,anchor=east,ocirc]{}
+		;
+	\end{circuitikz}
+\caption{Realisierung des RS-FlipFlop mit positiver \ac{TPS} \textcolor{red}{negativer \ac{TPS} (invertierter Takt)}}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\tikzset{flipflop AB/.style={flipflop,
+				 flipflop def={t1=R, t3=S, t4=Q, t6={Q*},
+				 c2=1,  t2={\texttt{C}}},
+				 }}
+			 \draw
+			 node[flipflop AB]{};
+	\end{circuitikz}
+\begin{circuitikz}
+\tikzset{flipflop AB/.style={flipflop,
+		flipflop def={t1=R, t3=S, t4=Q, t6={Q*},
+			c2=1,  t2={\texttt{C}}},
+}}
+\draw[color=red]
+node[flipflop AB](a){}
+(a.bpin 2) node[anchor=east,ocirc]{}
+;
+\end{circuitikz}
+\caption{Schaltsymbol RS-FlipFlop mit positiver \ac{TPS} \textcolor{red}{negativer \ac{TPS}}}
+\end{figure}
+
+\subsubsection{Schaltnetzanalyse}
+\begin{minipage}{0.45\textwidth}
+	\centering
+	\begin{circuitikz}
+\draw
+node[european buffer port](N){}
+node[european and port, right=1cm of N, anchor=in 1](A){}
+(N.bout) node[ocirc, anchor=west] {}
+(N.in) to[short, -*] ++(0, -1) coordinate(punkt)
+(punkt) -| (A.in 2)
+(punkt) to[short] ++(-2,0) coordinate(punkt2)
+(punkt2) node[anchor=east] {a (T)}
+(N.out) -- (A.in 1)
+;
+\end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		\# & a & x & $ a \wedge x $\\
+		0 & 0 & 1 & 0\\
+		1 & 1 & 0 & 0\\
+	\end{tabular}
+\end{minipage}
+\\ \\
+\textbf{Zeitverhalten:}\\
+\begin{tikztimingtable}[timing/slope=0, scale=4]
+	a     	& LLLLHHHHHHLLLLLL\\
+	x 	     & HHHHHLLLLLLHHHHH\\
+	f(a)   	& LLLLLLHLLLLLLLLL \\
+	\extracode
+	\makeatletter
+	\tikzset{
+		timing/z/.style={color=red},
+		timing/l/.style={color=red},
+		timing/h/.style={color=red}
+	}
+\end{tikztimingtable}
+
+\subsubsection{Realisierung RS-FF mit positiver \ac{TFS} (\glqq TFS für Arme\grqq)}
+
+\begin{minipage}{0.6\textwidth}
+		\begin{circuitikz}
+			\tikzset{flipflop AB/.style={flipflop,
+					flipflop def={t1=R, t3=S, t4=Q, t6={Q*},
+						c2=1,  t2={\texttt{T}}},
+			}}
+		\draw
+		node[european buffer port](N){}
+		node[european and port, right=0.5cm of N, anchor=in 1](A){}
+		node[flipflop AB, right=0.5cm of A, anchor=pin 2](FF){}
+		(A.out) -| (FF.pin 2)
+		(N.bout) node[ocirc, anchor=west] {}
+		(N.in) to[short, -*] ++(0, -0.75) coordinate(punkt)
+		(punkt) -| (A.in 2)
+		(punkt) to[short] ++(-2,0) coordinate(punkt2)
+		(punkt2) node[anchor=east] {T}
+		(N.out) -- (A.in 1)
+		(FF.pin 1) to[short] ++(-7,0)
+		(FF.pin 3) to[short] ++(-7,0)
+		;
+	\end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.35\textwidth}
+	\begin{itemize}
+		\item[$\bigoplus$]  sehr geringer HW-Aufwand
+		\item[$\bigominus$] Problem ist das Zeitverhalten: Reicht die positive TP von T mod aus, um das nachfolgende FF zum Schalten zu bringen? 
+	\end{itemize}
+\end{minipage}
+\\
+\glqq bessere\grqq/\glqq sicherere\grqq, aber auch \glqq teurere\grqq Variante einer \ac{TFS}:\\
+\begin{itemize}
+	\vspace*{-0.5em}
+	\itemsep 0em
+	\item doppelte Anzahl an \glqq internen\grqq Zuständen
+	\subitem Für jeden TP jeweils ein Zustand
+	\item nur beim Wechsel von \glqq 0\grqq- auf \glqq 1\grqq-Zustand darf sich die A-Belegung ändern.
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\tikzset{flipflop AB/.style={flipflop,
+				flipflop def={t1=R, t3=S, t4=Q, t6={Q*},
+					c2=1,  t2={\texttt{T}}},
+		}}
+	   \draw node[flipflop AB](A){};
+	   \draw[color=red] node[flipflop AB,right=1cm of A]{};
+	\end{circuitikz}
+\caption{Schaltsymbol RS-FF mit pos. TFS / \textcolor{red}{neg. TFS}}
+\end{figure}
+
+Damit: D-FF mit pos. TPS: (neg. TPS sowie pos. \& neg. TFS entsprechend)
+
+\begin{figure}[h!]
+\centering
+	\begin{circuitikz}
+	\tikzset{flipflop AB/.style={flipflop,
+			flipflop def={t1=R, t3=S, t4=Q, t6={Q*},
+				c2=1,  t2={\texttt{T}}},
+	}}
+	\draw
+	node[european buffer port](N){}
+	node[flipflop AB, right=0.5cm of N, anchor=pin 2](FF){}
+	(N.out) |- (FF.pin 1)
+	(N.bout) node[ocirc, anchor=west] {}
+	(N.in) to[short, -*] ++(0, -0.75) coordinate(punkt)
+	(punkt) -| (FF.pin 3)
+	(punkt) to[short] ++(-2,0) coordinate(punkt2)
+	(punkt2) node[anchor=east] {D}
+	;
+	\end{circuitikz}
+\caption{Ersatzschaltbild für ein D-FlipFlop mit Taktflankensteuerung}
+\end{figure}
+
+\FloatBarrier
+\noindent
+Schaltsymbol:\\
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+			\tikzset{flipflop D/.style={flipflop,
+				flipflop def={t3=D, t4=Q, t6={Q*},
+					c2=1,  t2={\texttt{T}}},
+		}}
+		\draw node[flipflop D]{};
+	\end{circuitikz}
+\caption{Schaltsymbol D-FlipFlop}
+\end{figure}
+
+\FloatBarrier
+\noindent
+\textbf{Anwendung:} manche 1bit-Speicherzellen im Computer z.B. CPU-Register, Teil des \glqq CPU-Cache\grqq{} (insbesondere L1-Cache) -- nicht dagegen im Hauptspeicher
+
+\subsection{Erneut FlipFlops}
+\subsubsection{JK-FlipFlop (Jack Kilby,  Jump and Kill)}
+
+Verhalten wie RS-FlipFlop, aber keine verbotene Eingangsbelegung, d.h. J=K=1 ist explizit erlaubt!
+
+\begin{figure}[h!]
+	\centering
+	
+	\begin{circuitikz}
+		\tikzset{rs-ff/.style={flipflop, flipflop def={t1=R, t3=S, t6={Q},t4={Q*}}}}
+		\draw
+		node[european and port](a1){}
+		node[rs-ff,right=1cm of a1, anchor=pin 1](RS){}
+		node[european and port,below=0.75cm of a1](a2){}
+		(a1.in 2) to[short] ++(-3,0) coordinate(er)
+		(a2.in 1) to[short] ++(-3,0) coordinate(es)
+		
+		(a1.in 1) to[short,] ++(0,0.5) coordinate(p1)
+		(a2.in 2) to[short] ++(0,-0.5) coordinate(p2)
+		
+		(er) node[anchor=east]{K}
+		(es) node[anchor=east]{J}
+		
+		(RS.pin 6) to[short, -*] ++(1,0) coordinate(qs)
+		(RS.pin 4) to[short, -*] ++(1,0) coordinate(q)
+		(qs) to[short] ++(1,0)
+		(q) to[short] ++(1,0)
+		(p1) -| (qs)
+		(p2) -| (q)
+		
+		(RS.pin 1) |- (a1.out)
+		(RS.pin 3) |- (a2.out)
+		
+		;
+	\end{circuitikz}
+	\caption{JK-FlipFlop Ersatzschaltbild mit RS-FlipFlop}
+\end{figure}
+
+\FloatBarrier
+\noindent
+Was passiert bei $ J=K=1 $? Das JK-FF wechselt seinen Zustand (es \glqq toggelt\grqq), solange $ J=K=1 $ (also mehrfach).\\
+
+\textbf{Unterschied zu RS-FF:}\\
+\begin{itemize}
+	\itemsep 0em
+	\vspace*{-0.5em}
+	\item[] Zustandswechsel tritt bei $ J=K=1 $ auf (und nicht bei $ R=S=0 $),
+	\subitem also dann, wenn ich das FF gleichzeitig setzen und rücksetzen will (was unmöglich ist), wohingegen das RS-FF dann \glqq flimmert\grqq, wenn es seinen Zustand (bei $ R=S=0 $) nicht ändern sollte!
+	\item[] JK-FF mit \ac{TPS}: FF toggelt, solange $ J=K=T=1 $!
+	\item[] JK-FF mit \ac{TFS}: FF toggelt, wenn $ J=K=1 $ und akt. TF! und außerdem genau 1x! (\textbf{Achtung:} bei \glqq TFS für Arme\grqq{} kann das nicht sichergestellt werden!)
+\end{itemize}
+
 \newpage
 \section*{Abkürzungsverzeichnis}
 \begin{acronym}[Bash]
