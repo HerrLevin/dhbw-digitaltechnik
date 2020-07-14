@@ -48,5 +48,5 @@
 \contentsline {subsubsection}{\numberline {4.2.1}RS-FF: Reset-Set-Flip-Flop (Abbildung \ref {abb:schaltwerk1})}{30}{subsubsection.4.2.1}%
 \contentsline {subsubsection}{\numberline {4.2.2}2. FF-Typ: D-FF (\glqq Data\grqq )}{31}{subsubsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.3}Taktsteuerung}{31}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}\ac {TPS}}{31}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}\ac {TFS}}{31}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.1}\acf {TPS}}{31}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}\acf {TFS}}{31}{subsubsection.4.3.2}%
