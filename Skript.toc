@@ -56,3 +56,5 @@
 \contentsline {subsubsection}{\numberline {4.4.1}JK-FlipFlop (Jack Kilby, Jump and Kill)}{33}{subsubsection.4.4.1}%
 \contentsline {subsubsection}{\numberline {4.4.2}T-FlipFlop (Toggle)}{33}{subsubsection.4.4.2}%
 \contentsline {subsubsection}{\numberline {4.4.3}Anderes Speicherprinzip: Kondensator Speicherladung}{35}{subsubsection.4.4.3}%
+\contentsline {section}{\numberline {5}Definitionsverzeichnis}{i}{section.5}%
+\contentsline {section}{\numberline {6}Abkürzungsverzeichnis}{ii}{section.6}%

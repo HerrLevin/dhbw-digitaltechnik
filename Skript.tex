@@ -46,7 +46,7 @@
 %\newtcbtheorem{thm}{Theorem}{code={\NR@gettitle{#2}}}{thm}  % alternatively, if nameref is loaded
 \makeatother
 
-\newtcbtheorem{Theorem}{Definition}{
+\newtcbtheorem[list inside={def}]{Theorem}{Definition}{
 	enhanced,
 	sharp corners,
 	attach boxed title to top left={
@@ -141,11 +141,11 @@
 
 \section{Codierung}
 
-	\begin{Theorem}{}{}
+	\begin{Theorem}{Codierung}{}
 		Codierung ist die Darstellung von Informationen mit einem \glqq Alphabet\grqq.
 	\end{Theorem}
 		
-	\begin{Theorem}{}{}
+	\begin{Theorem}{Alphabet}{}
 		Alphabet ist eine \underline{endliche} Menge von Symbolen
 	\end{Theorem}
 	
@@ -742,8 +742,8 @@ node[anchor=north]{Hidden Bit};
 
 \subsubsection{Einschrittiger Code (Gray Code )}
 
-\begin{Theorem}{}{}
-	Ein einstelliger Zahlencode ist einZahlencode bei dem sich zwei aufeinanderfolgende Zahlen um nur eine Stelle ändert.
+\begin{Theorem}{Einstelliger Zahlencode}{}
+	Ein einstelliger Zahlencode ist ein Zahlencode bei dem sich zwei aufeinanderfolgende Zahlen um nur eine Stelle ändert.
 \end{Theorem}
 
 \begin{minipage}{0.45\textwidth}
@@ -796,7 +796,7 @@ Graycode ist weder Abzähl- noch Stellenwertsystem. Es ist eine ganz andere Wert
 \newpage
 \subsection{Signalcodierung}
 
-\begin{Theorem}{}{}
+\begin{Theorem}{Signalcodierung}{}
 	Darstellung von abstrakten Informationen als Signalfolge. \\
 	Signal: physisch messbare Größe.
 \end{Theorem}
@@ -1286,7 +1286,7 @@ Beweis: $ x \wedge 0 \overset{H4}{=} x \wedge (x \wedge \overline{x})  \overset{
 1-Absorption: $ x \vee 1 \overset{!}{=} $\\
 Beweis: \\
 %ToDo
-\begin{Theorem}{}{}
+\begin{Theorem}{Boolsche Funktionen}{}
 Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegung (der $ n $ Eingangsvariablen) wird genau eine Ausgangsbelegung zugeordnet.
 \end{Theorem}
 
@@ -1296,7 +1296,7 @@ Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegun
 	\item Wahrheitstabelle
 \end{enumerate}
 
-\begin{Theorem}{}{}
+\begin{Theorem}{Äquivalenz}{}
 	Zwei Funktionen sind äquivalent, wenn sie dieselbe Wahrheitstabelle aufweisen
 \end{Theorem}
 
@@ -1378,7 +1378,7 @@ Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 \end{tabular}
 \end{center}
 
-\begin{Theorem}{}{}
+\begin{Theorem}{Vollständige Operatorensysteme}{}
 	Ein vollständiges Operatorensystem (der Boolschen Algebra/Schaltalgebra) ist eine Menge von Operatoren, mit denen jede (Boolsche) Funktion (der Schaltalgebra) dargestellt werden kann.
 \end{Theorem}
 
@@ -1478,13 +1478,13 @@ $$
 \end{tabular}
 \end{table}
 
-\begin{Theorem}{}{}
+\begin{Theorem}{\acl*{DNF}}{}
 	Die Disjunktion aller Minterme der Funktion $ f $ heißt \ac{DNF}.
 \end{Theorem}
-\begin{Theorem}{}{}
+\begin{Theorem}{\acl*{PI}}{}
 Ein \ac{PI} ist ein Implikant, der mit keinem anderen Implikanten zusammengefasst werden kann
 \end{Theorem}
-\begin{Theorem}{}{prim_kernprimimplikant}
+\begin{Theorem}{\acl*{KPI}}{prim_kernprimimplikant}
 	Ein \ac{KPI} ist ein \ac{PI}, welcher mindestens eine der Ausgangsbelegung exklusiv abdeckt (bzw. bei dem mindestens ein Minterm beim Zusammenfassen ausschließlich für diesen \ac{PI} verwendet wurde.)
 \end{Theorem}
 
@@ -1980,7 +1980,7 @@ $\Rightarrow$ der Einfachheit halber trotzdem:\\
 Im Schaltnetz (Abb. \ref{abb:schaltnetzG}) ist $ g $ äquivalent zu $ f $ (Abb. \ref{dnf:schaltnetz})! Für die Realisierung von $ g $ sind aber nur 6 Transistoren nötig, d.h. 10 Transistoren weniger als für $ f $.\\
 \\
 Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
-\begin{Theorem}{}{}
+\begin{Theorem}{\acl*{DMF}}{}
 	Eine \ac{DMF} ist eine Disjunktion von Konjunktionen von Literalen, welche die Funktion darstellt und \glqq minimal\grqq{} ist.\\
 	Minimal bedeutet, mit am wenigsten Hardware-Aufwand zu realisieren.
 \end{Theorem}
@@ -2699,9 +2699,17 @@ $\Rightarrow$ HW-Aufwand: 2 Transistor-Äquivalente, also $ \dfrac{1}{3} $ des H
 	$\Rightarrow$ während eines laufenden Refreshzyklus dauert der Zugriff unverhältnismäßig länger als \glqq normal\grqq
 \end{enumerate}
 
+Einsatz: \glqq DRAM\grqq{} $\hat{=}$ Dynamic RAM $\hat{=}$ Kondensatorspeicher\\
+$\Rightarrow$ Hauptspeicher, L3-Cache, heutige Grafikkartenspeicher (meist)\\
+\\
+dem gegenüber \glqq SRAM\grqq{} $\hat{=}$ Static RAM $\hat{=}$ D-FF-Speicher\\
+$\Rightarrow$ CPU-Register, L1-Cache, früherer teurer Grafikkartenspeicher
 
 \newpage
-\section*{Abkürzungsverzeichnis}
+\pagenumbering{roman}
+\tcblistof{def}{Definitionsverzeichnis}
+\newpage
+\section{Abkürzungsverzeichnis}
 \begin{acronym}[Bash]
 	\acro{SWS}{Stellenwertsysteme}
 	\acroplural{SWS}[SWS]{Stellenwertsysteme}
