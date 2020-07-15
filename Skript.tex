@@ -133,7 +133,7 @@
 	\begin{tabular}{r|l}
 		digital & analog \\
 		wertediskret & wertekontinuierlich\\
-		$\Rightarrow$ zwischen zwei benachbarten gibt es \underline{keine} zwischenwerte & $\Rightarrow$ zwischen zwei beliebigen gibt es unendlich viele Zwischenwerte \\
+		$\Rightarrow$ zwischen zwei benachbarten gibt es \underline{keine} Zwischenwerte & $\Rightarrow$ zwischen zwei beliebigen gibt es unendlich viele Zwischenwerte \\
 		$ \Rightarrow $ endlich oder auch unendlich (aber abzählbar viele) & $ \Rightarrow $ Immer unendlich (und sogar überabzählbar) viele Werte \\
 		meist zeitdiskret (\glqq getaktet\grqq) & zeitkontinuierlich \\
 		$ \Rightarrow $ unsere heutigen Rechner arbeiten digital & $ \Rightarrow $ unsere Welt \glqq arbeitet\grqq\ analog
@@ -155,7 +155,7 @@
 	\begin{itemize}
 		\item Zeichencodierung
 		\item Zahlencodierung (Text-, Bildbearbeitung,\dots)
-		\item Verschlüssellung (\textit{Achtung:} Unterschied zu anderen Codierungen: Aus der codierten verschlüsselten Info sollen die meisten Menschen nicht auf die Ursprungsinfo schließen können)
+		\item Verschlüsselung (\textit{Achtung:} Unterschied zu anderen Codierungen: Aus der codierten verschlüsselten Info sollen die meisten Menschen nicht auf die Ursprungsinformation schließen können)
 		\item Signalcodierung
 	\end{itemize}
 
@@ -187,7 +187,7 @@
 		\item[$ \ominus $] bis auf weiteres nur nicht-negative ganze Zahlen
 		\item[$ \oplus $] extrem einfach und verständlich		
 		\item[$ \oplus $] extrem einfache Addition und Subtraktion
-		\item[$ \ominus $] Multiplikation und Divisionmit erhöhtem Aufwand
+		\item[$ \ominus $] Multiplikation und Division mit erhöhtem Aufwand
 		\item[$ \oplus $] Immer verfügbar/\glqq zur Hand\grqq\
 	\end{itemize}
 	\subparagraph{Strichliste (einfache)}
@@ -251,12 +251,12 @@
 		Wert(Z_{n-1} \dots Z_0) = \sum_{i=0}^{n-1}|Z_i| \cdot b^i
 	$$
 	$b_{EIN}$ mit $b>1$\\
-	\textit{Anmerkung:} $b=1$ nicht sinnvoll, da im \ac{SWS} zur Basis nur die 0 dargestelt werden könnte.
+	\textit{Anmerkung:} $b=1$ nicht sinnvoll, da im \ac{SWS} zur Basis nur die 0 dargestellt werden könnte.
 	\begin{itemize}
 		\item[$ \oplus/\ominus $] gewisses \glqq Erstverständnis\grqq\/Lernaufwand ist nötig
-		\item[$ \oplus/\ominus $] es gibt für jede Grundrechenart einVerfahren mit etwas erhöhter Komplexität, welches aber nach erstmaligem Lernaufwand doch relativ problemfrei realisierbar ist
+		\item[$ \oplus/\ominus $] es gibt für jede Grundrechenart ein Verfahren mit etwas erhöhter Komplexität, welches aber nach erstmaligem Lernaufwand doch relativ problemfrei realisierbar ist
 		\item[$ \oplus/\ominus $] unbeschränkter Wertebereich
-		\item[$ \oplus/\ominus $] Wertebereich bis etwa $b^10$ ist übersichtlich darstelbar
+		\item[$ \oplus/\ominus $] Wertebereich bis etwa $b^10$ ist übersichtlich darstellbar
 	\end{itemize}
 	\subsubsection*{Umrechnung}
 	\begin{itemize}
@@ -278,7 +278,7 @@
 	\end{split}
 	\end{equation*}
 	Hinweis: Führende \glqq 0\grqq\ können bei Zahlen im \ac{SWS} beliebig hinzugefügt oder weggelassen werden. 
-	allg: Umrechnung von Basis $b_1$ nach Basis $b_2$
+	allg.: Umrechnung von Basis $b_1$ nach Basis $b_2$
 	\begin{itemize}
 		\item meist: von Basis $b_1$ nach $b_Z=10$ dann von $b_Z$ nach $b_2$
 		\item theoretisch: Ganzzahldivision durch Zielbasis $b_2$, aber ausgeführt im \ac{SWS} zur Ausgangsbasis $\Rightarrow$ Nicht praktikabel
@@ -525,7 +525,7 @@ $$
 \text{Exp}_{\text{gespeichert}} = \text{Exp}_{\text{real}} + \text{Bias}
 $$
 
-Bias wird forher festgelegt, z.B. bei 8-bit-Exp: Bias=127.
+Bias wird vorher festgelegt, z.B. bei 8-bit-Exp: Bias=127.
 
 \subsubsection*{Im Computer: \ac{GKZ} zur Basis 2}
 normalisierte Darstellung $ \Rightarrow $ Vkst ist immer \glqq 1\grqq.\\
@@ -818,8 +818,8 @@ Graycode ist weder Abzähl- noch Stellenwertsystem. Es ist eine ganz andere Wert
 \subsubsection*{in der Computertechnik relevant:}
 
 \begin{list}{}{}
-	\item[] optisch $\Rightarrow$ für netzwerkschnittstellen
-	\item ekeltrisch $\Rightarrow$ insbesondere in der Digitaltechnik
+	\item[] optisch $\Rightarrow$ für Netzwerkschnittstellen
+	\item elektrisch $\Rightarrow$ insbesondere in der Digitaltechnik
 	\subitem \textbf{vor allem:} Spannung (evtl. auch Stromstärke)\\
 	\hspace*{2em}$\Rightarrow$ eher kleinere Spannungspegel in der Digitaltechnik
 \end{list}
@@ -862,29 +862,29 @@ $ TTL-Pegel
 \begin{itemize}
 	\item[$\bigominus$] größere sind stromanfällig bei kleineren Spannungen
 	\item[$\bigoplus$] viel weniger Energieaufwand bei kleinen Spannungen, also auch weniger Wärmeentwicklung
-	\item[$\bigoplus$] weniger Störauswrkungen bei kleineren Spannungen
+	\item[$\bigoplus$] weniger Störauswirkungen bei kleineren Spannungen
 	\item[$\bigoplus$] schnelleres Spannungswechseln bei kleinen Spannungshüben möglich
 \end{itemize}
 
 \subsubsection{Umsetzung von Bitfolgen in Spannungspegelfolgen}
-\hspace*{2em} meist getaktet, d.h. festes Zeitraster für die Bitfolge, d.h. jedes Bit braucht eine konstante, gleichlange zeitdauer
+\hspace*{2em} meist getaktet, d.h. festes Zeitraster für die Bitfolge, d.h. jedes Bit braucht eine konstante, gleichlange Zeitdauer
 
 
 
 \subsubsection*{4 Verfahren (1-4) und 4 Eigenschaften(a-d)}
 \begin{enumerate}
 	\item \textbf{\underline{\acf{NRZ}}}\\[0.5em]
-	Während der gesamten Schrittdauer wird der Pegel angegegt, welcher dem zu übertragenen Bitwert entspricht
+	Während der gesamten Schrittdauer wird der Pegel angeregt, welcher dem zu übertragenen Bitwert entspricht
 	\item \textbf{\underline{\acf{RZ}}}\\[0.5em]
 	Jeder Schritt wird in zwei Schrittzeithälften eingeteilt. Während der ersten Hälfte wird der Pegel eingenommen, welcher den zu übertragenden Bitwert entspricht und während der zweiten Hälfte immer der \glqq0\grqq\-Pegel.
 	\subitem \ac{TRG} bei \ac{RZ}: Bei jeder \glqq1\grqq\ möglich, dann bei einer \glqq1\grqq\ zu Beginn und in der Mitte der Schrittzeit ein Pegelwechsel stattfindet
 	\item \textbf{\underline{\acf{AMI}}} \\[0.5em]
 	Ähnlich \ac{NRZ} mit single-ended Pegeln, d.h. \glqq0\grqq\ wird immer mit $0V$ (während der gesamten Schrittzeit) übertragen, aber \glqq1\grqq\ abwechselnd mit z.B. $+5V$ und $-5V$ (während der gesamten Schrittzeit)
-	\subitem \ac{GSF} bei \ac{AMI}: nachjeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
+	\subitem \ac{GSF} bei \ac{AMI}: nach jeder 2. \glqq1\grqq: In der Praxis ist der GS-Anteil nach der ungeraden \glqq1\grqq\ vernachlässigbar (bei langer Übertragungszeit und vielen übertragenen \glqq1\grqq), also praktisch immer \ac{GSF}.
 	\subitem \ac{TRG} bei \ac{AMI}: bei jeder \glqq1\grqq\ nur bei langer Folge von \glqq0\grqq\ keine \ac{TRG} möglich
 	\item \textbf{\underline{Manchester}}\\
 	Bitwert wird über Spannungswechsel in der Mitte der Schrittzeit dargestellt, z.B. steigende Flanke $\hat{=}$ \glqq1\grqq{} und fallende Flanke $\hat{=}$ \glqq 0\grqq.\\
-	ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfogenden (inhaltsführenden) Spannungswechsel durchführen zu können.
+	ggf. ist ein weiterer Spannungswechsel zu Beginn der Schrittzeit notwendig, um den nachfolgenden (inhaltsführenden) Spannungswechsel durchführen zu können.
 	\subitem \ac{TRG} bei Manchester: bei jedem Schritt möglich, da immer Regelwechsel in der Mitte der Schrittzeit.
 	\subitem \ac{GSF} bei Manchester: immer, da sich die Pegel in erster und zweiter Schrittzeithälfte gegenseitig ausgleichen
 	\subitem \ac{SSH} bei Manchester: optimal, da \glqq nur\grqq{} 2 Pegel
@@ -892,7 +892,7 @@ $ TTL-Pegel
 
 \begin{enumerate}
 	\item[a)] \textbf{\underline{\ac{TRG}}}\\[0.5em]
-	Möglichkeit, nur aus dem übertragenen Datensignal eine Resynchronisierung biem Empfänger auf den Takt des Senders zu machen
+	Möglichkeit, nur aus dem übertragenen Datensignal eine Resynchronisierung beim Empfänger auf den Takt des Senders zu machen
 	
 	\item[b)]\textbf{\underline{ \ac{GSF}}} \\[0.5em]
 	Motivation: Einsparung der Masseleitung. Im zeitlichen Mittel liegen auf der Signalleitung 0V an.\\
@@ -901,7 +901,7 @@ $ TTL-Pegel
 	\subitem -Pseudoargument: keine Energieübertragung vom S zum E.\\
 	Grundvoraussetzung: symmetrische Pegel statt single-ended. \\
 	z.B. $1V \hat{=} +5V$ und $0 \hat{=} -5V$\\
-	dann: \ac{GSF} bei \ac{NRZ}: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleichverteilt)\\\\
+	dann: \ac{GSF} bei \ac{NRZ}: falls \#\glqq0\grqq\ = \#\glqq1\grqq\ (bzw. \glqq1\grqq\ und \glqq0\grqq\ im Datenstrom gleich verteilt)\\\\
 	Bei den meisten Anwendungs-, Zeichen- und Zahlencodierungen kann keine Gleichverteilung angenommen werden. Ausnahme: Verschlüsselung und Kompression.
 	\item[c)] \textbf{\underline{\ac{SSH}}}\\[0.5em]
 	(Un-)Anfälligkeit eines Verfahrens ggü. Störungen, welche durch Spannungsschwankungen auf der Leitung verursacht werden.\\
@@ -911,7 +911,7 @@ $ TTL-Pegel
 	
 	\item[d)] \textbf{\underline{Bandbreitenbedarf, bandbreitenbegrenzte Übertragungskanäle}}\\[0.5em]
 	\noindent
-	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalcodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
+	\textbf{\ac{BBB}: }notwendige Bandbreite für ein bestimmtes Signalkodierungsverfahren bei einer bestimmten vorgegebenen Schrittrate\\
 	\textbf{\ac{BBB} bei \acl{NRZ}:} halbe Schrittrate, d.h. optimal H. Nyquist (max Frequenz bei \glqq010101...\grqq)\\
 	\textbf{\ac{BBB} bei \acl{RZ}:} Schrittrate, d.h. doppelt so viel wie nötig. (max Frequenz bei \glqq000000...\grqq, oder \glqq 111111...\grqq{} )\\
 	\textbf{\ac{BBB} bei \acl{AMI}:} halbe Schrittrate (max Frequenz bei \glqq 111111...\grqq)\\
@@ -966,7 +966,7 @@ $ TTL-Pegel
 	 & \ac{BBB} \newline abhängig von Schrittrate \\ \hline \rule{0pt}{2em} 
 	 \ac{NRZ} 
 	 & bei \glqq 01\grqq{} und \glqq 10\grqq{} \newline \circled{$--$} 
-	 & \#\glqq 1\grqq{} = \# \glqq 0\grqq{} \newline (1 und 0 gleichverteilt) \newline \circled{$-$}
+	 & \#\glqq 1\grqq{} = \# \glqq 0\grqq{} \newline (1 und 0 gleich verteilt) \newline \circled{$-$}
 	 & 2 \newline \circled{$+$}
 	 & halbe \newline \circled{$+$}\\ \hline \rule{0pt}{2em}
 	 \ac{RZ}
@@ -1025,7 +1025,7 @@ $ TTL-Pegel
 \\ \\ \\
 	\textbf{Hinweis:} Der Empfänger schaut nach $n$ gleichen Bitwerten den nächsten Bitwert an. Bei entgegengesetztem Bitwert wird dieses \glqq Stopfbit\grqq{} entfernt. Bei gleichem Bitwert wird ein Fehler nach oben gemeldet.
 	\\[0.25em]
-	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! 
+	\textbf{Vor-/Nachteile:} Overhead bei \ac{NRZ} im schlimmsten Fall nur halb so groß wie bei der Startbitsequenz (nur eine statt zwei Schrittzeiten pro $n$ Nutzdatenbit) und im besten Fall gar kein Overhead! 
 	\\[0.25em]
 	\textbf{Bei \ac{RZ}:} nur nach $n$ \glqq 0\grqq{} wird eine \glqq 1\grqq{} eingefügt, d.h. weniger Overhead als bei \ac{NRZ} und Bitstuffing. Verfahren ist komplex und deshalb\grqq{} teuer\grqq{} und \glqq fehleranfällig\grqq{} . Nutzdatenrate ist nicht konstant abhängig von Schrittrate, sondern sie variiert abhängig von den zu übermittelnden Nutzdaten (Overhead ist variabel) $\Rightarrow$ schlecht für Anwendungen mit konstanter Nutzdatenrate (z.B. PCM-kodiertes Audio)
 	\\[0.25em]
@@ -1061,7 +1061,7 @@ Ganggenauigkeit der Uhren und Anzahl der Schritte ohne Resynchronisierung:
 \end{tikzpicture}
 \end{center}
 Der Pegel wird beim Empfang in der Mitte der angenommenen Schrittzeit abgetastet.\\
-\hspace*{1em} $\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\[0.5em]
+\hspace*{1em} $\Rightarrow$ Die erlaubte Abweichung der Uhr bei $E$ von der Uhr bei $S$ ist (weniger als) eine halbe Schrittzeit. Da sowohl $S$- als auch $E$-Uhr eine Ganggenauigkeit aufweisen können, darf jede Uhr um maximal 25\% einer Schrittzeit abweichen.\\[0.5em]
 Bsp: Bei 5\% spezifischer Ganggenauigkeit wären 5 Schritte \glqq zu viel\grqq
 
 \newpage
@@ -1105,7 +1105,7 @@ Durch \circled{H4} wird ein einstelliger Operator definiert:\\
 \noindent\hspace*{2em}% 
 $\overline{a} = \neg a \; \; NICHT, NOT$
 \subsection{Schaltalgebra}
-\subsubsection{Huntingtonsche Axiome in der Schaltalgebra}
+\subsubsection{Huntington'sche Axiome in der Schaltalgebra}
 \begin{itemize}
 	\item[\circled{H1}] $a \vee b = b \vee a, \; a \wedge b  = b \wedge a$
 	\item[\circled{H2}] $a \vee (b \wedge c) = (a \vee b) \wedge (a \vee c)$\\
@@ -1182,7 +1182,7 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 	\item Ersetzen der Variablen durch die entsprechenden Werte
 	\item Auswerten \glqq von innen nach außen\grqq
 	\subitem Zunächst den Teilausdruck mit der stärksten Bindungskraft, zuletzt der Teilausdruck mit der schwächsten\\ Bindungskraft: am stärksten... $NOT$, Klammer, $AND$, $OR$ ...am schwächsten
-	\item bei gleicher Bindungskraft Auswertug von links nach rechts
+	\item bei gleicher Bindungskraft Auswertung von links nach rechts
 \end{itemize}
 
 \begin{table}[h!]
@@ -1209,7 +1209,7 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 \label{tab:ausdruck}
 \end{table}
 
-\subsubsection{Aus den Huntingtonschen axiomen abgeleitete (beweisbare Gesetze)}
+\subsubsection{Aus den Huntington'schen Axiomen abgeleitete (beweisbare Gesetze)}
 \begin{center}
 	\begin{tabular}{ll}
 	Assoziativgesetz & $(a \wedge b) \wedge c = a \wedge (b\wedge c)$ \\
@@ -1227,7 +1227,7 @@ Auswertung eines boolschen Ausdrucks: $(a \wedge \neg c) \vee 1 \wedge(b \wedge 
 	\item algebraische Umformungen mit Hilfe der Axiome und bereits bewiesener Gesetze: \\
 	$ a \overset{!}{=} a \wedge a $ (Idempotenzgesetz)\\
 	$ a \overset{H3}{=} a \wedge 1 \overset{H4}{=} a \wedge ( a \vee \overline{a} ) \overset{H2}{=} (a \wedge a) \vee (a \wedge \overline{a}) \overset{H4}{=} (a \wedge a) \vee 0 \overset{H3}{=} a \wedge a$
-	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle Eingangsbelegugen dieselbe Ausgagsbelegung haben (Tabelle \ref{tab:beweiswhtbl})
+	\item Wahrheitstabelle: Terme auf linker und rechter Seite müssen für alle Eingangsbelegungen dieselbe Ausgangsbelegung haben (Tabelle \ref{tab:beweiswhtbl})
 	\item spezielle Interpretation von $H4$:\\
 	falls $ a \vee \overline{b} = 1 $ und $ a \wedge \overline{b} = 0 $, dann $ a = b $\\
 	$ a \vee (b \vee c) \overset{!}{=} (a \vee b) \vee c $ (Assoziativgesetz)
@@ -1315,7 +1315,7 @@ Boolsche Funktionen abhängig von $ n $ Eingangsvariablen: Jeder Eingangsbelegun
 					 & $ f_1(a) = \overline{a} $ & \glqq Negation\grqq{} \\
 					 & $ f_2(a) = a $ & \glqq Identität\grqq{} \\
 					 & $ f_3(a) = 1 $ & \glqq Einsfunktion\grqq{} \\ \hline
- \multicolumn{3}{|l|}{$ \Rightarrow $ genau 4 verschiedene Funktionen abhängig vn 1 Variablen!}\\ \hline
+ \multicolumn{3}{|l|}{$ \Rightarrow $ genau 4 verschiedene Funktionen abhängig von 1 Variablen!}\\ \hline
 \end{tabular}
 \label{tab:funktionenausgang}
 \caption{Funktionen abhängig von Ausgangsvariablen ($ n = 0 \ldots 1 $)}
@@ -1366,7 +1366,7 @@ Anzahl verschiedener Wertetabellen: $ 2^{2^{n}} \Rightarrow $ Anzahl der Funktio
 \noindent
 \textbf{Implikation:} $ a \Rightarrow b $ (\glqq aus a folgt b\grqq)\\
 Aussage a: \glqq An der DHBW KA gibt es einen Corona-Fall.\grqq\\
-Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
+Aussage b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 
 \begin{center}
 	\begin{tabular}{ccc|c}
@@ -1387,7 +1387,7 @@ Aussabe b: \glqq An der DHBW KA finden keine Präsenzvorlesungen statt.\grqq\\
 	\begin{tabular}{rp{10cm}}
 	Satz: & $ \{\wedge, \vee, \neg\} $ ist ein vollständiges Operatorensystem.\\
 	Bew.:& Definition der Boolschen/Schaltalgebra.\\ \hline
-	Satz: & $ \{\wedge, \neg\} $ ist ein volständiges Operatorensystem.\\
+	Satz: & $ \{\wedge, \neg\} $ ist ein vollständiges Operatorensystem.\\
 	Bew.:& $ a \vee b \overset{\text{dopp.Neg.}}{=} \overline{\overline{a\vee b}} \overset{\text{De Morgan}}{=} \overline{\overline{a} \wedge \overline{b}}\; \blacksquare$\\ \hline
 	Satz: & $ \{\vee, \neg\} $ ist ein vollständiges Operatorensystem.\\
 	Bew.:& $ a \wedge b \overset{\text{dopp.Neg.}}{=} \overline{\overline{a \wedge b}} \overset{\text{De Morgan}}{=} \overline{\overline{a} \vee \overline{b}}\; \blacksquare $\\ \hline
@@ -1698,7 +1698,7 @@ Schaltnetze bestehen aus Gattern und Leitungsverbindungen. Sie sind die Darstell
 	\caption{Symbole für die Operatoren (\glqq Gatter\grqq) nach DIN/IEC}
 \end{figure}
 
-\textbf{Konvetionen:}
+\textbf{Konventionen:}
 \begin{itemize}
 	\item Jeder Ein- oder Ausgang eines Gatters kann durch einen nicht-ausgefüllten Kreis invertiert werden.
 	\item Eingänge bei Gattern werden meist links (oder alternativ oben) und die Ausgänge meist rechts (oder unten) notiert. Nur in Ausnahmefällen sind Eingänge rechts oder unten bzw. Ausgänge links oder oben!
@@ -1989,7 +1989,7 @@ Wie finden wir eine weniger aufwändige Realisierung als die \ac{DNF}?\\
 \section{Schaltwerke}
 \begin{tabular}{ll}
 	Verhalten: & Können sich etwas merken/\glqq speichern\grqq\\
-	Afubau: & Rückkopplungen (von Aus- zu Eingängen) sind erlaubt \\
+	Aufbau: & Rückkopplungen (von Aus- zu Eingängen) sind erlaubt \\
 \end{tabular}
 
 \begin{figure}[h!]
@@ -2723,14 +2723,14 @@ $\Rightarrow$ CPU-Register, L1-Cache, früherer teurer Grafikkartenspeicher
 	\acro{RZ}{Return-to-Zero}
 	\acro{AMI}{Alternate Mark Inversion}
 	\acro{TRG}{Taktrückgewinnung}
-	\acro{GSF}{Gleichspannungs-/stromfreiheit}
+	\acro{GSF}{Gleichspannungs-/Stromfreiheit}
 	\acro{SSH}{Störsicherheit}
 	\acro{DNF}{Disjunktive Normalform}
-	\acro{DMF}{Disjunktivie Minimalform}
+	\acro{DMF}{Disjunktive Minimalform}
 	\acro{KNF}{Konjunktive Normalform}
 	\acro{KMF}{Konjunktive Minimalform}
 	\acro{KPI}{Kernprimimplikant}
-	\acroplural{KPI}[KPI]{Kernprimipimplikanten}
+	\acroplural{KPI}[KPI]{Kernprimimplikanten}
 	\acro{PI}{Primimplikant}
 	\acro{TFS}{Taktflankensteuerung}
 	\acro{TPS}{Taktpegelsteuerung}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2020.6.22)  16 JUL 2020 00:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2020.6.22)  16 JUL 2020 00:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1494,7 +1494,7 @@ although it is yet undefined on input line 52.
  [2
 
 ]
-Overfull \hbox (28.54341pt too wide) in paragraph at lines 133--141
+Overfull \hbox (30.21008pt too wide) in paragraph at lines 133--141
 [] 
  []
 
@@ -2032,7 +2032,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  61332 strings out of 480478
  1499079 string characters out of 5905959
- 2211296 words of memory out of 5000000
+ 2211292 words of memory out of 5000000
  76243 multiletter control sequences out of 15000+600000
  551193 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2063,7 +2063,7 @@ re/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/f
 onts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texmf-dist/fonts/typ
 e1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/urw/zapfding
 /uzdr.pfb></usr/share/texmf-dist/fonts/type1/public/wasy-type1/wasy10.pfb>
-Output written on Skript.pdf (38 pages, 500609 bytes).
+Output written on Skript.pdf (38 pages, 500617 bytes).
 PDF statistics:
  946 PDF objects out of 1000 (max. 8388607)
  823 compressed objects within 9 object streams
