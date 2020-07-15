@@ -2527,7 +2527,177 @@ $\Rightarrow$ Rückwärtszähler\\
 $\Rightarrow$ Vorwärtszähler bei Invertierung zwischen Q und T
 \end{center}
 
+\vspace*{2em}
+\begin{center}
+	\begin{circuitikz}
+		\tikzset{flipflop T/.style={flipflop,
+				flipflop def={t4=Q,c2=1,t2={\texttt{T}}},
+		}}
+		\draw
+		node[flipflop T](T1){}
+		node[european xor port, right=1cm of T1](T2){}
+		node[flipflop T, right=1cm of T2](T3){}
+		(T1.pin 4) |- (T2.in 2)
+		(T2.out) |- (T3.pin 2)
+		(T2.in 1) |- ++(0,1) coordinate(p1)
+		(T1.pin 2) node[anchor=east] {$ T $}
+		(p1) node[anchor=south] {direction}
+		;
+	\end{circuitikz}
+\end{center}
 
+\begin{tabular}{rl}
+	XOR: & bei \textit{direction=1} wird das andere E-Signal invertiert\\
+	          & bei \textit{direction=0} nicht invertiert\\
+	$\Rightarrow$ & Zähler, der in beide Richtungen (vor- und rückwärts) zählen kann\\
+	\multicolumn{2}{l}{Noch zu verbessern:}\\
+	& Auch bei Änderung von \textit{direction} wird \glqq gezählt\grqq\\
+	& Setz- bzw. Rücksetzmöglichkeit\\
+\end{tabular}
+\\
+Der Hardware-Aufwand für ein D-FF als 1bit-Speicher ist (zu) groß!
+
+\begin{center}
+	\begin{circuitikz}
+		\draw
+		(0,1) node[anchor=east](inT){T}
+		(3,0) node[european and port](a1){}
+		(3,2) node[european and port](a2){}
+
+		(inT) |- (1,1) node[circ]{}
+		(1,1) |- (a2.in 2)
+		(1,1) |- (a1.in 1)
+
+		
+		(5,0) node[european or port](o1){}
+		(5,2) node[european or port](o2){}
+		(o1.bout) node[anchor=west,ocirc]{}
+		(o2.bout) node[anchor=west,ocirc]{}
+		(a2.out) |- (o2.in 1)
+		(a1.out) |- (o1.in 2)
+		(o1.out) |- (5,0.75)
+		(o2.out) |- (5,1.25)
+		(3,0.75) |- (o1.in 1)
+		(3,1.25) |- (o2.in 2)
+		(3,0.75) -- (5,1.25)
+		(3,1.25) -- (5,0.75)
+		(6,2) node[anchor=west](outx){}
+		(6,0) node[anchor=west](outy){}
+		(o2.out) |- (outx)
+		(o1.out) |- (outy)
+		;
+				
+		\draw
+		node[european buffer port, left=1cm of a2](not){}
+		(not.bout) node[anchor=west,ocirc]{}
+		(a1.in 2) to[short, -*] ++(-3.5,0) coordinate(punkt)
+		(punkt) to[short] ++(-1,0) coordinate(n)
+		(n) node[anchor=east]{D}
+		(not.in) -| (punkt)
+		(a2.in 1) -| (not.out)
+		;
+	\end{circuitikz}
+\\
+$\Rightarrow$ 8Tr.\\
+\end{center}
+
+
+\begin{center}
+	\begin{circuitikz}
+		\draw
+		
+		
+		(5,0) node[european and port, number inputs=3](o1){}
+		(5,2) node[european and port, number inputs=3](o2){}
+		(o1.bout) node[anchor=west,ocirc]{}
+		(o2.bout) node[anchor=west,ocirc]{}
+		(o2.bin 1) node[ocirc]{}
+		(o1.out) |- (5,0.75)
+		(o2.out) |- (5,1.25)
+		(3,0.75) |- (o1.in 1)
+		(3,1.25) |- (o2.in 3)
+		(3,0.75) -- (5,1.25)
+		(3,1.25) -- (5,0.75)
+		(6,2) node[anchor=west](outx){}
+		(6,0) node[anchor=west](outy){}
+		(o2.out) |- (outx)
+		(o1.out) |- (outy)
+		(1,1) node[anchor=east](inT){T}
+		
+		(inT) |- (2,1) node[circ]{}
+		(2,1) |- (o2.in 2)
+		(2,1) |- (o1.in 2)
+		;
+		
+		\draw
+		(o1.in 3) to[short, -*] ++(-3.5,0) coordinate(punkt)
+		(punkt) to[short] ++(-1,0) coordinate(n)
+		(n) node[anchor=east]{D}
+		(o2.in 1) -| (punkt)
+		;
+	\end{circuitikz}
+\\
+$\Rightarrow$ 6Tr.\\
+\end{center}
+
+\subsubsection{Anderes Speicherprinzip: Kondensator Speicherladung}
+\begin{tabular}{ll}
+	Kondensator \glqq aufgeladen\grqq: & \glqq 1\grqq\\
+	Kondensator entladen: &  \glqq 0\grqq\\
+\end{tabular}
+\\ \vspace*{2em}
+\FloatBarrier
+\begin{minipage}{0.45\textwidth}
+	\centering
+	\begin{circuitikz}[scale=6]
+		\draw (0,0) to[C] ++(0,-0.5) coordinate(g)
+		(g) node[tlground]{}
+		(0,0) -- (0.5,0);
+		\draw[color=blue]
+		[<->] (0.5,0) -- (0.5,-0.5) node[midway, right] {U}
+		;
+	\end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+	\textbf{Einspeichern/schreiben:}\\
+	Anlegen der Betriebsspannung für \glqq 1\grqq \\
+	Anlegen von $ 0V $ für \glqq 0\grqq\\
+\textbf{	Lesen:}\\
+	Betriebsspannung $\Rightarrow$ \glqq 1\grqq\\
+	\glqq$ 0V $\grqq{} $\Rightarrow$ \glqq 0\grqq
+\end{minipage}
+
+\textbf{Realisierung:} Zwei kurze Stücke \glqq Leiterbahnen\grqq{} parallel geführt.\\
+$\Rightarrow$ Prinzip \glqq Plattenkondensator\grqq\\
+$\Rightarrow$ Aufwand im IC entspricht etwa einem Transistor.
+
+\begin{center}
+	\begin{circuitikz}[scale=3]
+		\draw
+		node[nmos, rotate=-90](mosA){}
+		(mosA.D) node[anchor=west]{data}
+		(mosA.G) node[anchor=south]{select}
+		(mosA.S) to[C] ++(0,-0.5) coordinate(g)
+		(g) node[tlground]{}
+		;
+	\end{circuitikz}
+\end{center}
+
+Nur bei \textit{select = 1} wird der Kondensatorspeicher angesprochen, und zwar lesen oder schreiben wir ihn abhängig davon, ob wir die Spannung messen, oder eine Spannung anlegen!\\
+$\Rightarrow$ HW-Aufwand: 2 Transistor-Äquivalente, also $ \dfrac{1}{3} $ des HW-Aufwands für ein D-FF!\\
+\\
+\textbf{Nachteile:}\\
+\begin{enumerate}
+	\item Ladung geht beim Lesen verloren\\
+	$\Rightarrow$ Wieder einschreiben nach jedem Lesen nötig. \glqq Refresh-Logik\grqq{} notwendig, d.h. für jedes gleichzeitig gelesene Bit benötigen wir zusätzlich ein D-FF.\\
+	\includegraphics[width=0.7\textwidth]{img/cap}\footnote{\href{https://commons.wikimedia.org/wiki/File:Capacitor_Square_wave_charge-discharge.svg}{Wikipedia}}
+	\item langsame Zugriffsgeschwindigkeit beim Schreiben aufgrund Lade-/Entlade-Kurve des Kondensators
+	\item Lesen geht eigentlich schnell, aber ab dem zweiten Lesen muss auf das Wiedereinschreiben nach dem ersten Lesen gewartet werden \textcolor{red}{$\Rightarrow$ Zugriffsgeschwindigkeit ist auch ab dem zweiten Lesen recht langsam!}
+	\item Aufgrund von Leckströmen verliert der Kondensator ständig (langsam/ein wenig) Ladung\\
+	$\Rightarrow$ auch ohne explizites Lesen muss der Kondensatorspeicher nach einiger Zeit wiederaufgefrischt werden.\\
+	$\Rightarrow$ zyklisches komplettes Durchlesen des gesamten Speichers führt zu einem Refresh jeder Speicherzelle\\
+	$\Rightarrow$ während eines laufenden Refreshzyklus dauert der Zugriff unverhältnismäßig länger als \glqq normal\grqq
+\end{enumerate}
 
 
 \newpage
